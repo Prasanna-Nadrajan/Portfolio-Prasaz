@@ -159,7 +159,7 @@ for (let i = 0; i < navigationLinks.length; i++) {
 }
 
 const typewriterElement = document.getElementById('typewriter');
-const titles = ["Data Analyst","Business Scientist"];
+const titles = ["Data Analyst","Business Intelligence Enthusiast","Data Storyteller"];
 let titleIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
