@@ -1606,6 +1606,267 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .project-list, .blog-posts-list { grid-template-columns: 1fr 1fr; }
 
+.content-card {
+  position: relative;
+  background: var(--border-gradient-onyx);
+  padding: 15px;
+  padding-top: 25px; /* MODIFICATION 1: Reduced this from 45px to 25px */
+  border-radius: 14px;
+  box-shadow: var(--shadow-2);
+  cursor: pointer;
+  z-index: 1;
+}
+
+/* ... (Your existing CSS) ... */
+
+
+/*-----------------------------------*\
+  #TIMELINE EXPERIENCE STYLES
+\*-----------------------------------*/
+
+.timeline-experience {
+    padding: 20px 0;
+}
+
+.timeline-track {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* 1. The vertical line (track) - Mobile Default (Left-aligned) */
+.timeline-track::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background-color: var(--jet); 
+    top: 0;
+    bottom: 0;
+    left: 15px; /* Aligned to the left for single-column view */
+    transform: none;
+    z-index: 1;
+}
+
+/* 2. Base styles for all timeline events - Mobile Default (Full width, right of line) */
+.timeline-event {
+    position: relative;
+    width: 100%; 
+    margin-bottom: 50px; 
+    padding-left: 55px; /* Space for the icon and line */
+    padding-right: 5px; 
+    z-index: 2;
+}
+
+/* Content Card styling */
+.timeline-event .experience-card {
+    padding: 20px;
+    position: relative;
+    box-shadow: 0 0 0 1px var(--jet), var(--shadow-2);
+}
+
+.timeline-event .experience-card .content {
+    margin-top: 10px;
+}
+
+.timeline-event .experience-card .title {
+    font-size: var(--fs-4);
+    font-weight: var(--fw-600);
+    margin-bottom: 5px;
+}
+
+.timeline-event .experience-card .subtitle {
+    color: var(--accent-neon-blue);
+    font-size: var(--fs-6);
+    margin-bottom: 10px;
+}
+
+.timeline-event .experience-card .description {
+    color: var(--secondary-text);
+    font-size: var(--fs-7);
+    line-height: 1.5;
+}
+
+/* Logo Box styling */
+.timeline-event .logo-box {
+    position: absolute;
+    top: -10px; 
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--onyx);
+    border: 1px solid var(--jet);
+    z-index: 5;
+}
+.timeline-event .logo-box img {
+    /* FIX: Constrain image inside the logo-box */
+    max-width: 100%; 
+    max-height: 100%;
+    width: auto; 
+    height: auto; 
+    object-fit: contain; /* CRITICAL: Ensures the whole logo is visible without cropping */
+}
+
+.timeline-event .logo-placeholder {
+    font-size: var(--fs-7);
+    font-weight: var(--fw-500);
+    color: var(--secondary-text);
+    text-align: center;
+    line-height: 1;
+}
+
+/* 3. Date styling - Mobile Default (Outside the card, above the icon) */
+.timeline-event .timeline-date {
+    /* MODIFICATION 2: Use relative positioning on mobile to keep date flow */
+    position: absolute; /* Kept absolute relative to .timeline-event */
+    top: -35px; /* Moved further up to clear the icon area */
+    left: 55px; /* Aligned with the card content */
+    font-size: var(--fs-7);
+    font-weight: var(--fw-500);
+    color: var(--secondary-text);
+    text-align: left;
+    white-space: nowrap;
+}
+
+/* 4. Icon (Dot) Styling - Mobile Default (Left of the card, on the line) */
+.timeline-event .timeline-icon {
+    position: absolute;
+    top: 0; /* Aligned to the top of the card/event */
+    left: 15px; /* Center over the left vertical line */
+    transform: translateX(-50%); 
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--main-text);
+    box-shadow: var(--shadow-1);
+    border: 3px solid var(--onyx); 
+    z-index: 3;
+}
+
+.timeline-event .timeline-icon.green {
+    background: var(--green-icon);
+}
+.timeline-event .timeline-icon.orange {
+    background: var(--orange-icon);
+}
+.timeline-event .timeline-icon ion-icon {
+    font-size: 15px;
+}
+
+/* Documents/Links Styling */
+.timeline-event .documents {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+.timeline-event .document-link {
+    color: var(--accent-neon-blue);
+    font-size: var(--fs-8);
+    font-weight: var(--fw-400);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 8px;
+    border-radius: 5px;
+    background: hsla(195, 100%, 50%, 0.1);
+    transition: var(--transition-1);
+}
+.timeline-event .document-link:hover {
+    background: hsla(195, 100%, 50%, 0.2);
+}
+
+/*-----------------------------------*\
+  #RESPONSIVE FOR TIMELINE (Desktop/Tablet: > 768px)
+\*-----------------------------------*/
+
+@media (min-width: 768px) {
+    /* Re-center the track line for desktop view */
+    .timeline-track::before {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    /* Events take half width for the two-column look */
+    .timeline-event {
+        width: 50%;
+        margin-bottom: 40px;
+        padding-left: 5px; /* Reset mobile padding */
+        padding-right: 5px; /* Reset mobile padding */
+        
+        /* Reset mobile date/icon positioning space */
+        padding-right: 5px; 
+    }
+
+    /* Right side events */
+    .timeline-event.right {
+        margin-left: 50%;
+        /* Add right padding to move card away from the center line */
+        padding-left: 45px; 
+    }
+    
+    /* Left side events */
+    .timeline-event.left {
+        margin-left: 0;
+        /* Add left padding to move card away from the center line */
+        padding-right: 45px; 
+    }
+
+    /* Align date/icon for right events */
+    .timeline-event.right .timeline-date {
+        position: absolute;
+        top: 10px;
+        left: -180px; /* Position to the left of the card */
+        text-align: right;
+        width: 150px; 
+    }
+    .timeline-event.right .timeline-icon {
+        left: -1px; /* Center over the vertical line */
+        transform: translateX(-50%);
+        top: 10px; /* Align icon with the top of the card on desktop */
+    }
+
+    /* Align date/icon for left events */
+    .timeline-event.left .timeline-date {
+        position: absolute;
+        top: 10px;
+        right: -180px; /* Position to the right of the card */
+        left: auto;
+        text-align: left;
+        width: 150px; 
+    }
+    .timeline-event.left .timeline-icon {
+        right: -1px; /* Center over the vertical line */
+        left: auto;
+        transform: translateX(50%);
+        top: 10px; /* Align icon with the top of the card on desktop */
+    }
+    
+    /* Reposition logo for left events to keep it top-right of the card */
+    .timeline-event.left .logo-box {
+        left: auto;
+        right: 15px;
+    }
+
+}
+
+@media (min-width: 1024px) {
+    .timeline-event.right .timeline-date {
+        left: -200px;
+        width: 170px;
+    }
+    .timeline-event.left .timeline-date {
+        right: -200px;
+        width: 170px;
+    }
+}
 
 
   /**
