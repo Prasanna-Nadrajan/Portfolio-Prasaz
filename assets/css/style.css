@@ -1686,6 +1686,16 @@ textarea.form-input::-webkit-resizer { display: none; }
     line-height: 1.5;
 }
 
+/* Replace the existing .timeline-event a.experience-card .description rules with this */
+.timeline-event a:link .description,
+.timeline-event a:visited .description,
+.timeline-event a:hover .description,
+.timeline-event a:focus .description,
+.timeline-event a:active .description {
+    color: var(--secondary-text) !important;
+}
+
+
 /* Logo Box styling */
 .timeline-event .logo-box {
     position: absolute;
@@ -2304,3 +2314,10 @@ textarea.form-input::-webkit-resizer { display: none; }
   height: 100%; /* Maintain consistent height for all items */
 }
 
+.experience-card .description,
+.experience-card p.description,
+a .experience-card .description,
+a.experience-card .description,
+.timeline-event .description {
+    color: #AAAAAA !important;
+}
