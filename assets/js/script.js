@@ -258,3 +258,45 @@ document.addEventListener("DOMContentLoaded", () => {
     mainContent.style.display = "block";
   });
 });
+
+// File: script.js
+// === ADD: Badges duplication for seamless loop (namespaced) ===
+// Append this entire block to the end of your file
+
+(function badgesInit() {
+  // Ensure this runs after the DOM is ready, respecting existing scripts
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupBadges);
+  } else {
+    setupBadges(); // DOM is already ready
+  }
+
+  function setupBadges() {
+    const rows = document.querySelectorAll('.badges-row .badges-track');
+    if (!rows.length) {
+      // console.log('No badge tracks found.'); // Optional: for debugging
+      return;
+    }
+
+    rows.forEach(track => {
+      const container = track.parentElement;
+      if (!container) return;
+
+      // We need to fill at least 2x the container width for a smooth loop
+      const minWidth = container.clientWidth * 2;
+      let totalWidth = track.scrollWidth;
+      const items = Array.from(track.children);
+      
+      if (items.length === 0) return; // Skip if track is empty
+
+      // Keep cloning the *original* set of items until the track is wide enough
+      while (totalWidth < minWidth) {
+        // console.log('Cloning items for badge track...'); // Optional: for debugging
+        items.forEach(node => {
+          track.appendChild(node.cloneNode(true));
+        });
+        totalWidth = track.scrollWidth; // Recalculate new total width
+      }
+    });
+  }
+})();

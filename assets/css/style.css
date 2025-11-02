@@ -318,7 +318,7 @@ main {
 
 .avatar-box img {
   background: var(--onyx);
-  border-radius: 20px;
+  border-radius: 10px;
 }
 
 .info-content .name {
@@ -2320,4 +2320,132 @@ a .experience-card .description,
 a.experience-card .description,
 .timeline-event .description {
     color: #AAAAAA !important;
+}
+
+/* File: style.css */
+/* === ADD: Badges section (namespaced) === */
+/* Append this entire block to the end of your file */
+
+:root {
+  --badges-gap: 1.25rem; /* 20px */
+  --badges-size: clamp(10px, 10vw, 150px);
+  --badges-speed-1: 20s;
+  --badges-speed-2: 25s;
+  --badges-speed-3: 30s;
+}
+
+/* This class is for the new <article> wrapper */
+
+
+.badges {
+  overflow: hidden;
+  padding-block: 1rem;
+  /* Masking for a fade-out effect at the edges */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+}
+
+.badges-row {
+  position: relative;
+  display: flex; /* Use flex to contain the track */
+  margin-block: 0.5rem;
+}
+
+.badges-track {
+  display: flex;
+  flex-shrink: 0; /* Prevent track from shrinking */
+  gap: var(--badges-gap);
+  align-items: center;
+  /* Add will-change for performance */
+  will-change: transform;
+}
+
+.badges-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--badges-size);
+  height: var(--badges-size);
+  flex-shrink: 0; /* Prevent items from shrinking */
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.badges-item img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  /* Matching your theme's dark background */
+  filter: drop-shadow(0 0 4px hsla(195, 100%, 50%, 0.1)) brightness(0.9) grayscale(0.1);
+  opacity: 0.8;
+  transition: var(--transition-1);
+}
+
+.badges-item:hover img {
+  opacity: 1;
+  filter: drop-shadow(0 0 8px hsla(195, 100%, 50%, 0.3)) brightness(1) grayscale(0);
+}
+
+/* Animation */
+.badges-row {
+  /* Set speed per row using CSS variables */
+  --badges-speed: 30s; /* Default */
+}
+.badges-row:nth-of-type(1) { --badges-speed: var(--badges-speed-1); }
+.badges-row:nth-of-type(2) { --badges-speed: var(--badges-speed-2); }
+.badges-row:nth-of-type(3) { --badges-speed: var(--badges-speed-3); }
+
+.badges-row[data-direction="left"] .badges-track {
+  animation: badges-left var(--badges-speed) linear infinite;
+}
+
+.badges-row[data-direction="right"] .badges-track {
+  animation: badges-right var(--badges-speed) linear infinite;
+}
+
+@keyframes badges-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% - (var(--badges-gap) / 2))); }
+}
+
+@keyframes badges-right {
+  from { transform: translateX(calc(-50% - (var(--badges-gap) / 2))); }
+  to { transform: translateX(0); }
+}
+
+/* Hover pause */
+.badges:hover .badges-track {
+  animation-play-state: paused;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .badges-track {
+    animation: none !important;
+  }
+  
+  /* Allow rows to be scrolled horizontally instead */
+  .badges-row {
+    overflow-x: auto;
+    /* Add padding to show the start/end of the list */
+    padding-inline: 1.5rem;
+  }
+  
+  .badges {
+    /* Disable the fade-out mask */
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
 }
