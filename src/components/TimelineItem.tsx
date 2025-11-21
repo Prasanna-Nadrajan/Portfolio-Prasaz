@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { IoStar } from 'react-icons/io5';
+// Removed unused IoStar import
 
 interface TimelineItemProps {
     date: string;
