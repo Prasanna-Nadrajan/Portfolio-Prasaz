@@ -1,0 +1,202 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+@theme {
+  /* Reference the CSS variables defined in @layer base below */
+  --color-neon-blue: var(--neon-blue);
+  --color-dark-accent-blue: var(--dark-accent-blue);
+  --color-main-bg: var(--main-bg);
+  --color-container-bg: var(--container-bg);
+  --color-border-color: var(--border-color);
+  --color-main-text: var(--main-text);
+  --color-secondary-text: var(--secondary-text);
+  --color-onyx: var(--onyx);
+  --color-jet: var(--jet);
+  --color-light-gray-70: var(--light-gray-70);
+  
+  /* Updated Font */
+  --font-poppins: 'Outfit', sans-serif;
+
+  --shadow-neon: 0 4px 15px var(--shadow-color);
+  --shadow-neon-hover: 0 8px 25px var(--shadow-color-hover);
+
+  --animate-fade-in: fadeIn 0.5s ease-in-out;
+  --animate-slide-up: slideUp 0.5s ease-out;
+  /* We keep this for utility classes like 'animate-twinkle' */
+  --animate-twinkle: twinkle 4s ease-in-out infinite;
+
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    0% { transform: translateY(20px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.8; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+}
+
+@layer base {
+  /* --- LIGHT MODE DEFAULTS (DIMMED / DARKER-LIGHT) --- */
+  :root {
+    --neon-blue: #005c8a;      
+    --dark-accent-blue: #00476b;
+    
+    --main-bg: #CBD5E1;        
+    --container-bg: #E2E8F0;   
+    --border-color: #94A3B8;   
+    
+    --main-text: #020617;      
+    --secondary-text: #1E293B; 
+    --light-gray-70: #334155;  
+    
+    --onyx: #E2E8F0;           
+    --jet: #CBD5E1;            
+    
+    --shadow-color: hsla(215, 28%, 10%, 0.2);
+    --shadow-color-hover: hsla(215, 28%, 10%, 0.3);
+
+    /* Star Color for Light Mode - Dark Gray/Black so they are visible */
+    --star-color: #1E293B; 
+
+    --gradient-start: #F1F5F9; 
+    --gradient-end: #CBD5E1;
+    --gradient-jet-start: hsla(210, 20%, 85%, 0.8);
+    --gradient-jet-end: hsla(210, 20%, 85%, 0);
+    --gradient-jet-base: #CBD5E1;
+  }
+
+  /* --- DARK MODE OVERRIDES (SPACE THEME) --- */
+  :root.dark {
+    --neon-blue: #00BFFF;
+    --dark-accent-blue: #009ACD;
+
+    --main-bg: #050507; /* Deep space black/blue */
+    --container-bg: #0f1014;
+    --border-color: #1A1A1A;
+    --main-text: #EEEEEE;
+    --secondary-text: #AAAAAA;
+    --onyx: #1e1e24;
+    --jet: #25252b;
+    --light-gray-70: #b3b3b3;
+
+    --shadow-color: hsla(195, 100%, 50%, 0.1);
+    --shadow-color-hover: hsla(195, 100%, 50%, 0.15);
+
+    /* Star Color for Dark Mode - White/Bright for space */
+    --star-color: #FFF;
+
+    --gradient-start: hsl(220, 20%, 10%);
+    --gradient-end: hsla(220, 20%, 5%, 0);
+    --gradient-jet-start: hsla(240, 1%, 18%, 0.251);
+    --gradient-jet-end: hsla(240, 2%, 11%, 0);
+    --gradient-jet-base: hsl(240, 2%, 13%);
+  }
+
+  html {
+    font-family: var(--font-poppins);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-main-bg text-main-text overflow-x-hidden transition-colors duration-300 relative;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-container-bg;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-neon-blue rounded-full;
+  }
+}
+
+/* Custom Utilities */
+@layer utilities {
+  .bg-border-gradient-onyx {
+    background: linear-gradient(to bottom right, var(--gradient-start) 0%, var(--gradient-end) 50%);
+  }
+
+  .bg-bg-gradient-onyx {
+    background: linear-gradient(to bottom right, var(--onyx) 3%, var(--onyx) 97%);
+  }
+
+  .bg-bg-gradient-jet {
+    background: linear-gradient(to bottom right, var(--gradient-jet-start) 0%, var(--gradient-jet-end) 100%), var(--gradient-jet-base);
+  }
+  
+  .mask-image-linear-gradient {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+
+  /* --- SPACE BACKGROUND UTILITIES --- */
+  /* Ensure keyframes are available here */
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.8; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(0.7); }
+  }
+
+  /* Tiny Stars - Using var(--star-color) */
+  .stars-sm {
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow: 
+      10vw 10vh var(--star-color), 20vw 80vh var(--star-color), 30vw 30vh var(--star-color), 40vw 50vh var(--star-color),
+      50vw 90vh var(--star-color), 60vw 20vh var(--star-color), 70vw 70vh var(--star-color), 80vw 40vh var(--star-color),
+      90vw 10vh var(--star-color), 15vw 60vh var(--star-color), 85vw 85vh var(--star-color), 5vw 5vh var(--star-color),
+      45vw 15vh var(--star-color), 25vw 95vh var(--star-color), 75vw 25vh var(--star-color), 95vw 55vh var(--star-color);
+    opacity: 0.5;
+    animation: twinkle 4s ease-in-out infinite;
+  }
+
+  /* Medium Stars - Using var(--star-color) */
+  .stars-md {
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    box-shadow: 
+      15vw 15vh var(--neon-blue), 35vw 75vh var(--star-color), 55vw 35vh var(--star-color), 
+      75vw 85vh var(--neon-blue), 95vw 25vh var(--star-color), 25vw 55vh var(--star-color);
+    opacity: 0.7;
+    animation: twinkle 5s ease-in-out infinite alternate;
+  }
+
+  /* Large Stars / Planets - Using var(--star-color) */
+  .stars-lg {
+    width: 3px;
+    height: 3px;
+    background: transparent;
+    box-shadow: 
+      10vw 80vh var(--neon-blue), 80vw 10vh var(--star-color), 40vw 40vh var(--star-color);
+    opacity: 0.9;
+    animation: twinkle 7s ease-in-out infinite alternate-reverse;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-container-bg/80 border border-border-color rounded-2xl p-4 shadow-neon backdrop-blur-md transition-colors duration-300;
+  }
+
+  .icon-box {
+    @apply relative w-8 h-8 rounded-lg flex justify-center items-center text-neon-blue shadow-neon z-10 overflow-hidden;
+    background: linear-gradient(to bottom right, var(--jet) 0%, hsla(0, 0%, 13%, 0) 50%); 
+  }
+
+  .icon-box::before {
+    content: "";
+    @apply absolute inset-[1px] bg-container-bg rounded-lg -z-10;
+  }
+}
