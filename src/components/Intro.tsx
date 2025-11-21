@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const languages = [
-    "Hello",      // English
-    "नमस्ते",     // Hindi
-    "வணக்கம்",    // Tamil
+    "வணக்கம்",
+    "Hello",
+    "こんにちは",      // English
+    "नमस्ते",     // Hindi    // Tamil
     "Bonjour",    // French
-    "こんにちは"   // Japanese
+       // Japanese
 ];
 
 const Intro = ({ onComplete }: { onComplete: () => void }) => {
