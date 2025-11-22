@@ -18,15 +18,15 @@ const TimelineItem = ({ date, title, subtitle, description, logo, link, side }: 
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className={`timeline-event relative mb-8 pl-12 md:pl-0 md:w-1/2 ${side === 'left' ? 'md:pr-8 md:ml-0' : 'md:pl-8 md:ml-auto'}`}
+            className={`timeline-event relative mb-8 w-full md:w-1/2 ${side === 'left' ? 'md:pr-8 md:ml-0' : 'md:pl-8 md:ml-auto'}`}
         >
-            {/* Timeline Dot */}
-            <div className={`absolute top-0 w-4 h-4 bg-neon-blue rounded-full shadow-neon z-10 ${side === 'left' ? 'left-0 md:right-[-9px] md:left-auto' : 'left-0 md:left-[-9px]'}`}>
+            {/* Timeline Dot - Hidden on Mobile */}
+            <div className={`hidden md:block absolute top-0 w-4 h-4 bg-neon-blue rounded-full shadow-neon z-10 ${side === 'left' ? 'md:right-[-9px] md:left-auto' : 'md:left-[-9px]'}`}>
                 <div className="absolute inset-0 bg-neon-blue animate-ping opacity-75 rounded-full"></div>
             </div>
 
-            {/* Date Badge */}
-            <div className={`absolute top-0 text-xs font-medium text-neon-blue bg-onyx px-2 py-1 rounded-md mb-2 ${side === 'left' ? 'md:right-8 md:top-[-25px]' : 'md:left-8 md:top-[-25px]'} left-12 top-[-25px]`}>
+            {/* Date Badge - Stacked on Mobile */}
+            <div className={`text-xs font-medium text-neon-blue bg-onyx px-2 py-1 rounded-md mb-2 inline-block md:absolute md:top-0 ${side === 'left' ? 'md:right-8 md:top-[-25px]' : 'md:left-8 md:top-[-25px]'}`}>
                 {date}
             </div>
 

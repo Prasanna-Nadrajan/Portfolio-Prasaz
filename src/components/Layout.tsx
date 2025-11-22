@@ -22,12 +22,12 @@ const Layout = ({ children }: LayoutProps) => {
             </div>
 
             <Cursor />
-            
-            <div className="fixed top-4 right-4 z-50">
+
+            <div className="fixed top-4 right-4 z-50 hidden md:block">
                 <ThemeToggle />
             </div>
 
-            <main className="container mx-auto px-4 py-4 md:py-8 lg:px-8 max-w-7xl relative z-10">
+            <main className="container mx-auto px-4 py-4 pt-20 md:py-8 lg:px-8 max-w-7xl relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
                     <div className="md:col-span-3 lg:col-span-3">
                         <Sidebar />

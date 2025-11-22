@@ -12,7 +12,7 @@ const roles = [
 
 const Sidebar = () => {
     const [isActive, setIsActive] = useState(false);
-    
+
     // Typewriter State
     const [text, setText] = useState('');
     const [roleIndex, setRoleIndex] = useState(0);
@@ -60,7 +60,7 @@ const Sidebar = () => {
 
     return (
         <aside
-            className={`sidebar bg-container-bg border border-border-color rounded-2xl p-6 shadow-neon z-10 transition-all duration-500 ease-in-out overflow-hidden ${isActive ? 'max-h-[500px]' : 'max-h-[120px] md:max-h-full'
+            className={`sidebar bg-container-bg border border-border-color rounded-2xl p-6 shadow-neon z-10 transition-all duration-500 ease-in-out overflow-hidden hidden md:block ${isActive ? 'max-h-[500px]' : 'max-h-[120px] md:max-h-full'}
                 } md:sticky md:top-16 md:h-fit`}
             data-sidebar
         >
@@ -78,7 +78,7 @@ const Sidebar = () => {
                     <h1 className="name text-main-text text-xl font-medium mb-2" title="Prasanna Nadrajan">
                         Prasanna Nadrajan
                     </h1>
-                    
+
                     {/* Dynamic Typewriter Role */}
                     <p className="title bg-onyx text-main-text text-xs font-light px-3 py-1 rounded-lg inline-block min-w-[150px]">
                         {text}

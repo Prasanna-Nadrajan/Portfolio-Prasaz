@@ -152,41 +152,55 @@
     50% { opacity: 0.3; transform: scale(0.7); }
   }
 
-  /* Tiny Stars - Using var(--star-color) */
-  .stars-sm {
-    width: 1px;
-    height: 1px;
-    background: transparent;
-    box-shadow: 
-      10vw 10vh var(--star-color), 20vw 80vh var(--star-color), 30vw 30vh var(--star-color), 40vw 50vh var(--star-color),
-      50vw 90vh var(--star-color), 60vw 20vh var(--star-color), 70vw 70vh var(--star-color), 80vw 40vh var(--star-color),
-      90vw 10vh var(--star-color), 15vw 60vh var(--star-color), 85vw 85vh var(--star-color), 5vw 5vh var(--star-color),
-      45vw 15vh var(--star-color), 25vw 95vh var(--star-color), 75vw 25vh var(--star-color), 95vw 55vh var(--star-color);
-    opacity: 0.5;
-    animation: twinkle 4s ease-in-out infinite;
+  /* Static Background for Mobile */
+  @media (max-width: 767px) {
+    body {
+      background: linear-gradient(to bottom, #111827, #000000); /* Gray-900 to Black */
+    }
+    
+    .stars-sm, .stars-md, .stars-lg {
+      display: none;
+    }
   }
 
-  /* Medium Stars - Using var(--star-color) */
-  .stars-md {
-    width: 2px;
-    height: 2px;
-    background: transparent;
-    box-shadow: 
-      15vw 15vh var(--neon-blue), 35vw 75vh var(--star-color), 55vw 35vh var(--star-color), 
-      75vw 85vh var(--neon-blue), 95vw 25vh var(--star-color), 25vw 55vh var(--star-color);
-    opacity: 0.7;
-    animation: twinkle 5s ease-in-out infinite alternate;
-  }
+  /* Animated Stars for Desktop Only */
+  @media (min-width: 768px) {
+    /* Tiny Stars - Using var(--star-color) */
+    .stars-sm {
+      width: 1px;
+      height: 1px;
+      background: transparent;
+      box-shadow: 
+        10vw 10vh var(--star-color), 20vw 80vh var(--star-color), 30vw 30vh var(--star-color), 40vw 50vh var(--star-color),
+        50vw 90vh var(--star-color), 60vw 20vh var(--star-color), 70vw 70vh var(--star-color), 80vw 40vh var(--star-color),
+        90vw 10vh var(--star-color), 15vw 60vh var(--star-color), 85vw 85vh var(--star-color), 5vw 5vh var(--star-color),
+        45vw 15vh var(--star-color), 25vw 95vh var(--star-color), 75vw 25vh var(--star-color), 95vw 55vh var(--star-color);
+      opacity: 0.5;
+      animation: twinkle 4s ease-in-out infinite;
+    }
 
-  /* Large Stars / Planets - Using var(--star-color) */
-  .stars-lg {
-    width: 3px;
-    height: 3px;
-    background: transparent;
-    box-shadow: 
-      10vw 80vh var(--neon-blue), 80vw 10vh var(--star-color), 40vw 40vh var(--star-color);
-    opacity: 0.9;
-    animation: twinkle 7s ease-in-out infinite alternate-reverse;
+    /* Medium Stars - Using var(--star-color) */
+    .stars-md {
+      width: 2px;
+      height: 2px;
+      background: transparent;
+      box-shadow: 
+        15vw 15vh var(--neon-blue), 35vw 75vh var(--star-color), 55vw 35vh var(--star-color), 
+        75vw 85vh var(--neon-blue), 95vw 25vh var(--star-color), 25vw 55vh var(--star-color);
+      opacity: 0.7;
+      animation: twinkle 5s ease-in-out infinite alternate;
+    }
+
+    /* Large Stars / Planets - Using var(--star-color) */
+    .stars-lg {
+      width: 3px;
+      height: 3px;
+      background: transparent;
+      box-shadow: 
+        10vw 80vh var(--neon-blue), 80vw 10vh var(--star-color), 40vw 40vh var(--star-color);
+      opacity: 0.9;
+      animation: twinkle 7s ease-in-out infinite alternate-reverse;
+    }
   }
 }
 

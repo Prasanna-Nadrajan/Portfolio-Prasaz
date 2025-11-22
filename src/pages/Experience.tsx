@@ -42,7 +42,7 @@ const Experience = () => {
                 - Changed Light Mode color to 'bg-gray-400' (Darker Gray for contrast against Slate background)
                 - Changed Dark Mode color to 'dark:bg-gray-600' (Lighter Gray for visibility on Black)
             */}
-            <section className="timeline relative mt-8 before:absolute before:top-0 before:left-[21px] md:before:left-1/2 before:w-[2px] before:h-full before:bg-gray-400 dark:before:bg-gray-600 before:-translate-x-1/2">
+            <section className="timeline relative mt-8 md:before:absolute md:before:top-0 md:before:left-1/2 md:before:w-[2px] md:before:h-full md:before:bg-gray-400 md:dark:before:bg-gray-600 md:before:-translate-x-1/2">
                 {experienceData.map((item, index) => (
                     <TimelineItem
                         key={index}
