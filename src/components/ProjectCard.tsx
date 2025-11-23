@@ -8,7 +8,7 @@ interface ProjectCardProps {
     link: string;
 }
 
-const ProjectCard = ({ title, category, image, link }: ProjectCardProps) => {
+const ProjectCard = ({ title, category, image}: ProjectCardProps) => {
     return (
         <motion.li
             layout
