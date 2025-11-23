@@ -187,7 +187,15 @@
         10vw 10vh var(--star-color), 20vw 80vh var(--star-color), 30vw 30vh var(--star-color), 40vw 50vh var(--star-color),
         50vw 90vh var(--star-color), 60vw 20vh var(--star-color), 70vw 70vh var(--star-color), 80vw 40vh var(--star-color),
         90vw 10vh var(--star-color), 15vw 60vh var(--star-color), 85vw 85vh var(--star-color), 5vw 5vh var(--star-color),
-        45vw 15vh var(--star-color), 25vw 95vh var(--star-color), 75vw 25vh var(--star-color), 95vw 55vh var(--star-color);
+        45vw 15vh var(--star-color), 25vw 95vh var(--star-color), 75vw 25vh var(--star-color), 95vw 55vh var(--star-color),
+        /* Extra stars */
+        12vw 12vh var(--star-color), 22vw 82vh var(--star-color), 32vw 32vh var(--star-color), 42vw 52vh var(--star-color),
+        52vw 92vh var(--star-color), 62vw 22vh var(--star-color), 72vw 72vh var(--star-color), 82vw 42vh var(--star-color),
+        92vw 12vh var(--star-color), 17vw 62vh var(--star-color), 87vw 87vh var(--star-color), 7vw 7vh var(--star-color),
+        47vw 17vh var(--star-color), 27vw 97vh var(--star-color), 77vw 27vh var(--star-color), 97vw 57vh var(--star-color),
+        3vw 35vh var(--star-color), 13vw 45vh var(--star-color), 23vw 55vh var(--star-color), 33vw 65vh var(--star-color),
+        43vw 75vh var(--star-color), 53vw 85vh var(--star-color), 63vw 95vh var(--star-color), 73vw 5vh var(--star-color),
+        83vw 15vh var(--star-color), 93vw 25vh var(--star-color), 18vw 35vh var(--star-color), 28vw 45vh var(--star-color);
       opacity: 0.5;
       animation: twinkle 4s ease-in-out infinite;
     }
@@ -199,7 +207,11 @@
       background: transparent;
       box-shadow: 
         15vw 15vh var(--neon-blue), 35vw 75vh var(--star-color), 55vw 35vh var(--star-color), 
-        75vw 85vh var(--neon-blue), 95vw 25vh var(--star-color), 25vw 55vh var(--star-color);
+        75vw 85vh var(--neon-blue), 95vw 25vh var(--star-color), 25vw 55vh var(--star-color),
+        /* Extra stars */
+        10vw 20vh var(--star-color), 30vw 80vh var(--neon-blue), 50vw 40vh var(--star-color),
+        70vw 90vh var(--star-color), 90vw 30vh var(--neon-blue), 20vw 60vh var(--star-color),
+        40vw 10vh var(--star-color), 60vw 50vh var(--star-color), 80vw 70vh var(--star-color);
       opacity: 0.7;
       animation: twinkle 5s ease-in-out infinite alternate;
     }
@@ -210,9 +222,28 @@
       height: 3px;
       background: transparent;
       box-shadow: 
-        10vw 80vh var(--neon-blue), 80vw 10vh var(--star-color), 40vw 40vh var(--star-color);
+        10vw 80vh var(--neon-blue), 80vw 10vh var(--star-color), 40vw 40vh var(--star-color),
+        /* Extra stars */
+        20vw 20vh var(--star-color), 60vw 60vh var(--neon-blue), 90vw 90vh var(--star-color);
       opacity: 0.9;
       animation: twinkle 7s ease-in-out infinite alternate-reverse;
+    }
+
+    /* Asteroids */
+    @keyframes float-asteroid {
+      0% { transform: translate(-10vw, -10vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translate(110vw, 110vh) rotate(360deg); opacity: 0; }
+    }
+
+    .asteroid {
+      position: absolute;
+      background: linear-gradient(45deg, #555, #333);
+      border-radius: 40% 60% 50% 50% / 50% 40% 60% 50%;
+      box-shadow: inset -2px -2px 6px rgba(0,0,0,0.5), 2px 2px 4px rgba(0,0,0,0.3);
+      z-index: 0;
+      pointer-events: none;
     }
   }
 }

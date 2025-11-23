@@ -25,6 +25,7 @@ const Navbar = () => {
         { name: 'Blog', path: '/blog', icon: <IoDocumentTextOutline size={20} /> },
         { name: 'Platforms', path: '/platforms', icon: <IoLayersOutline size={20} /> },
         { name: 'Experience', path: '/experience', icon: <IoStarOutline size={20} /> },
+        { name: 'Resume', path: '/resume', icon: <IoDocumentTextOutline size={20} /> },
         { name: 'Contact', path: '/contact', icon: <IoMailOutline size={20} /> },
     ];
 

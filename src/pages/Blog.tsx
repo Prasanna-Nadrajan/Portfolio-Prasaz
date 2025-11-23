@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { IoSearchOutline, IoChevronDown } from 'react-icons/io5';
 import BlogPostCard from '../components/BlogPostCard';
 
 const blogPosts = [
@@ -67,7 +69,20 @@ const blogPosts = [
     }
 ];
 
+const categories = ["All", "Machine Learning", "Data", "Data StoryTelling", "Data Analytics", "Data Science", "Data Engineering"];
+
 const Blog = () => {
+    const [searchQuery, setSearchQuery] = useState("");
+    const [filter, setFilter] = useState("All");
+    const [isSelectOpen, setIsSelectOpen] = useState(false);
+
+    const filteredPosts = blogPosts.filter(post => {
+        const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            post.description.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchesCategory = filter === "All" || post.category === filter;
+        return matchesSearch && matchesCategory;
+    });
+
     return (
         <article className="blog active animate-fade-in" data-page="blog">
             <header>
@@ -75,19 +90,87 @@ const Blog = () => {
             </header>
 
             <section className="blog-posts">
-                <ul className="blog-posts-list grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {blogPosts.map((post, index) => (
-                        <BlogPostCard
-                            key={index}
-                            title={post.title}
-                            category={post.category}
-                            date={post.date}
-                            description={post.description}
-                            image={post.image}
-                            link={post.link}
+                {/* Search and Filter Controls */}
+                <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
+                    {/* Search Bar */}
+                    <div className="relative w-full md:w-1/2">
+                        <input
+                            type="text"
+                            placeholder="Search blog posts..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            className="w-full bg-border-gradient-onyx p-3 pl-10 rounded-xl border border-jet text-main-text focus:outline-none focus:border-neon-blue transition-colors"
                         />
-                    ))}
-                </ul>
+                        <IoSearchOutline className="absolute left-3 top-1/2 transform -translate-y-1/2 text-light-gray-70" size={20} />
+                    </div>
+
+                    {/* Desktop Filter Buttons */}
+                    <ul className="filter-list hidden md:flex flex-wrap justify-end items-center gap-4">
+                        {categories.map((category) => (
+                            <li key={category} className="filter-item">
+                                <button
+                                    onClick={() => setFilter(category)}
+                                    className={`text-sm transition-colors duration-300 ${filter === category ? 'text-neon-blue font-medium' : 'text-secondary-text hover:text-light-gray-70'
+                                        }`}
+                                >
+                                    {category}
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+
+                    {/* Mobile Filter Select */}
+                    <div className="filter-select-box md:hidden relative w-full">
+                        <button
+                            className={`filter-select w-full bg-border-gradient-onyx p-3 rounded-xl flex justify-between items-center border border-jet text-light-gray-70 text-sm ${isSelectOpen ? 'active' : ''}`}
+                            onClick={() => setIsSelectOpen(!isSelectOpen)}
+                        >
+                            <div className="select-value">{filter}</div>
+                            <div className="select-icon">
+                                <IoChevronDown className={`transition-transform duration-300 ${isSelectOpen ? 'rotate-180' : ''}`} />
+                            </div>
+                        </button>
+
+                        {isSelectOpen && (
+                            <ul className="select-list bg-onyx absolute top-full left-0 w-full p-2 rounded-xl border border-jet shadow-neon z-20 mt-2">
+                                {categories.map((category) => (
+                                    <li key={category} className="select-item">
+                                        <button
+                                            onClick={() => {
+                                                setFilter(category);
+                                                setIsSelectOpen(false);
+                                            }}
+                                            className="w-full text-left p-2 text-secondary-text text-sm hover:bg-jet rounded-lg transition-colors"
+                                        >
+                                            {category}
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+                </div>
+
+                {/* Blog Posts Grid */}
+                {filteredPosts.length > 0 ? (
+                    <ul className="blog-posts-list grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {filteredPosts.map((post, index) => (
+                            <BlogPostCard
+                                key={index}
+                                title={post.title}
+                                category={post.category}
+                                date={post.date}
+                                description={post.description}
+                                image={post.image}
+                                link={post.link}
+                            />
+                        ))}
+                    </ul>
+                ) : (
+                    <div className="text-center py-10 text-secondary-text">
+                        <p>No posts found matching your criteria.</p>
+                    </div>
+                )}
             </section>
         </article>
     );
