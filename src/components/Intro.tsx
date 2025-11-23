@@ -11,22 +11,6 @@ const languages = [
 
 const Intro = ({ onComplete }: { onComplete: () => void }) => {
     const [index, setIndex] = useState(0);
-    const [progress, setProgress] = useState(0);
-
-    useEffect(() => {
-        // Progress bar animation
-        const progressInterval = setInterval(() => {
-            setProgress((prev) => {
-                if (prev >= 100) {
-                    clearInterval(progressInterval);
-                    return 100;
-                }
-                return prev + 1;
-            });
-        }, 60); // Slower progress bar (approx 6s total for 5 languages)
-
-        return () => clearInterval(progressInterval);
-    }, []);
 
     useEffect(() => {
         if (index < languages.length) {

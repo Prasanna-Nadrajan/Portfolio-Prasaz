@@ -109,6 +109,8 @@ const About = () => {
                     {testimonials.map((item, index) => (
                         <li
                             key={index}
+                            // Added data-cursor="hover" to explicitly trigger cursor animation
+                            data-cursor="hover" 
                             className="testimonials-item bg-border-gradient-onyx p-5 rounded-2xl shadow-neon relative z-10 before:absolute before:inset-[1px] before:bg-bg-gradient-jet before:rounded-2xl before:-z-10 cursor-pointer hover:scale-[1.02] transition-transform duration-300 h-full"
                             onClick={() => openModal(item)}
                         >

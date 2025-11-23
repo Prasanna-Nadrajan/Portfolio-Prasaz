@@ -112,6 +112,19 @@
     @apply bg-main-bg text-main-text overflow-x-hidden transition-colors duration-300 relative;
   }
 
+  /* CRITICAL FIX: STRICT SYSTEM CURSOR HIDING
+     Targeting explicit elements is safer than just '*' which can be overridden by user agent styles.
+     This block ensures cursor is none on desktop screens.
+  */
+  @media (min-width: 768px) {
+    *, *::before, *::after, 
+    html, body, 
+    a, button, input, textarea, select, option, label,
+    [role="button"] {
+      cursor: none !important;
+    }
+  }
+
   /* Custom Scrollbar */
   ::-webkit-scrollbar {
     width: 6px;

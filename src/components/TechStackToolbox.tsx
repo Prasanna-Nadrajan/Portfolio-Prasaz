@@ -38,11 +38,13 @@ const TechStackToolbox = () => {
                 {techStack.map((stack, index) => (
                     <motion.div
                         key={index}
+                        // Added data-cursor="hover" to trigger the HUD cursor on these cards
+                        data-cursor="hover"
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: index * 0.1 }}
-                        className="toolbox-item bg-border-gradient-onyx p-5 rounded-2xl shadow-neon relative z-10 before:absolute before:inset-[1px] before:bg-bg-gradient-jet before:rounded-2xl before:-z-10 hover:scale-[1.02] transition-transform duration-300"
+                        className="toolbox-item bg-border-gradient-onyx p-5 rounded-2xl shadow-neon relative z-10 before:absolute before:inset-[1px] before:bg-bg-gradient-jet before:rounded-2xl before:-z-10 hover:scale-[1.02] transition-transform duration-300 cursor-default"
                     >
                         <div className="flex items-center gap-3 mb-4 border-b border-jet pb-3">
                             <div className="text-neon-blue text-xl bg-onyx p-2 rounded-lg shadow-sm">
