@@ -31,6 +31,9 @@ const Blog = () => {
     const rssUrl = `https://medium.com/feed/${mediumUsername}`;
     const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
 
+    // Updated: Single placeholder image path as per your request
+    const placeholderImage = "/assets/images/blog/Medium-Emblem.png";
+
     const fetchPosts = async () => {
         setLoading(true);
         setError(null);
@@ -67,23 +70,33 @@ const Blog = () => {
         return doc.body.textContent || "";
     };
 
-    // Helper to extract image from content if thumbnail is missing
+    // Helper to extract image from content with strict filtering
     const getPostImage = (post: MediumPost) => {
-        // 1. Check if the API provided a thumbnail
-        if (post.thumbnail && post.thumbnail.startsWith('http')) {
+        // Helper to check if a URL is a valid content image (not a tracking pixel)
+        const isValidImage = (url: string) => {
+            return url && 
+                   url.startsWith('http') && 
+                   !url.includes('medium.com/_/stat') && // Block Medium tracking pixels
+                   !url.includes('medium.com/m/global'); // Block generic Medium icons
+        };
+
+        // 1. Check thumbnail field
+        if (isValidImage(post.thumbnail)) {
             return post.thumbnail;
         }
 
-        // 2. If not, try to extract the first <img> src from the description/content
+        // 2. Parse content for the first valid <img>
         const doc = new DOMParser().parseFromString(post.description || post.content, 'text/html');
-        const img = doc.querySelector('img');
-        if (img && img.src) {
-            return img.src;
+        const images = doc.querySelectorAll('img');
+        
+        for (let i = 0; i < images.length; i++) {
+            if (isValidImage(images[i].src)) {
+                return images[i].src;
+            }
         }
 
-        // 3. Last resort fallback - Themed Placeholder
-        // Using placehold.co to match your dark theme (Background: Onyx-like, Text: Neon Blue)
-        return "https://placehold.co/600x400/1e1e24/00BFFF?text=No+Image"; 
+        // 3. Fallback: Return the single local placeholder image
+        return placeholderImage;
     };
 
     const filteredPosts = posts.filter(post => {
@@ -110,7 +123,6 @@ const Blog = () => {
 
             <header className="flex justify-between items-center mb-4 border-b-2 border-neon-blue w-full pb-1">
                 <h2 className="h2 article-title text-2xl font-semibold">Blog</h2>
-                {/* Reload button for manual refresh if needed */}
                 <button 
                     onClick={fetchPosts} 
                     className="text-secondary-text hover:text-neon-blue transition-colors p-2"
@@ -202,12 +214,10 @@ const Blog = () => {
                             <BlogPostCard
                                 key={post.guid || index}
                                 title={post.title}
-                                // Use the first category or a default
                                 category={post.categories[0] || "Tech"}
                                 date={formatDate(post.pubDate)}
-                                // Strip HTML from description and truncate
                                 description={stripHtml(post.description).substring(0, 150) + "..."}
-                                image={getPostImage(post)} // Use the new helper function here
+                                image={getPostImage(post)} // Fallback will now return Medium-Emblem.png
                                 link={post.link}
                             />
                         ))}
