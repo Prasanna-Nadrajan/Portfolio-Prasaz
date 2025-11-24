@@ -6,36 +6,43 @@ const VisitorCounter = () => {
     const [count, setCount] = useState(0);
 
     useEffect(() => {
-        // Simulate fetching visitor count
-        // In a real app, you'd fetch from an API like countapi.xyz
-        // const fetchCount = async () => {
-        //   try {
-        //     const response = await fetch('https://api.countapi.xyz/hit/your-namespace/your-key');
-        //     const data = await response.json();
-        //     setCount(data.value);
-        //   } catch (error) {
-        //     console.error("Error fetching visitor count:", error);
-        //   }
-        // };
-        // fetchCount();
+        const fetchCount = async () => {
+            try {
+                // Define your unique namespace and key
+                // Change 'portfolio-prasanna-nadrajan' to a unique string for your project
+                const namespace = 'portfolio-prasanna-nadrajan'; 
+                const key = 'visits';
+                
+                // Call the 'up' endpoint to increment and retrieve the count
+                const response = await fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`);
+                
+                if (!response.ok) throw new Error('Network response was not ok');
+                
+                const data = await response.json();
+                const targetCount = data.count; // The API returns { count: 123, ... }
 
-        // Mock animation for now
-        let start = 0;
-        const end = 123; // Mock total visits
-        const duration = 2000;
-        const increment = end / (duration / 16);
+                // Start animation from 0 to the fetched count
+                let start = 0;
+                const duration = 2000; // 2 seconds animation
+                const increment = targetCount / (duration / 16); // 60 FPS
 
-        const timer = setInterval(() => {
-            start += increment;
-            if (start >= end) {
-                setCount(end);
-                clearInterval(timer);
-            } else {
-                setCount(Math.floor(start));
+                const timer = setInterval(() => {
+                    start += increment;
+                    if (start >= targetCount) {
+                        setCount(targetCount);
+                        clearInterval(timer);
+                    } else {
+                        setCount(Math.floor(start));
+                    }
+                }, 16);
+
+            } catch (error) {
+                console.error("Error fetching visitor count:", error);
+                setCount(100); // Fallback number if API fails
             }
-        }, 16);
+        };
 
-        return () => clearInterval(timer);
+        fetchCount();
     }, []);
 
     return (
@@ -43,7 +50,7 @@ const VisitorCounter = () => {
             <IoEyeOutline className="text-neon-blue" />
             <span className="text-xs text-light-gray-70">Visits:</span>
             <motion.span
-                key={count}
+                key={count} // Triggers animation when count changes final value
                 initial={{ opacity: 0, y: -5 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="text-sm font-mono text-main-text"

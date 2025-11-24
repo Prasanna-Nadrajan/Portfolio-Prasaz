@@ -1,4 +1,5 @@
 import TimelineItem from '../components/TimelineItem';
+import SEO from '../components/SEO';
 
 const experienceData = [
     {
@@ -16,7 +17,7 @@ const experienceData = [
         subtitle: "Tech Blogger",
         description: "Research, write, and publish original articles on topics such as data science, statistics, technology, and real-world applications.",
         logo: "/assets/images/experience/medium.png",
-        link: "",
+        link: "https://medium.com/@prasaznat",
         side: "left" as const
     },
     {
@@ -33,15 +34,15 @@ const experienceData = [
 const Experience = () => {
     return (
         <article className="experience active animate-fade-in" data-page="experience">
+            <SEO 
+                title="Experience" 
+                description="My professional journey, internships, and roles in data analysis and tech communities." 
+            />
+
             <header>
                 <h2 className="h2 article-title text-2xl font-semibold mb-4 border-b-2 border-neon-blue w-max pb-1">Experience</h2>
             </header>
 
-            {/* Updated timeline line styling: 
-                - Increased width to 2px 
-                - Changed Light Mode color to 'bg-gray-400' (Darker Gray for contrast against Slate background)
-                - Changed Dark Mode color to 'dark:bg-gray-600' (Lighter Gray for visibility on Black)
-            */}
             <section className="timeline relative mt-8 md:before:absolute md:before:top-0 md:before:left-1/2 md:before:w-[2px] md:before:h-full md:before:bg-gray-400 md:dark:before:bg-gray-600 md:before:-translate-x-1/2">
                 {experienceData.map((item, index) => (
                     <TimelineItem

@@ -1,97 +1,128 @@
-import { useState } from 'react';
-import { IoSearchOutline, IoChevronDown } from 'react-icons/io5';
+import { useState, useEffect } from 'react';
+import { IoSearchOutline, IoChevronDown, IoReloadOutline } from 'react-icons/io5';
 import BlogPostCard from '../components/BlogPostCard';
+import SEO from '../components/SEO';
 
-const blogPosts = [
-    {
-        title: "Unlocking NLP for Business",
-        category: "Machine Learning",
-        date: "Nov 20, 2025",
-        description: "Sentiment, Topics, and Practical Chatbots",
-        image: "/assets/images/blog/b8.png",
-        link: "https://medium.com/@prasaznat/unlocking-nlp-for-business-sentiment-topics-and-practical-chatbots-050873872fa1"
-    },
-    {
-        title: "The Rise of Generative AI",
-        category: "Data",
-        date: "Nov 15, 2025",
-        description: "Opportunities and Challenges for Data Pros",
-        image: "/assets/images/blog/b7.png",
-        link: "https://medium.com/@prasaznat/the-rise-of-generative-ai-opportunities-and-challenges-for-data-pros-0d983f8375db"
-    },
-    {
-        title: "Data StoryTelling",
-        category: "Data StoryTelling",
-        date: "Nov 6, 2025",
-        description: "Turning Analytics into Actionable Narratives",
-        image: "/assets/images/blog/b6.png",
-        link: "https://medium.com/@prasaznat/data-storytelling-turning-analytics-into-actionable-narratives-138351612cd7"
-    },
-    {
-        title: "From Data to Decisions",
-        category: "Data Analytics",
-        date: "Nov 2, 2025",
-        description: "Building an End-to-End Analytics Pipeline",
-        image: "/assets/images/blog/b5.png",
-        link: "https://medium.com/@prasaznat/from-data-to-decisions-building-an-end-to-end-analytics-pipeline-3ebb3eb78073"
-    },
-    {
-        title: "Unveiling Business Workflows",
-        category: "Data Science",
-        date: "Oct 29, 2025",
-        description: "My Journey into Process Mining with Celonis",
-        image: "/assets/images/blog/b4.png",
-        link: "https://medium.com/@prasaznat/unveiling-business-workflows-my-journey-into-process-mining-with-celonis-3ee5f5505893"
-    },
-    {
-        title: "Real-Time Analytics",
-        category: "Data Science",
-        date: "Oct 25, 2025",
-        description: "How Streaming Data Is Transforming Business Decisions",
-        image: "/assets/images/blog/b3.png",
-        link: "https://medium.com/@prasaznat/real-time-analytics-how-streaming-data-is-transforming-business-decisions-f801da2b165a"
-    },
-    {
-        title: "Data’s Hidden Traps",
-        category: "Data Engineering",
-        date: "Oct 22, 2025",
-        description: "How to Spot and Fix Missing Values, Outliers, and Inconsistent Formats",
-        image: "/assets/images/blog/b2.png",
-        link: "https://medium.com/@prasaznat/datas-hidden-traps-how-to-spot-and-fix-missing-values-outliers-and-inconsistent-formats-e6501f43fd00"
-    },
-    {
-        title: "Why Correlation lies to You",
-        category: "Data Science",
-        date: "Oct 19, 2025",
-        description: "The Statistical Fallacy Unveiled: Understanding Correlation vs. Causation",
-        image: "/assets/images/blog/b1.png",
-        link: "https://medium.com/@prasaznat/the-statistical-trap-why-correlation-will-always-lie-to-you-17c4e42aab97"
-    }
-];
-
-const categories = ["All", "Machine Learning", "Data", "Data StoryTelling", "Data Analytics", "Data Science", "Data Engineering"];
+// Interface for the Medium RSS to JSON response items
+interface MediumPost {
+    title: string;
+    pubDate: string;
+    link: string;
+    guid: string;
+    author: string;
+    thumbnail: string;
+    description: string;
+    content: string;
+    categories: string[];
+}
 
 const Blog = () => {
+    const [posts, setPosts] = useState<MediumPost[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+    
     const [searchQuery, setSearchQuery] = useState("");
     const [filter, setFilter] = useState("All");
+    const [categories, setCategories] = useState<string[]>(["All"]);
     const [isSelectOpen, setIsSelectOpen] = useState(false);
 
-    const filteredPosts = blogPosts.filter(post => {
+    // Your Medium Username
+    const mediumUsername = '@prasaznat';
+    const rssUrl = `https://medium.com/feed/${mediumUsername}`;
+    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+
+    const fetchPosts = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            const response = await fetch(apiUrl);
+            const data = await response.json();
+
+            if (data.status === 'ok') {
+                const fetchedPosts: MediumPost[] = data.items;
+                setPosts(fetchedPosts);
+
+                // Extract unique categories dynamically from the posts
+                const allCategories = fetchedPosts.flatMap(post => post.categories);
+                const uniqueCategories = ["All", ...new Set(allCategories)];
+                setCategories(uniqueCategories);
+            } else {
+                throw new Error("Failed to fetch blog posts.");
+            }
+        } catch (err) {
+            console.error(err);
+            setError("Could not load blog posts. Please try again later.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchPosts();
+    }, []);
+
+    // Function to clean up HTML descriptions for display
+    const stripHtml = (html: string) => {
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        return doc.body.textContent || "";
+    };
+
+    // Helper to extract image from content if thumbnail is missing
+    const getPostImage = (post: MediumPost) => {
+        // 1. Check if the API provided a thumbnail
+        if (post.thumbnail && post.thumbnail.startsWith('http')) {
+            return post.thumbnail;
+        }
+
+        // 2. If not, try to extract the first <img> src from the description/content
+        const doc = new DOMParser().parseFromString(post.description || post.content, 'text/html');
+        const img = doc.querySelector('img');
+        if (img && img.src) {
+            return img.src;
+        }
+
+        // 3. Last resort fallback - Generic Placeholder
+        // You can replace this URL with a local asset path like "/assets/images/blog-placeholder.png"
+        return "https://via.placeholder.com/600x400?text=No+Image+Available"; 
+    };
+
+    const filteredPosts = posts.filter(post => {
         const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            post.description.toLowerCase().includes(searchQuery.toLowerCase());
-        const matchesCategory = filter === "All" || post.category === filter;
+            stripHtml(post.description).toLowerCase().includes(searchQuery.toLowerCase());
+        
+        const matchesCategory = filter === "All" || post.categories.includes(filter);
+        
         return matchesSearch && matchesCategory;
     });
 
+    // Format date helper
+    const formatDate = (dateString: string) => {
+        const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
+        return new Date(dateString).toLocaleDateString('en-US', options);
+    };
+
     return (
         <article className="blog active animate-fade-in" data-page="blog">
-            <header>
-                <h2 className="h2 article-title text-2xl font-semibold mb-4 border-b-2 border-neon-blue w-max pb-1">Blog</h2>
+            <SEO 
+                title="Blog" 
+                description="Read my latest articles on Data Science, Machine Learning, and Business Intelligence on Medium." 
+            />
+
+            <header className="flex justify-between items-center mb-4 border-b-2 border-neon-blue w-full pb-1">
+                <h2 className="h2 article-title text-2xl font-semibold">Blog</h2>
+                {/* Reload button for manual refresh if needed */}
+                <button 
+                    onClick={fetchPosts} 
+                    className="text-secondary-text hover:text-neon-blue transition-colors p-2"
+                    title="Refresh posts"
+                >
+                    <IoReloadOutline className={loading ? "animate-spin" : ""} size={20}/>
+                </button>
             </header>
 
             <section className="blog-posts">
                 {/* Search and Filter Controls */}
-                <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
+                <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-8 mt-6">
                     {/* Search Bar */}
                     <div className="relative w-full md:w-1/2">
                         <input
@@ -99,19 +130,22 @@ const Blog = () => {
                             placeholder="Search blog posts..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full bg-border-gradient-onyx p-3 pl-10 rounded-xl border border-jet text-main-text focus:outline-none focus:border-neon-blue transition-colors"
+                            className="w-full bg-border-gradient-onyx p-3 pl-10 rounded-xl border border-jet text-main-text focus:outline-none focus:border-neon-blue transition-colors shadow-neon"
                         />
                         <IoSearchOutline className="absolute left-3 top-1/2 transform -translate-y-1/2 text-light-gray-70" size={20} />
                     </div>
 
                     {/* Desktop Filter Buttons */}
-                    <ul className="filter-list hidden md:flex flex-wrap justify-end items-center gap-4">
-                        {categories.map((category) => (
+                    <ul className="filter-list hidden md:flex flex-wrap justify-end items-center gap-3">
+                        {categories.slice(0, 6).map((category) => (
                             <li key={category} className="filter-item">
                                 <button
                                     onClick={() => setFilter(category)}
-                                    className={`text-sm transition-colors duration-300 ${filter === category ? 'text-neon-blue font-medium' : 'text-secondary-text hover:text-light-gray-70'
-                                        }`}
+                                    className={`text-xs px-3 py-1.5 rounded-lg transition-all duration-300 border border-transparent ${
+                                        filter === category 
+                                        ? 'text-neon-blue font-medium bg-jet border-neon-blue/30' 
+                                        : 'text-secondary-text hover:text-light-gray-70 hover:bg-jet/50'
+                                    }`}
                                 >
                                     {category}
                                 </button>
@@ -125,14 +159,14 @@ const Blog = () => {
                             className={`filter-select w-full bg-border-gradient-onyx p-3 rounded-xl flex justify-between items-center border border-jet text-light-gray-70 text-sm ${isSelectOpen ? 'active' : ''}`}
                             onClick={() => setIsSelectOpen(!isSelectOpen)}
                         >
-                            <div className="select-value">{filter}</div>
+                            <div className="select-value capitalize">{filter}</div>
                             <div className="select-icon">
                                 <IoChevronDown className={`transition-transform duration-300 ${isSelectOpen ? 'rotate-180' : ''}`} />
                             </div>
                         </button>
 
                         {isSelectOpen && (
-                            <ul className="select-list bg-onyx absolute top-full left-0 w-full p-2 rounded-xl border border-jet shadow-neon z-20 mt-2">
+                            <ul className="select-list bg-onyx absolute top-full left-0 w-full p-2 rounded-xl border border-jet shadow-neon z-20 mt-2 max-h-60 overflow-y-auto">
                                 {categories.map((category) => (
                                     <li key={category} className="select-item">
                                         <button
@@ -140,7 +174,7 @@ const Blog = () => {
                                                 setFilter(category);
                                                 setIsSelectOpen(false);
                                             }}
-                                            className="w-full text-left p-2 text-secondary-text text-sm hover:bg-jet rounded-lg transition-colors"
+                                            className="w-full text-left p-2 text-secondary-text text-sm hover:bg-jet rounded-lg transition-colors capitalize"
                                         >
                                             {category}
                                         </button>
@@ -151,17 +185,29 @@ const Blog = () => {
                     </div>
                 </div>
 
-                {/* Blog Posts Grid */}
-                {filteredPosts.length > 0 ? (
+                {/* Content Area */}
+                {loading ? (
+                    <div className="flex flex-col items-center justify-center py-20">
+                        <div className="w-10 h-10 border-4 border-jet border-t-neon-blue rounded-full animate-spin mb-4"></div>
+                        <p className="text-secondary-text animate-pulse">Fetching latest articles from Medium...</p>
+                    </div>
+                ) : error ? (
+                    <div className="text-center py-10 bg-border-gradient-onyx rounded-xl border border-red-500/30">
+                        <p className="text-red-400 mb-2">{error}</p>
+                        <button onClick={fetchPosts} className="text-neon-blue hover:underline text-sm">Try Again</button>
+                    </div>
+                ) : filteredPosts.length > 0 ? (
                     <ul className="blog-posts-list grid grid-cols-1 md:grid-cols-2 gap-6">
                         {filteredPosts.map((post, index) => (
                             <BlogPostCard
-                                key={index}
+                                key={post.guid || index}
                                 title={post.title}
-                                category={post.category}
-                                date={post.date}
-                                description={post.description}
-                                image={post.image}
+                                // Use the first category or a default
+                                category={post.categories[0] || "Tech"}
+                                date={formatDate(post.pubDate)}
+                                // Strip HTML from description and truncate
+                                description={stripHtml(post.description).substring(0, 150) + "..."}
+                                image={getPostImage(post)} // Use the new helper function here
                                 link={post.link}
                             />
                         ))}

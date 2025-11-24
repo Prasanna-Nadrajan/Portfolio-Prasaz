@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import ServiceCard from '../components/ServiceCard';
-import TechStackToolbox from '../components/TechStackToolbox'; // Changed from SkillCloud
+import TechStackToolbox from '../components/TechStackToolbox';
 import Badges from '../components/Badges';
 import TestimonialModal from '../components/TestimonialModal';
+import SEO from '../components/SEO';
 
 // Updated Services Data
 const services = [
@@ -71,6 +72,11 @@ const About = () => {
 
     return (
         <article className="about active animate-fade-in" data-page="about">
+            <SEO 
+                title="About" 
+                description="Learn about Prasanna Nadrajan, a Data Analyst and MERN Stack Developer specializing in AI, BI, and Data Science." 
+            />
+
             <header>
                 <h2 className="h2 article-title text-2xl font-semibold mb-4 border-b-2 border-neon-blue w-max pb-1">About me</h2>
             </header>
@@ -98,9 +104,7 @@ const About = () => {
                 </div>
             </section>
 
-            {/* Replaced SkillCloud with TechStackToolbox */}
             <TechStackToolbox />
-            
             <Badges />
 
             <section className="testimonials mb-8">
@@ -109,7 +113,6 @@ const About = () => {
                     {testimonials.map((item, index) => (
                         <li
                             key={index}
-                            // Added data-cursor="hover" to explicitly trigger cursor animation
                             data-cursor="hover" 
                             className="testimonials-item bg-border-gradient-onyx p-5 rounded-2xl shadow-neon relative z-10 before:absolute before:inset-[1px] before:bg-bg-gradient-jet before:rounded-2xl before:-z-10 cursor-pointer hover:scale-[1.02] transition-transform duration-300 h-full"
                             onClick={() => openModal(item)}

@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { IoPaperPlaneOutline, IoMailOutline, IoLocationOutline, IoLogoLinkedin, IoLogoInstagram, IoCloudDownloadOutline } from 'react-icons/io5';
 import emailjs from 'emailjs-com';
 import { motion } from 'framer-motion';
+import SEO from '../components/SEO';
 
 const Contact = () => {
     const form = useRef<HTMLFormElement>(null);
@@ -16,13 +17,11 @@ const Contact = () => {
         setIsSending(true);
         setMessage(null);
 
-        // Replace these with your actual EmailJS service, template, and user IDs
         const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_id';
         const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_id';
         const userId = import.meta.env.VITE_EMAILJS_USER_ID || 'user_id';
 
         if (serviceId === 'service_id') {
-            // Simulation mode
             setTimeout(() => {
                 setIsSending(false);
                 setMessage({ text: "Message sent successfully! (Simulation)", type: 'success' });
@@ -46,12 +45,16 @@ const Contact = () => {
 
     return (
         <article className="contact active animate-fade-in" data-page="contact">
+            <SEO 
+                title="Contact" 
+                description="Get in touch with Prasanna Nadrajan for collaborations, data projects, or just to say hi." 
+            />
+
             <header className="flex justify-between items-end mb-8 border-b-2 border-neon-blue pb-1">
                 <h2 className="h2 article-title text-2xl font-semibold">Contact</h2>
                 
-                {/* Resume Download Button */}
                 <a 
-                    href="/assets/Prasanna_Nadrajan_Resume.pdf" // Ensure this file exists in public/assets/
+                    href="/assets/Prasanna_Nadrajan_Resume.pdf"
                     download="Prasanna_Nadrajan_Resume.pdf"
                     className="flex items-center gap-2 text-sm font-medium text-neon-blue hover:text-main-text transition-colors bg-border-gradient-onyx px-4 py-2 rounded-xl shadow-neon mb-1"
                 >
@@ -63,7 +66,6 @@ const Contact = () => {
             <section className="mapbox mb-8" data-mapbox>
                 <figure className="h-[250px] w-full rounded-2xl overflow-hidden border border-jet shadow-neon grayscale dark:invert-[1] dark:contrast-[1.2] opacity-50 hover:opacity-100 transition-opacity duration-500">
                     <iframe
-                        // Updated map source for Ellis Road, Chennai
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.684466492225!2d80.26704637599662!3d13.063268912994097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a526610e6775555%3A0x22434a90200e0485!2sEllis%20Rd%2C%20Triplicane%2C%20Chennai%2C%20Tamil%20Nadu%20600002!5e0!3m2!1sen!2sin!4v1709217800000!5m2!1sen!2sin"
                         width="600"
                         height="450"
@@ -78,7 +80,6 @@ const Contact = () => {
                 <h3 className="h3 form-title text-xl font-semibold mb-5">Reach me out</h3>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    {/* Contact Info */}
                     <ul className="contacts-list flex flex-col gap-4">
                         <li className="contact-item flex items-center gap-4 bg-border-gradient-onyx p-4 rounded-xl shadow-neon relative z-10 before:absolute before:inset-[1px] before:bg-bg-gradient-jet before:rounded-xl before:-z-10">
                             <div className="icon-box w-12 h-12 flex items-center justify-center bg-onyx text-neon-blue rounded-xl text-2xl shadow-neon shrink-0">
@@ -121,7 +122,6 @@ const Contact = () => {
                         </li>
                     </ul>
 
-                    {/* Form */}
                     <form ref={form} onSubmit={sendEmail} className="form-content">
                         <div className="input-wrapper grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                             <input

@@ -3,6 +3,7 @@ import { AnimatePresence } from 'framer-motion';
 import { IoChevronDown } from 'react-icons/io5';
 import ProjectCard from '../components/ProjectCard';
 import ProjectModal from '../components/ProjectModal';
+import SEO from '../components/SEO';
 
 const projects = [
     {
@@ -68,6 +69,11 @@ const Portfolio = () => {
 
     return (
         <article className="portfolio active animate-fade-in" data-page="portfolio">
+            <SEO 
+                title="Portfolio" 
+                description="Explore my data science, machine learning, and web development projects." 
+            />
+
             <header>
                 <h2 className="h2 article-title text-2xl font-semibold mb-4 border-b-2 border-neon-blue w-max pb-1">Portfolio</h2>
             </header>
