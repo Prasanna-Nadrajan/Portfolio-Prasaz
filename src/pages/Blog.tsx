@@ -81,9 +81,9 @@ const Blog = () => {
             return img.src;
         }
 
-        // 3. Last resort fallback - Generic Placeholder
-        // You can replace this URL with a local asset path like "/assets/images/blog-placeholder.png"
-        return "https://via.placeholder.com/600x400?text=No+Image+Available"; 
+        // 3. Last resort fallback - Themed Placeholder
+        // Using placehold.co to match your dark theme (Background: Onyx-like, Text: Neon Blue)
+        return "https://placehold.co/600x400/1e1e24/00BFFF?text=No+Image"; 
     };
 
     const filteredPosts = posts.filter(post => {
