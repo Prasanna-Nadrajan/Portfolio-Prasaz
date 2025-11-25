@@ -42,10 +42,10 @@ const Cursor = () => {
     return (
         <div className="fixed inset-0 pointer-events-none z-[9999] overflow-hidden hidden md:block">
             {/* Main Cursor Container 
-                mix-blend-difference ensures the cursor inverts colors based on background 
+                Using CSS Variable --cursor-color defined in index.css for robust theme switching
             */}
             <motion.div
-                className="absolute top-0 left-0 mix-blend-difference will-change-transform"
+                className="absolute top-0 left-0 will-change-transform"
                 style={{
                     x: cursorXSpring,
                     y: cursorYSpring,
@@ -55,7 +55,7 @@ const Cursor = () => {
             >
                 {/* Core "Star" - The central dot (Made larger) */}
                 <motion.div
-                    className="absolute bg-white rounded-full"
+                    className="absolute rounded-full bg-[var(--cursor-color)]"
                     animate={{
                         width: isHovering ? 12 : 8,
                         height: isHovering ? 12 : 8,
@@ -67,7 +67,7 @@ const Cursor = () => {
 
                 {/* Inner Gyro Ring (Thicker border and larger size) */}
                 <motion.div
-                    className="absolute border-[3px] border-white rounded-full opacity-100"
+                    className="absolute border-[3px] rounded-full opacity-100 border-[var(--cursor-color)]"
                     animate={{
                         width: isHovering ? 48 : 32,
                         height: isHovering ? 48 : 32,
@@ -88,7 +88,7 @@ const Cursor = () => {
 
                 {/* Outer Orbital Ring (Thicker border) */}
                 <motion.div
-                    className="absolute border-[2px] border-white rounded-full opacity-70 border-dashed"
+                    className="absolute border-[2px] rounded-full opacity-70 border-dashed border-[var(--cursor-color)]"
                     animate={{
                         width: isHovering ? 64 : 48,
                         height: isHovering ? 64 : 48,
@@ -115,10 +115,10 @@ const Cursor = () => {
                     style={{ width: 80, height: 80, x: -40, y: -40 }}
                 >
                     {/* Four thicker ticks for better visibility */}
-                    <div className="absolute top-0 w-[3px] h-4 bg-white rounded-full" />
-                    <div className="absolute bottom-0 w-[3px] h-4 bg-white rounded-full" />
-                    <div className="absolute left-0 h-[3px] w-4 bg-white rounded-full" />
-                    <div className="absolute right-0 h-[3px] w-4 bg-white rounded-full" />
+                    <div className="absolute top-0 w-[3px] h-4 rounded-full bg-[var(--cursor-color)]" />
+                    <div className="absolute bottom-0 w-[3px] h-4 rounded-full bg-[var(--cursor-color)]" />
+                    <div className="absolute left-0 h-[3px] w-4 rounded-full bg-[var(--cursor-color)]" />
+                    <div className="absolute right-0 h-[3px] w-4 rounded-full bg-[var(--cursor-color)]" />
                 </motion.div>
 
             </motion.div>
