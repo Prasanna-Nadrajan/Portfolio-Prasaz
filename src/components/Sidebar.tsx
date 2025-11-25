@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { IoChevronDown, IoMailOutline, IoLocationOutline, IoLogoLinkedin, IoLogoGithub } from 'react-icons/io5';
-import VisitorCounter from './VisitorCounter';
 
-// Roles to cycle through (from script.js)
 const roles = [
     "Sophomore at REC",
     "Data Analyst",
@@ -31,7 +29,7 @@ const Sidebar = () => {
             if (text.length > 0) {
                 const timeout = setTimeout(() => {
                     setText(prev => prev.slice(0, -1));
-                }, 50); // Deleting speed (50ms)
+                }, 50);
                 return () => clearTimeout(timeout);
             } else {
                 // Finished deleting, wait 500ms then switch to typing next word
@@ -46,7 +44,7 @@ const Sidebar = () => {
             if (text.length < currentRole.length) {
                 const timeout = setTimeout(() => {
                     setText(currentRole.slice(0, text.length + 1));
-                }, 100); // Typing speed (100ms)
+                }, 100);
                 return () => clearTimeout(timeout);
             } else {
                 // Finished typing, wait 1000ms then switch to deleting
@@ -137,10 +135,6 @@ const Sidebar = () => {
                         </a>
                     </li>
                 </ul>
-
-                <div className="separator my-6 bg-jet h-[1px]"></div>
-
-                <VisitorCounter />
             </div>
         </aside>
     );

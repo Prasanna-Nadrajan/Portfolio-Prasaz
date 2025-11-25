@@ -17,6 +17,8 @@ const ProjectCard = ({ title, category, image}: ProjectCardProps) => {
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.3 }}
             className="project-item active"
+            // Added data-cursor="hover" to trigger the custom cursor active state
+            data-cursor="hover"
         >
             <div className="block w-full cursor-pointer">
                 <figure className="project-img relative rounded-2xl overflow-hidden mb-4 group">
