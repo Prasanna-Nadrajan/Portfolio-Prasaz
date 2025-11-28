@@ -4,27 +4,42 @@ import { motion, useSpring, useMotionValue } from 'framer-motion';
 const Cursor = () => {
     const [isHovering, setIsHovering] = useState(false);
     
-    // Use MotionValues and Springs for ultra-smooth physics-based movement
+    // Primary cursor (tracks mouse quickly)
     const cursorX = useMotionValue(-100);
     const cursorY = useMotionValue(-100);
     
-    const springConfig = { damping: 25, stiffness: 300, mass: 0.5 };
-    const cursorXSpring = useSpring(cursorX, springConfig);
-    const cursorYSpring = useSpring(cursorY, springConfig);
+    // Secondary cursor (delayed trail)
+    const secondaryX = useMotionValue(-100);
+    const secondaryY = useMotionValue(-100);
+    
+    // Optimized Spring Configs
+    // Primary: Faster, tighter follow (less damping, higher stiffness)
+    const primarySpringConfig = { damping: 20, stiffness: 300, mass: 0.1 };
+    
+    // Secondary: Slower, looser trail (higher damping, lower stiffness)
+    const secondarySpringConfig = { damping: 40, stiffness: 150, mass: 0.2 };
+
+    const primaryXSpring = useSpring(cursorX, primarySpringConfig);
+    const primaryYSpring = useSpring(cursorY, primarySpringConfig);
+    
+    const secondaryXSpring = useSpring(secondaryX, secondarySpringConfig);
+    const secondaryYSpring = useSpring(secondaryY, secondarySpringConfig);
 
     useEffect(() => {
         const moveCursor = (e: MouseEvent) => {
+            // Update raw motion values
             cursorX.set(e.clientX);
             cursorY.set(e.clientY);
+            secondaryX.set(e.clientX);
+            secondaryY.set(e.clientY);
         };
 
         const handleMouseOver = (e: MouseEvent) => {
             const target = e.target as HTMLElement;
-            // Check for interactive elements
+            // Check for interactive elements using standard pointers and data attributes
             const isInteractive =
-                target.matches('a, button, input, textarea, select, option, [role="button"]') ||
-                target.closest('a, button, [role="button"]') ||
-                target.closest('[data-cursor="hover"]') ||
+                target.matches('a, button, input, textarea, select, option, [role="button"], [data-cursor="hover"]') ||
+                target.closest('a, button, [role="button"], [data-cursor="hover"]') ||
                 window.getComputedStyle(target).cursor === 'pointer';
 
             setIsHovering(!!isInteractive);
@@ -37,91 +52,66 @@ const Cursor = () => {
             window.removeEventListener('mousemove', moveCursor);
             window.removeEventListener('mouseover', handleMouseOver);
         };
-    }, [cursorX, cursorY]);
+    }, [cursorX, cursorY, secondaryX, secondaryY]);
 
     return (
         <div className="fixed inset-0 pointer-events-none z-[9999] overflow-hidden hidden md:block">
-            {/* Main Cursor Container 
-                Using CSS Variable --cursor-color defined in index.css for robust theme switching
-            */}
+            {/* Secondary Cursor (Delayed Trail) - Minimalist Ring */}
             <motion.div
                 className="absolute top-0 left-0 will-change-transform"
                 style={{
-                    x: cursorXSpring,
-                    y: cursorYSpring,
+                    x: secondaryXSpring,
+                    y: secondaryYSpring,
                     translateX: "-50%",
                     translateY: "-50%",
                 }}
             >
-                {/* Core "Star" - The central dot (Made larger) */}
+                <motion.div
+                    className="absolute rounded-full border-[2px] border-[var(--cursor-color)] opacity-70"
+                    animate={{
+                        width: isHovering ? 40 : 20,
+                        height: isHovering ? 40 : 20,
+                        x: isHovering ? -20 : -10,
+                        y: isHovering ? -20 : -10,
+                        opacity: isHovering ? 0.9 : 0.4,
+                        scale: isHovering ? 1.5 : 1,
+                        // Spin effect when idle, held stationary on hover
+                        rotate: isHovering ? 0 : 360,
+                    }}
+                    transition={{
+                        // Slower animation for the trailing effect
+                        scale: { duration: 0.3 },
+                        rotate: { duration: 15, repeat: Infinity, ease: "linear" },
+                        width: { type: "spring", stiffness: 300, damping: 20 },
+                        height: { type: "spring", stiffness: 300, damping: 20 },
+                    }}
+                />
+            </motion.div>
+            
+            {/* Primary Cursor (The "Star" - Fastest Response) */}
+            <motion.div
+                className="absolute top-0 left-0 will-change-transform"
+                style={{
+                    x: primaryXSpring,
+                    y: primaryYSpring,
+                    translateX: "-50%",
+                    translateY: "-50%",
+                }}
+            >
                 <motion.div
                     className="absolute rounded-full bg-[var(--cursor-color)]"
                     animate={{
-                        width: isHovering ? 12 : 8,
-                        height: isHovering ? 12 : 8,
-                        x: isHovering ? -6 : -4,
-                        y: isHovering ? -6 : -4,
+                        width: isHovering ? 20 : 6,
+                        height: isHovering ? 20 : 6,
+                        x: isHovering ? -10 : -3,
+                        y: isHovering ? -10 : -3,
+                        opacity: isHovering ? 0 : 1, // Disappear or shrink/fade when secondary indicator is active
+                        backgroundColor: isHovering ? 'transparent' : 'var(--cursor-color)'
                     }}
                     transition={{ duration: 0.2 }}
                 />
-
-                {/* Inner Gyro Ring (Thicker border and larger size) */}
-                <motion.div
-                    className="absolute border-[3px] rounded-full opacity-100 border-[var(--cursor-color)]"
-                    animate={{
-                        width: isHovering ? 48 : 32,
-                        height: isHovering ? 48 : 32,
-                        x: isHovering ? -24 : -16,
-                        y: isHovering ? -24 : -16,
-                        rotate: isHovering ? 0 : 360, // Locks rotation on hover
-                        scale: isHovering ? 1 : [1, 1.1, 1], // Pulsates when idle
-                        borderRadius: isHovering ? "14px" : "50%", // Morphs to a squircle on hover
-                    }}
-                    transition={{
-                        rotate: { duration: 8, repeat: Infinity, ease: "linear" },
-                        scale: { duration: 2, repeat: Infinity, ease: "easeInOut" },
-                        width: { type: "spring", stiffness: 300, damping: 20 },
-                        height: { type: "spring", stiffness: 300, damping: 20 },
-                        borderRadius: { duration: 0.3 }
-                    }}
-                />
-
-                {/* Outer Orbital Ring (Thicker border) */}
-                <motion.div
-                    className="absolute border-[2px] rounded-full opacity-70 border-dashed border-[var(--cursor-color)]"
-                    animate={{
-                        width: isHovering ? 64 : 48,
-                        height: isHovering ? 64 : 48,
-                        x: isHovering ? -32 : -24,
-                        y: isHovering ? -32 : -24,
-                        rotate: isHovering ? 180 : -360,
-                    }}
-                    transition={{
-                        rotate: { duration: 12, repeat: Infinity, ease: "linear" },
-                        width: { type: "spring", stiffness: 300, damping: 20 },
-                        height: { type: "spring", stiffness: 300, damping: 20 },
-                    }}
-                />
-
-                {/* Crosshair Ticks - Only visible on Hover (Thicker) */}
-                <motion.div
-                    className="absolute top-0 left-0 w-full h-full flex items-center justify-center"
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ 
-                        opacity: isHovering ? 1 : 0,
-                        scale: isHovering ? 1 : 0.5,
-                        rotate: isHovering ? 45 : 0
-                    }}
-                    style={{ width: 80, height: 80, x: -40, y: -40 }}
-                >
-                    {/* Four thicker ticks for better visibility */}
-                    <div className="absolute top-0 w-[3px] h-4 rounded-full bg-[var(--cursor-color)]" />
-                    <div className="absolute bottom-0 w-[3px] h-4 rounded-full bg-[var(--cursor-color)]" />
-                    <div className="absolute left-0 h-[3px] w-4 rounded-full bg-[var(--cursor-color)]" />
-                    <div className="absolute right-0 h-[3px] w-4 rounded-full bg-[var(--cursor-color)]" />
-                </motion.div>
-
             </motion.div>
+            
         </div>
     );
 };
