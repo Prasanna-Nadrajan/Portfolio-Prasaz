@@ -1,60 +1,33 @@
-import { useState, useEffect } from 'react';
-import { IoSearchOutline, IoChevronDown, IoReloadOutline } from 'react-icons/io5';
+import { useState, useEffect, useMemo } from 'react';
+import { IoReloadOutline, IoSearchOutline, IoChevronDown } from 'react-icons/io5';
 import BlogPostCard from '../components/BlogPostCard';
 import SEO from '../components/SEO';
-
-// Interface for the Medium RSS to JSON response items
-interface MediumPost {
-    title: string;
-    pubDate: string;
-    link: string;
-    guid: string;
-    author: string;
-    thumbnail: string;
-    description: string;
-    content: string;
-    categories: string[];
-}
+import { CONFIG } from '../constants/config';
+import type { BlogPost } from '../types';
 
 const Blog = () => {
-    const [posts, setPosts] = useState<MediumPost[]>([]);
+    const [posts, setPosts] = useState<BlogPost[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    
-    const [searchQuery, setSearchQuery] = useState("");
-    const [filter, setFilter] = useState("All");
-    const [categories, setCategories] = useState<string[]>(["All"]);
+    const [filter, setFilter] = useState('All');
+    const [searchQuery, setSearchQuery] = useState('');
     const [isSelectOpen, setIsSelectOpen] = useState(false);
-
-    // Your Medium Username
-    const mediumUsername = '@prasaznat';
-    const rssUrl = `https://medium.com/feed/${mediumUsername}`;
-    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-
-    // Updated: Single placeholder image path as per your request
-    const placeholderImage = "/assets/images/blog/Medium-Emblem.png";
 
     const fetchPosts = async () => {
         setLoading(true);
         setError(null);
         try {
-            const response = await fetch(apiUrl);
+            const response = await fetch(CONFIG.MEDIUM_API);
             const data = await response.json();
 
             if (data.status === 'ok') {
-                const fetchedPosts: MediumPost[] = data.items;
-                setPosts(fetchedPosts);
-
-                // Extract unique categories dynamically from the posts
-                const allCategories = fetchedPosts.flatMap(post => post.categories);
-                const uniqueCategories = ["All", ...new Set(allCategories)];
-                setCategories(uniqueCategories);
+                setPosts(data.items);
             } else {
-                throw new Error("Failed to fetch blog posts.");
+                setError('Failed to fetch posts');
             }
         } catch (err) {
+            setError('Error connecting to Medium');
             console.error(err);
-            setError("Could not load blog posts. Please try again later.");
         } finally {
             setLoading(false);
         }
@@ -64,51 +37,35 @@ const Blog = () => {
         fetchPosts();
     }, []);
 
-    // Function to clean up HTML descriptions for display
+    const categories = useMemo(() => {
+        const allCategories = posts.flatMap(post => post.categories);
+        return ['All', ...Array.from(new Set(allCategories))];
+    }, [posts]);
+
+    const filteredPosts = useMemo(() => {
+        return posts.filter(post => {
+            const matchesCategory = filter === 'All' || post.categories.includes(filter);
+            const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase());
+            return matchesCategory && matchesSearch;
+        });
+    }, [posts, filter, searchQuery]);
+
+    // Helper to strip HTML tags for description preview
     const stripHtml = (html: string) => {
-        const doc = new DOMParser().parseFromString(html, 'text/html');
-        return doc.body.textContent || "";
+        const tmp = document.createElement("DIV");
+        tmp.innerHTML = html;
+        return tmp.textContent || tmp.innerText || "";
     };
 
-    // Helper to extract image from content with strict filtering
-    const getPostImage = (post: MediumPost) => {
-        // Helper to check if a URL is a valid content image (not a tracking pixel)
-        const isValidImage = (url: string) => {
-            return url && 
-                   url.startsWith('http') && 
-                   !url.includes('medium.com/_/stat') && // Block Medium tracking pixels
-                   !url.includes('medium.com/m/global'); // Block generic Medium icons
-        };
-
-        // 1. Check thumbnail field
-        if (isValidImage(post.thumbnail)) {
-            return post.thumbnail;
-        }
-
-        // 2. Parse content for the first valid <img>
-        const doc = new DOMParser().parseFromString(post.description || post.content, 'text/html');
-        const images = doc.querySelectorAll('img');
-        
-        for (let i = 0; i < images.length; i++) {
-            if (isValidImage(images[i].src)) {
-                return images[i].src;
-            }
-        }
-
-        // 3. Fallback: Return the single local placeholder image
-        return placeholderImage;
+    // Helper to extract first image from content if thumbnail is missing
+    const getPostImage = (post: BlogPost) => {
+        if (post.thumbnail) return post.thumbnail;
+        const div = document.createElement('div');
+        div.innerHTML = post.content;
+        const img = div.querySelector('img');
+        return img ? img.src : '/assets/images/Medium-Emblem.png'; // Fallback image
     };
 
-    const filteredPosts = posts.filter(post => {
-        const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            stripHtml(post.description).toLowerCase().includes(searchQuery.toLowerCase());
-        
-        const matchesCategory = filter === "All" || post.categories.includes(filter);
-        
-        return matchesSearch && matchesCategory;
-    });
-
-    // Format date helper
     const formatDate = (dateString: string) => {
         const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
         return new Date(dateString).toLocaleDateString('en-US', options);
@@ -116,19 +73,19 @@ const Blog = () => {
 
     return (
         <article className="blog active animate-fade-in" data-page="blog">
-            <SEO 
-                title="Blog" 
-                description="Read my latest articles on Data Science, Machine Learning, and Business Intelligence on Medium." 
+            <SEO
+                title="Blog"
+                description="Read my latest articles on Data Science, Machine Learning, and Business Intelligence on Medium."
             />
 
             <header className="flex justify-between items-center mb-4 border-b-2 border-neon-blue w-full pb-1">
                 <h2 className="h2 article-title text-2xl font-semibold">Blog</h2>
-                <button 
-                    onClick={fetchPosts} 
+                <button
+                    onClick={fetchPosts}
                     className="text-secondary-text hover:text-neon-blue transition-colors p-2"
                     title="Refresh posts"
                 >
-                    <IoReloadOutline className={loading ? "animate-spin" : ""} size={20}/>
+                    <IoReloadOutline className={loading ? "animate-spin" : ""} size={20} />
                 </button>
             </header>
 
@@ -153,11 +110,10 @@ const Blog = () => {
                             <li key={category} className="filter-item">
                                 <button
                                     onClick={() => setFilter(category)}
-                                    className={`text-xs px-3 py-1.5 rounded-lg transition-all duration-300 border border-transparent ${
-                                        filter === category 
-                                        ? 'text-neon-blue font-medium bg-jet border-neon-blue/30' 
+                                    className={`text-xs px-3 py-1.5 rounded-lg transition-all duration-300 border border-transparent ${filter === category
+                                        ? 'text-neon-blue font-medium bg-jet border-neon-blue/30'
                                         : 'text-secondary-text hover:text-light-gray-70 hover:bg-jet/50'
-                                    }`}
+                                        }`}
                                 >
                                     {category}
                                 </button>

@@ -6,9 +6,11 @@ interface ProjectCardProps {
     category: string;
     image: string;
     link: string;
+    onClick?: () => void;
+    className?: string;
 }
 
-const ProjectCard = ({ title, category, image}: ProjectCardProps) => {
+const ProjectCard = ({ title, category, image, onClick, className }: ProjectCardProps) => {
     return (
         <motion.li
             layout
@@ -16,7 +18,8 @@ const ProjectCard = ({ title, category, image}: ProjectCardProps) => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.3 }}
-            className="project-item active"
+            className={`project-item active ${className || ''}`}
+            onClick={onClick}
             // Added data-cursor="hover" to trigger the custom cursor active state
             data-cursor="hover"
         >

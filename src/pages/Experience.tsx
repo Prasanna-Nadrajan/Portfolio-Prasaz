@@ -1,42 +1,13 @@
 import TimelineItem from '../components/TimelineItem';
 import SEO from '../components/SEO';
-
-const experienceData = [
-    {
-        date: "Sep 2025 - Present",
-        title: "ARQ REC",
-        subtitle: "Data Analyst Associate",
-        description: "Utilized data visualization tools (Power BI) and SQL/Python for business intelligence reporting and operational efficiency improvements.",
-        logo: "/assets/images/experience/arq_rec_logo.jpg",
-        link: "https://drive.google.com/file/d/1wcf2VrSWUfjEsIXIQeqzqqbNERYEGGUb/view?usp=sharing",
-        side: "right" as const
-    },
-    {
-        date: "Aug 2025 - Present",
-        title: "Medium",
-        subtitle: "Tech Blogger",
-        description: "Research, write, and publish original articles on topics such as data science, statistics, technology, and real-world applications.",
-        logo: "/assets/images/experience/medium.png",
-        link: "https://medium.com/@prasaznat",
-        side: "left" as const
-    },
-    {
-        date: "Sep 2025 - Present",
-        title: "Ethics Club REC",
-        subtitle: "Board Member",
-        description: "Spearheading initiatives to promote ethical practices and awareness within the college community.",
-        logo: "/assets/images/experience/ethics_club.png",
-        link: "",
-        side: "right" as const
-    }
-];
+import { experienceData } from '../data/experience';
 
 const Experience = () => {
     return (
         <article className="experience active animate-fade-in" data-page="experience">
-            <SEO 
-                title="Experience" 
-                description="My professional journey, internships, and roles in data analysis and tech communities." 
+            <SEO
+                title="Experience"
+                description="My professional journey and academic background."
             />
 
             <header>

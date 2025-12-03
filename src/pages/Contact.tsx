@@ -9,9 +9,57 @@ const Contact = () => {
     const [isSending, setIsSending] = useState(false);
     const [message, setMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
 
+    const [formData, setFormData] = useState({
+        user_name: '',
+        user_email: '',
+        message: ''
+    });
+    const [errors, setErrors] = useState({
+        user_name: '',
+        user_email: '',
+        message: ''
+    });
+
+    const validateForm = () => {
+        let isValid = true;
+        const newErrors = { user_name: '', user_email: '', message: '' };
+
+        if (!formData.user_name.trim()) {
+            newErrors.user_name = 'Name is required';
+            isValid = false;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!formData.user_email.trim()) {
+            newErrors.user_email = 'Email is required';
+            isValid = false;
+        } else if (!emailRegex.test(formData.user_email)) {
+            newErrors.user_email = 'Please enter a valid email address';
+            isValid = false;
+        }
+
+        if (!formData.message.trim()) {
+            newErrors.message = 'Message is required';
+            isValid = false;
+        }
+
+        setErrors(newErrors);
+        return isValid;
+    };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+        // Clear error when user starts typing
+        if (errors[name as keyof typeof errors]) {
+            setErrors(prev => ({ ...prev, [name]: '' }));
+        }
+    };
+
     const sendEmail = (e: React.FormEvent) => {
         e.preventDefault();
 
+        if (!validateForm()) return;
         if (!form.current) return;
 
         setIsSending(true);
@@ -25,6 +73,7 @@ const Contact = () => {
             setTimeout(() => {
                 setIsSending(false);
                 setMessage({ text: "Message sent successfully! (Simulation)", type: 'success' });
+                setFormData({ user_name: '', user_email: '', message: '' });
                 form.current?.reset();
             }, 1500);
             return;
@@ -35,6 +84,7 @@ const Contact = () => {
                 console.log(result.text);
                 setIsSending(false);
                 setMessage({ text: "Message sent successfully!", type: 'success' });
+                setFormData({ user_name: '', user_email: '', message: '' });
                 form.current?.reset();
             }, (error) => {
                 console.log(error.text);
@@ -45,15 +95,15 @@ const Contact = () => {
 
     return (
         <article className="contact active animate-fade-in" data-page="contact">
-            <SEO 
-                title="Contact" 
-                description="Get in touch with Prasanna Nadrajan for collaborations, data projects, or just to say hi." 
+            <SEO
+                title="Contact"
+                description="Get in touch with Prasanna Nadrajan for collaborations, data projects, or just to say hi."
             />
 
             <header className="flex justify-between items-end mb-8 border-b-2 border-neon-blue pb-1">
                 <h2 className="h2 article-title text-2xl font-semibold">Contact</h2>
-                
-                <a 
+
+                <a
                     href="/assets/Prasanna_Nadrajan_Resume.pdf"
                     download="Prasanna_Nadrajan_Resume.pdf"
                     className="flex items-center gap-2 text-sm font-medium text-neon-blue hover:text-main-text transition-colors bg-border-gradient-onyx px-4 py-2 rounded-xl shadow-neon mb-1"
@@ -122,30 +172,42 @@ const Contact = () => {
                         </li>
                     </ul>
 
-                    <form ref={form} onSubmit={sendEmail} className="form-content">
+                    <form ref={form} onSubmit={sendEmail} className="form-content" noValidate>
                         <div className="input-wrapper grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                            <input
-                                type="text"
-                                name="user_name"
-                                className="form-input bg-onyx border border-jet rounded-xl p-3 text-main-text text-sm outline-none focus:border-neon-blue transition-colors w-full"
-                                placeholder="Full name"
-                                required
-                            />
-                            <input
-                                type="email"
-                                name="user_email"
-                                className="form-input bg-onyx border border-jet rounded-xl p-3 text-main-text text-sm outline-none focus:border-neon-blue transition-colors w-full"
-                                placeholder="Email address"
-                                required
-                            />
+                            <div className="flex flex-col gap-1">
+                                <input
+                                    type="text"
+                                    name="user_name"
+                                    value={formData.user_name}
+                                    onChange={handleChange}
+                                    className={`form-input bg-onyx border rounded-xl p-3 text-main-text text-sm outline-none transition-colors w-full ${errors.user_name ? 'border-red-500' : 'border-jet focus:border-neon-blue'}`}
+                                    placeholder="Full name"
+                                />
+                                {errors.user_name && <span className="text-xs text-red-400 pl-1">{errors.user_name}</span>}
+                            </div>
+                            <div className="flex flex-col gap-1">
+                                <input
+                                    type="email"
+                                    name="user_email"
+                                    value={formData.user_email}
+                                    onChange={handleChange}
+                                    className={`form-input bg-onyx border rounded-xl p-3 text-main-text text-sm outline-none transition-colors w-full ${errors.user_email ? 'border-red-500' : 'border-jet focus:border-neon-blue'}`}
+                                    placeholder="Email address"
+                                />
+                                {errors.user_email && <span className="text-xs text-red-400 pl-1">{errors.user_email}</span>}
+                            </div>
                         </div>
 
-                        <textarea
-                            name="message"
-                            className="form-input bg-onyx border border-jet rounded-xl p-3 text-main-text text-sm outline-none focus:border-neon-blue transition-colors w-full mb-4 h-32 resize-none"
-                            placeholder="Your Message"
-                            required
-                        ></textarea>
+                        <div className="flex flex-col gap-1 mb-4">
+                            <textarea
+                                name="message"
+                                value={formData.message}
+                                onChange={handleChange}
+                                className={`form-input bg-onyx border rounded-xl p-3 text-main-text text-sm outline-none transition-colors w-full h-32 resize-none ${errors.message ? 'border-red-500' : 'border-jet focus:border-neon-blue'}`}
+                                placeholder="Your Message"
+                            ></textarea>
+                            {errors.message && <span className="text-xs text-red-400 pl-1">{errors.message}</span>}
+                        </div>
 
                         <div className="flex justify-end">
                             <button

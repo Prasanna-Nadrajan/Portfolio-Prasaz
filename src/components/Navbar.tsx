@@ -2,32 +2,19 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-    IoPersonOutline,
-    IoBriefcaseOutline,
-    IoDocumentTextOutline,
-    IoLayersOutline,
-    IoStarOutline,
-    IoMailOutline,
     IoMenu,
     IoClose,
+    IoMailOutline,
     IoLocationOutline,
     IoLogoLinkedin,
     IoLogoGithub
 } from 'react-icons/io5';
 import ThemeToggle from './ThemeToggle';
+import { navItems } from '../data/navigation';
+import { CONFIG } from '../constants/config';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-    const navItems = [
-        { name: 'About', path: '/', icon: <IoPersonOutline size={20} /> },
-        { name: 'Portfolio', path: '/portfolio', icon: <IoBriefcaseOutline size={20} /> },
-        { name: 'Blog', path: '/blog', icon: <IoDocumentTextOutline size={20} /> },
-        { name: 'Platforms', path: '/platforms', icon: <IoLayersOutline size={20} /> },
-        { name: 'Experience', path: '/experience', icon: <IoStarOutline size={20} /> },
-        { name: 'Resume', path: '/resume', icon: <IoDocumentTextOutline size={20} /> },
-        { name: 'Contact', path: '/contact', icon: <IoMailOutline size={20} /> },
-    ];
 
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
     const closeMenu = () => setIsMenuOpen(false);
@@ -98,8 +85,8 @@ const Navbar = () => {
                                     </div>
                                     <div className="flex flex-col">
                                         <span className="text-xs uppercase text-light-gray-70">Email</span>
-                                        <a href="mailto:prasannanadrajan.r@gmail.com" className="text-sm text-main-text hover:text-neon-blue transition-colors">
-                                            prasannanadrajan.r@gmail.com
+                                        <a href={`mailto:${CONFIG.EMAIL}`} className="text-sm text-main-text hover:text-neon-blue transition-colors">
+                                            {CONFIG.EMAIL}
                                         </a>
                                     </div>
                                 </li>
@@ -109,16 +96,16 @@ const Navbar = () => {
                                     </div>
                                     <div className="flex flex-col">
                                         <span className="text-xs uppercase text-light-gray-70">Location</span>
-                                        <span className="text-sm text-main-text">Chennai, India</span>
+                                        <span className="text-sm text-main-text">{CONFIG.LOCATION}</span>
                                     </div>
                                 </li>
                             </ul>
 
                             <div className="flex justify-center gap-6 mb-6">
-                                <a href="https://www.linkedin.com/in/prasannanadrajan/" target="_blank" rel="noopener noreferrer" className="text-light-gray-70 hover:text-neon-blue transition-colors">
+                                <a href={CONFIG.LINKEDIN} target="_blank" rel="noopener noreferrer" className="text-light-gray-70 hover:text-neon-blue transition-colors">
                                     <IoLogoLinkedin size={24} />
                                 </a>
-                                <a href="https://github.com/Prasanna-Nadrajan" target="_blank" rel="noopener noreferrer" className="text-light-gray-70 hover:text-neon-blue transition-colors">
+                                <a href={CONFIG.GITHUB} target="_blank" rel="noopener noreferrer" className="text-light-gray-70 hover:text-neon-blue transition-colors">
                                     <IoLogoGithub size={24} />
                                 </a>
                             </div>
@@ -160,6 +147,7 @@ const Navbar = () => {
                         </li>
                     ))}
                 </ul>
+
             </nav>
         </>
     );

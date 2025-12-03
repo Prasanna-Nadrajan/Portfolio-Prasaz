@@ -1,77 +1,27 @@
-import { useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { useState, useMemo } from 'react';
 import { IoChevronDown } from 'react-icons/io5';
+import { AnimatePresence } from 'framer-motion';
 import ProjectCard from '../components/ProjectCard';
 import ProjectModal from '../components/ProjectModal';
+import { projectCategories, projects } from '../data/projects';
+import type { Project } from '../types';
 import SEO from '../components/SEO';
 
-const projects = [
-    {
-        title: "Ambulance Detecting Traffic System",
-        category: "Python",
-        image: "/assets/images/portfolio/Ambulance_detection.png",
-        link: "https://github.com/Prasanna-Nadrajan/Ambulance_detecting_traffic_system",
-        description: "Developed a Smart Traffic Management System using Computer Vision to detect emergency vehicles in real-time through visual and audio cues. Implemented virtual environment with automated traffic light control.",
-        techStack: ["Python", "OpenCV", "YOLO", "PyGame"]
-    },
-    {
-        title: "Code Reviewer for ML-Pipelines",
-        category: "Python",
-        image: "/assets/images/portfolio/ai-powered-code-reviewer-for-ml-pipelines.png",
-        link: "https://github.com/Prasanna-Nadrajan/AI-powered-code-review-for-ML-pipelines",
-        description: "Automated code review tool for ML pipelines analyzing best practices and performance bottlenecks.",
-        techStack: ["Python", "AST", "Machine Learning", "CI/CD"]
-    },
-    {
-        title: "Loan Eligibility Predictor",
-        category: "Python",
-        image: "/assets/images/portfolio/loan_eligibilty.png",
-        link: "https://github.com/Prasanna-Nadrajan/Loan-Eligibility-Detector",
-        description: "Streamlit application predicting loan eligibility using financial and personal data.",
-        techStack: ["Python", "Streamlit", "Scikit-learn", "Pandas"]
-    },
-    {
-        title: "eDNA Analysis using unsupervised learning",
-        category: "Python",
-        image: "/assets/images/portfolio/eDNA_Pipeline.png",
-        link: "https://github.com/Prasanna-Nadrajan/eDNA-VAI-Pipeline",
-        description: "Engineered an AI pipeline for deep-sea biodiversity assessment using Variational Autoencoder (VAE) to cluster and analyze environmental DNA sequences.",
-        techStack: ["Python", "VAE", "Deep Learning", "Bioinformatics"]
-    },
-    {
-        title: "Professional Blog",
-        category: "Frontend",
-        image: "/assets/images/portfolio/blog.png",
-        link: "https://github.com/Prasanna-Nadrajan/Portfolio-Prasaz",
-        description: "A modern, responsive portfolio website built with React and Tailwind CSS, featuring dark mode, animations, and a clean UI.",
-        techStack: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"]
-    },
-    {
-        title: "Billing Management System",
-        category: "Full Stack",
-        image: "/assets/images/portfolio/billing_management.png",
-        link: "https://github.com/Prasanna-Nadrajan/Billing_Management_System_Using_C",
-        description: "CGI-based system with payment processing, customer management, and history tracking.",
-        techStack: ["C", "CGI", "HTML/CSS", "File Handling"]
-    }
-];
-
-const categories = ["All", "Python", "Frontend", "Full Stack"];
-
 const Portfolio = () => {
-    const [filter, setFilter] = useState("All");
+    const [filter, setFilter] = useState('All');
+    const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const [isSelectOpen, setIsSelectOpen] = useState(false);
-    const [selectedProject, setSelectedProject] = useState<any>(null);
 
-    const filteredProjects = filter === "All"
-        ? projects
-        : projects.filter(project => project.category === filter);
+    const filteredProjects = useMemo(() => {
+        if (filter === 'All') return projects;
+        return projects.filter(project => project.category === filter);
+    }, [filter]);
 
     return (
         <article className="portfolio active animate-fade-in" data-page="portfolio">
-            <SEO 
-                title="Portfolio" 
-                description="Explore my data science, machine learning, and web development projects." 
+            <SEO
+                title="Portfolio"
+                description="Explore my portfolio of data science, machine learning, and web development projects."
             />
 
             <header>
@@ -81,7 +31,7 @@ const Portfolio = () => {
             <section className="projects">
                 {/* Filter Buttons for Desktop */}
                 <ul className="filter-list hidden md:flex justify-start items-center gap-6 mb-8 pl-1">
-                    {categories.map((category) => (
+                    {projectCategories.map((category) => (
                         <li key={category} className="filter-item">
                             <button
                                 onClick={() => setFilter(category)}
@@ -108,7 +58,7 @@ const Portfolio = () => {
 
                     {isSelectOpen && (
                         <ul className="select-list bg-onyx absolute top-full left-0 w-full p-2 rounded-xl border border-jet shadow-neon z-20 mt-2">
-                            {categories.map((category) => (
+                            {projectCategories.map((category) => (
                                 <li key={category} className="select-item">
                                     <button
                                         onClick={() => {
@@ -129,14 +79,15 @@ const Portfolio = () => {
                 <ul className="project-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <AnimatePresence>
                         {filteredProjects.map((project, index) => (
-                            <div key={index} onClick={() => setSelectedProject(project)} className="cursor-pointer">
-                                <ProjectCard
-                                    title={project.title}
-                                    category={project.category}
-                                    image={project.image}
-                                    link={project.link}
-                                />
-                            </div>
+                            <ProjectCard
+                                key={index}
+                                title={project.title}
+                                category={project.category}
+                                image={project.image}
+                                link={project.link}
+                                onClick={() => setSelectedProject(project)}
+                                className="cursor-pointer"
+                            />
                         ))}
                     </AnimatePresence>
                 </ul>

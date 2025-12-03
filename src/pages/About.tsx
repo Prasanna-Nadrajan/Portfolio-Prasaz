@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ServiceCard from '../components/ServiceCard';
-import TechStackToolbox from '../components/TechStackToolbox';
+import SkillVisualization from '../components/SkillVisualization';
 import Badges from '../components/Badges';
 import TestimonialModal from '../components/TestimonialModal';
 import SEO from '../components/SEO';
@@ -34,30 +34,30 @@ const testimonials = [
     {
         name: "Chennai Data Circle - AI In BI (Boon Or Bane)?",
         date: "Jan 25, 2025",
-        avatar: "/assets/images/events/cdc_meeetup.png", 
+        avatar: "/assets/images/events/cdc_meeetup.png",
         text: "Participated in an insightful session discussing the impact of Artificial Intelligence on Business Intelligence, exploring whether it's a boon or a bane for the industry.",
-        link: "https://www.linkedin.com/" 
+        link: "https://www.linkedin.com/"
     },
     {
         name: "CII Connect 2024",
         date: "Dec 17, 2024",
-        avatar: "/assets/images/events/cii_connect_2024.jpg", 
+        avatar: "/assets/images/events/cii_connect_2024.jpg",
         text: "Attended CII Connect 2024, a premier event bringing together industry leaders and technology experts to discuss the future of digital transformation and innovation.",
-        link: "https://www.linkedin.com/" 
+        link: "https://www.linkedin.com/"
     },
     {
         name: "Investiture Ceremony ARQ REC",
         date: "Oct 10, 2025",
-        avatar: "/assets/images/events/investiture.png", 
+        avatar: "/assets/images/events/investiture.png",
         text: "Honored to be part of the Investiture Ceremony at ARQ REC, marking the beginning of a new leadership journey and commitment to excellence.",
-        link: "https://www.linkedin.com/" 
+        link: "https://www.linkedin.com/"
     },
     {
         name: "CodeSapiens - Students Community (Meetup)",
         date: "Nov 15, 2024",
-        avatar: "/assets/images/events/codesapiens_meetup.png", 
+        avatar: "/assets/images/events/codesapiens_meetup.png",
         text: "Joined fellow student developers at the CodeSapiens meetup to share knowledge, collaborate on projects, and build a strong tech community.",
-        link: "https://www.linkedin.com/" 
+        link: "https://www.linkedin.com/"
     }
 ];
 
@@ -72,9 +72,9 @@ const About = () => {
 
     return (
         <article className="about active animate-fade-in" data-page="about">
-            <SEO 
-                title="About" 
-                description="Learn about Prasanna Nadrajan, a Data Analyst and MERN Stack Developer specializing in AI, BI, and Data Science." 
+            <SEO
+                title="About"
+                description="Learn about Prasanna Nadrajan, a Data Analyst and MERN Stack Developer specializing in AI, BI, and Data Science."
             />
 
             <header>
@@ -104,7 +104,7 @@ const About = () => {
                 </div>
             </section>
 
-            <TechStackToolbox />
+            <SkillVisualization />
             <Badges />
 
             <section className="testimonials mb-8">
@@ -113,22 +113,22 @@ const About = () => {
                     {testimonials.map((item, index) => (
                         <li
                             key={index}
-                            data-cursor="hover" 
+                            data-cursor="hover"
                             className="testimonials-item bg-border-gradient-onyx p-5 rounded-2xl shadow-neon relative z-10 before:absolute before:inset-[1px] before:bg-bg-gradient-jet before:rounded-2xl before:-z-10 cursor-pointer hover:scale-[1.02] transition-transform duration-300 h-full"
                             onClick={() => openModal(item)}
                         >
                             <div className="content-card flex flex-col h-full">
                                 <figure className="testimonials-avatar-box w-full h-48 rounded-xl overflow-hidden mb-4 shadow-neon shrink-0">
-                                    <img 
-                                        src={item.avatar} 
-                                        alt={item.name} 
-                                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" 
+                                    <img
+                                        src={item.avatar}
+                                        alt={item.name}
+                                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                                         onError={(e) => {
                                             (e.target as HTMLImageElement).src = "https://via.placeholder.com/300x200?text=Event";
                                         }}
                                     />
                                 </figure>
-                                
+
                                 <div className="testimonials-content flex flex-col flex-grow">
                                     <time className="text-xs text-neon-blue font-medium mb-2 block">{item.date}</time>
                                     <h4 className="h4 testimonials-item-title text-lg font-medium text-main-text mb-2 leading-snug">{item.name}</h4>

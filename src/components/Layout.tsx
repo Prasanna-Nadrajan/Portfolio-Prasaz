@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import Cursor from './Cursor.tsx';
 import ThemeToggle from './ThemeToggle.tsx';
 import Footer from './Footer';
+import ScrollToTop from './ScrollToTop';
 
 interface LayoutProps {
     children: ReactNode;
@@ -34,7 +35,7 @@ const Layout = ({ children }: LayoutProps) => {
                 <ThemeToggle />
             </div>
 
-            <main className="container mx-auto px-4 py-4 pt-20 md:py-8 lg:px-8 max-w-7xl relative z-10 flex-grow">
+            <main className="container mx-auto px-4 py-4 pt-20 md:py-8 lg:px-4 max-w-[95%] relative z-10 flex-grow">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
                     <div className="md:col-span-3 lg:col-span-3">
                         <Sidebar />
@@ -54,6 +55,7 @@ const Layout = ({ children }: LayoutProps) => {
             <div className="relative z-10">
                 <Footer />
             </div>
+            <ScrollToTop />
         </div>
     );
 };
