@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 @theme {
   /* Reference the CSS variables defined in @layer base below */
@@ -16,6 +17,7 @@
   
   /* Updated Font */
   --font-poppins: 'Outfit', sans-serif;
+  --font-pixelated: 'Press Start 2P', cursive;
 
   --shadow-neon: 0 4px 15px var(--shadow-color);
   --shadow-neon-hover: 0 8px 25px var(--shadow-color-hover);
@@ -142,6 +144,10 @@
 
   ::-webkit-scrollbar-thumb {
     @apply bg-neon-blue rounded-full;
+  }
+  
+  .font-pixelated {
+    font-family: var(--font-pixelated);
   }
 }
 
