@@ -31,13 +31,13 @@ const GitHubCalendar = () => {
             try {
                 // Using a public API proxy to fetch GitHub contribution data
                 const response = await fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`);
-                
+
                 if (!response.ok) {
                     throw new Error('Failed to fetch GitHub data');
                 }
 
                 const data: APIResponse = await response.json();
-                
+
                 // The API returns all days. We need to ensure we have the last 365 days or similar.
                 // This API returns 'contributions' as an array of days.
                 setContributions(data.contributions);
@@ -70,10 +70,10 @@ const GitHubCalendar = () => {
         // We want to show roughly the last year (52 weeks)
         // The API returns a flat array. We need to chunk it or arrange it.
         // Usually, GitHub graph starts on a Sunday.
-        
+
         // Let's grab the last ~364 days to fill the grid nicely (52 weeks * 7 days)
         const lastYearData = contributions.slice(-364);
-        
+
         for (let i = 0; i < lastYearData.length; i += 7) {
             weeks.push(lastYearData.slice(i, i + 7));
         }
@@ -88,8 +88,8 @@ const GitHubCalendar = () => {
                 GitHub Contributions
                 <span className="text-xs font-normal text-secondary-text ml-auto">Last Year</span>
             </h3>
-            
-            <div className="bg-border-gradient-onyx p-5 rounded-2xl shadow-neon relative z-10 before:absolute before:inset-[1px] before:bg-bg-gradient-jet before:rounded-2xl before:-z-10 overflow-x-auto">
+
+            <div className="bg-border-gradient-onyx p-5 rounded-2xl shadow-neon relative z-10 before:absolute before:inset-[1px] before:bg-bg-gradient-jet before:rounded-2xl before:-z-10 overflow-x-auto w-fit max-w-full mx-auto">
                 {loading ? (
                     <div className="flex items-center justify-center h-32 text-sm text-secondary-text">
                         Loading GitHub Activity...
@@ -116,7 +116,7 @@ const GitHubCalendar = () => {
                                 </div>
                             ))}
                         </div>
-                        
+
                         <div className="flex items-center justify-end gap-2 mt-4 text-xs text-secondary-text">
                             <span>Less</span>
                             <div className="flex gap-1">

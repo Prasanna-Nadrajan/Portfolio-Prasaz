@@ -29,3 +29,45 @@ export const experienceData: ExperienceItem[] = [
         side: "right"
     }
 ];
+
+export const volunteeringData: ExperienceItem[] = [
+    {
+        date: "2024",
+        title: "CII Connect 2024",
+        subtitle: "Confederation of Indian Industries",
+        description: "Volunteered for CII Connect 2024, assisting in event organization and coordination.",
+        logo: "/assets/images/experience/cii.png",
+        link: "",
+        side: "left"
+    },
+    {
+        date: "2024 - Present",
+        title: "College Events",
+        subtitle: "Rajalakshmi Engineering College",
+        description: "Active volunteer for various technical and cultural events organized by the college.",
+        logo: "/assets/images/experience/rec.png",
+        link: "",
+        side: "right"
+    }
+];
+
+export const educationData: ExperienceItem[] = [
+    {
+        date: "2024 - Present",
+        title: "Rajalakshmi Engineering College",
+        subtitle: "Undergraduate Student",
+        description: "Pursuing Bachelor's degree. Actively involved in technical societies and hackathons.",
+        logo: "/assets/images/experience/rec.png",
+        link: "https://www.rajalakshmi.org/",
+        side: "left"
+    },
+    {
+        date: "Upto 2024",
+        title: "The Hindu Senior Secondary School",
+        subtitle: "Higher Secondary Education",
+        description: "Completed schooling with a strong foundation in core subjects.",
+        logo: "/assets/images/experience/hsss.png",
+        link: "",
+        side: "right"
+    }
+];

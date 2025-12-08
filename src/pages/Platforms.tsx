@@ -1,5 +1,6 @@
 import GitHubCalendar from '../components/GitHubCalendar';
 import LeetCodeCalendar from '../components/LeetCodeCalendar';
+import GitHubUnwrapped from '../components/GitHubUnwrapped';
 
 const platforms = [
     {
@@ -38,32 +39,33 @@ const Platforms = () => {
             {/* Added GitHub Calendar at the top of Platforms page */}
             <GitHubCalendar />
             <LeetCodeCalendar />
+            <GitHubUnwrapped />
 
             <section className="platforms-list">
                 <h3 className="h3 service-title text-xl font-semibold mb-6">Coding Profiles</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {platforms.map((platform, index) => (
-                        <a 
-                            key={index} 
-                            href={platform.link} 
-                            target="_blank" 
+                        <a
+                            key={index}
+                            href={platform.link}
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="platform-item bg-border-gradient-onyx p-6 rounded-2xl shadow-neon relative z-10 before:absolute before:inset-[1px] before:bg-bg-gradient-jet before:rounded-2xl before:-z-10 hover:scale-[1.02] transition-transform duration-300 flex items-center gap-4"
                         >
                             <div className="platform-icon bg-onyx p-3 rounded-xl shadow-neon shrink-0">
                                 {/* Using a placeholder generic icon or image */}
-                                <img 
-                                    src={platform.icon} 
-                                    alt={platform.title} 
+                                <img
+                                    src={platform.icon}
+                                    alt={platform.title}
                                     className="w-10 h-10 object-contain"
                                     onError={(e) => {
                                         (e.target as HTMLImageElement).style.display = 'none';
                                         (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
-                                    }} 
+                                    }}
                                 />
                                 <div className="hidden w-10 h-10 bg-jet rounded-lg flex items-center justify-center text-xs text-secondary-text">IMG</div>
                             </div>
-                            
+
                             <div className="platform-content">
                                 <h3 className="text-main-text text-lg font-medium mb-1">{platform.title}</h3>
                                 <p className="text-secondary-text text-sm">{platform.description}</p>

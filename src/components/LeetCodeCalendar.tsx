@@ -21,9 +21,9 @@ const LeetCodeCalendar = () => {
     const [stats, setStats] = useState<{ total: number; easy: number; medium: number; hard: number } | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    
+
     // Replace with your actual LeetCode username if different
-    const username = 'Prasanna_Nadrajan'; 
+    const username = 'Prasanna_Nadrajan';
 
     useEffect(() => {
         const fetchLeetCodeData = async () => {
@@ -31,7 +31,7 @@ const LeetCodeCalendar = () => {
                 // Using a public proxy API to fetch LeetCode stats
                 // Note: This API might have cold start times (takes a few seconds to wake up)
                 const response = await fetch(`https://leetcode-stats-api.herokuapp.com/${username}`);
-                
+
                 if (!response.ok) {
                     throw new Error('Failed to fetch LeetCode data');
                 }
@@ -87,7 +87,7 @@ const LeetCodeCalendar = () => {
 
     // LeetCode Orange Colors
     const getColor = (count: number) => {
-        if (count === 0) return 'bg-jet/50'; 
+        if (count === 0) return 'bg-jet/50';
         if (count <= 2) return 'bg-[#faca15]'; // Yellow-400
         if (count <= 4) return 'bg-[#eab308]'; // Yellow-500
         return 'bg-[#ca8a04]'; // Yellow-600 (Darker Orange/Gold)
@@ -119,8 +119,8 @@ const LeetCodeCalendar = () => {
                     </div>
                 )}
             </div>
-            
-            <div className="bg-border-gradient-onyx p-5 rounded-2xl shadow-neon relative z-10 before:absolute before:inset-[1px] before:bg-bg-gradient-jet before:rounded-2xl before:-z-10 overflow-x-auto">
+
+            <div className="bg-border-gradient-onyx p-5 rounded-2xl shadow-neon relative z-10 before:absolute before:inset-[1px] before:bg-bg-gradient-jet before:rounded-2xl before:-z-10 overflow-x-auto w-fit max-w-full mx-auto">
                 {loading ? (
                     <div className="flex items-center justify-center h-32 text-sm text-secondary-text">
                         Loading LeetCode Stats...
@@ -147,7 +147,7 @@ const LeetCodeCalendar = () => {
                                 </div>
                             ))}
                         </div>
-                        
+
                         <div className="flex items-center justify-end gap-2 mt-4 text-xs text-secondary-text">
                             <span>Less</span>
                             <div className="flex gap-1">
