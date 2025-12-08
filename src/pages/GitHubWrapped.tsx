@@ -155,12 +155,20 @@ const GitHubWrapped = () => {
                             className="w-full h-full object-cover rounded-full border-4 border-black group-hover:grayscale transition-all"
                         />
                         <div className="absolute -bottom-4 bg-black border border-green-500 px-3 py-1 text-xs text-white">
-                            LVL. 75
+                            EPIC
                         </div>
                     </div>
 
                     <h1 className="text-2xl md:text-3xl mb-2 text-white">PRASAZ</h1>
-                    <p className="text-green-500 text-xs mb-6">GitHub Unwrapped</p>
+                    <p className="text-green-500 text-xs mb-2">GitHub Unwrapped</p>
+                    <a
+                        href="https://www.linkedin.com/feed/update/urn:li:activity:7403640881175506945/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3BVvdpqojHQMuRdYdp63vszQ%3D%3D"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[10px] text-green-500 underline hover:text-white transition-colors cursor-pointer mb-6 block"
+                    >
+                        for more info click here
+                    </a>
 
                     <div className="w-full text-left space-y-4 font-mono text-sm opacity-80 mt-auto bg-green-900/10 p-4 rounded border border-green-500/20">
                         <p>{`> Status: Online`}</p>
