@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 import Cursor from './Cursor.tsx';
@@ -11,8 +11,14 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
+    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
+    const toggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    };
+
     return (
-        <div className="min-h-screen bg-main-bg text-main-text font-poppins relative overflow-hidden transition-colors duration-300 flex flex-col">
+        <div className="min-h-screen bg-main-bg text-main-text font-poppins relative overflow-x-hidden transition-colors duration-300 flex flex-col">
             {/* Space Background Layers - Visible mainly in Dark Mode */}
             <div className="fixed inset-0 z-0 pointer-events-none">
                 <div className="stars-sm absolute inset-0"></div>
@@ -37,12 +43,14 @@ const Layout = ({ children }: LayoutProps) => {
 
             <main className="container mx-auto px-4 py-4 pt-20 md:py-8 lg:px-4 max-w-[95%] relative z-10 flex-grow">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-                    <div className="md:col-span-3 lg:col-span-3">
+                    {/* Sidebar Column: Hidden in DOM if isSidebarOpen is false on Desktop */}
+                    <div className={`md:col-span-3 lg:col-span-3 ${isSidebarOpen ? 'block' : 'hidden'}`}>
                         <Sidebar />
                     </div>
 
-                    <div className="md:col-span-9 lg:col-span-9 relative">
-                        <Navbar />
+                    {/* Main Content Column: Expands to 12 if sidebar closed */}
+                    <div className={`relative ${isSidebarOpen ? 'md:col-span-9 lg:col-span-9' : 'md:col-span-12 lg:col-span-12'}`}>
+                        <Navbar isSidebarOpen={isSidebarOpen} onToggleSidebar={toggleSidebar} />
                         <div className="glass-card mt-4 md:mt-0 min-h-[calc(100vh-100px)] md:min-h-[calc(100vh-60px)] relative flex flex-col">
                             <div className="flex-grow">
                                 {children}

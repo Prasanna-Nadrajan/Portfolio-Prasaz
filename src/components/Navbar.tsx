@@ -7,13 +7,20 @@ import {
     IoMailOutline,
     IoLocationOutline,
     IoLogoLinkedin,
-    IoLogoGithub
+    IoLogoGithub,
+    IoChevronBack,
+    IoChevronForward
 } from 'react-icons/io5';
 import ThemeToggle from './ThemeToggle';
 import { navItems } from '../data/navigation';
 import { CONFIG } from '../constants/config';
 
-const Navbar = () => {
+interface NavbarProps {
+    isSidebarOpen?: boolean;
+    onToggleSidebar?: () => void;
+}
+
+const Navbar = ({ isSidebarOpen = true, onToggleSidebar }: NavbarProps) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -131,7 +138,40 @@ const Navbar = () => {
             </AnimatePresence>
 
             {/* Desktop Navbar (Existing Logic) */}
-            <nav className="hidden md:block navbar md:static md:w-auto md:bg-transparent md:backdrop-blur-0 md:border-none md:shadow-none md:rounded-none md:ml-auto md:translate-x-0 md:max-w-none">
+            <nav className="hidden md:flex items-center gap-4 navbar md:static md:w-auto md:bg-transparent md:backdrop-blur-0 md:border-none md:shadow-none md:rounded-none md:ml-auto md:translate-x-0 md:max-w-none">
+
+                {/* Collapse/Expand Sidebar Button */}
+                <button
+                    onClick={onToggleSidebar}
+                    className="p-2 bg-jet/50 rounded-lg text-neon-blue hover:text-white hover:bg-jet transition-colors shadow-neon"
+                    title={isSidebarOpen ? "Hide Sidebar" : "Show Sidebar"}
+                >
+                    {isSidebarOpen ? <IoChevronBack size={20} /> : <IoChevronForward size={20} />}
+                </button>
+
+                {/* Conditional Profile Picture when Sidebar is Closed */}
+                {!isSidebarOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.8 }}
+                        transition={{ duration: 0.3 }}
+                        className="flex items-center gap-3 bg-container-bg border border-jet rounded-xl px-3 py-1 shadow-neon"
+                    >
+                        <figure className="w-8 h-8 rounded-full overflow-hidden border border-neon-blue">
+                            <img
+                                src="/assets/images/portfolio_image.png"
+                                alt="Prasanna"
+                                className="w-full h-full object-cover"
+                            />
+                        </figure>
+                        <div className="flex flex-col">
+                            <span className="text-main-text font-medium text-xs leading-tight">Prasanna Nadrajan</span>
+                            <span className="text-[10px] text-neon-blue font-light">Data Analyst</span>
+                        </div>
+                    </motion.div>
+                )}
+
                 <ul className="navbar-list flex justify-between items-center px-6 py-3 md:bg-container-bg md:border md:border-jet md:rounded-tr-2xl md:rounded-bl-2xl md:px-8 md:shadow-neon md:gap-8 md:py-0">
                     {navItems.map((item) => (
                         <li key={item.name} className="navbar-item">

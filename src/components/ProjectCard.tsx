@@ -14,31 +14,35 @@ const ProjectCard = ({ title, category, image, onClick, className }: ProjectCard
     return (
         <motion.li
             layout
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
+            exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.3 }}
-            className={`project-item active ${className || ''}`}
+            className={`project-item active group relative rounded-xl overflow-hidden cursor-pointer h-72 shadow-neon hover:shadow-neon-hover transition-all duration-300 ${className || ''}`}
             onClick={onClick}
-            // Added data-cursor="hover" to trigger the custom cursor active state
             data-cursor="hover"
         >
-            <div className="block w-full cursor-pointer">
-                <figure className="project-img relative rounded-2xl overflow-hidden mb-4 group">
-                    <div className="project-item-icon-box absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-jet text-neon-blue p-3 rounded-xl text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 shadow-neon">
-                        <IoEyeOutline />
-                    </div>
-                    <img
-                        src={image}
-                        alt={title}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                        loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-transparent group-hover:bg-black/50 transition-colors duration-300"></div>
-                </figure>
+            {/* Image Background */}
+            <img
+                src={image}
+                alt={title}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 group-hover:blur-[2px]"
+                loading="lazy"
+            />
 
-                <h3 className="project-title text-main-text text-lg font-medium mb-1 ml-2 capitalize">{title}</h3>
-                <p className="project-category text-light-gray-70 text-sm font-light ml-2 capitalize">{category}</p>
+            {/* Hover Content Overlay */}
+            <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-4 text-center">
+                <div className="bg-jet text-neon-blue p-3 rounded-full mb-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75 shadow-lg">
+                    <IoEyeOutline size={24} />
+                </div>
+
+                <h3 className="text-white text-xl font-bold mb-1 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100 font-pixelated">
+                    {title}
+                </h3>
+
+                <p className="text-neon-blue text-sm font-light transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-150">
+                    {category}
+                </p>
             </div>
         </motion.li>
     );
