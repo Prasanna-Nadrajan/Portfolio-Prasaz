@@ -44,7 +44,7 @@ const Platforms = () => {
             <LeetCodeCalendar />
 
             {/* GitHub Wrapped 2025 Link Box - Styled as Project Card */}
-            <section className="mb-10">
+            <section className="mb-10 flex flex-col md:flex-row gap-6">
                 <ProjectCard
                     title="GitHub Wrapped 2025"
                     category="Year in Review"
@@ -53,7 +53,17 @@ const Platforms = () => {
                     link="/github-wrapped"
                     onClick={() => navigate('/github-wrapped')}
                     usePixelatedFont={true}
-                    className="w-full md:w-1/2 lg:w-1/3" // Adjust width to match grid look or keep full? User said "like the placeholder image... (projects boxes)". Project boxes are in a grid. This is a single item here. I'll stick to a reasonable max-width or let it fill. ProjectCard has h-72 fixed height. A full width h-72 card might look stretched. I'll restrict width."
+                    className="w-full md:w-1/2"
+                />
+                <ProjectCard
+                    title="LeetCode Wrapped 2025"
+                    category="Coding Journey"
+                    image="/assets/images/contact_me/code.png"
+                    video="/assets/videos/leetcode-wrapped-2025.mp4"
+                    link="/leetcode-wrapped"
+                    onClick={() => navigate('/leetcode-wrapped')}
+                    usePixelatedFont={true}
+                    className="w-full md:w-1/2"
                 />
             </section>
 

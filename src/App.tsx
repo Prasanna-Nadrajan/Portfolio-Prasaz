@@ -12,6 +12,7 @@ const Contact = lazy(() => import('./pages/Contact'));
 const Platforms = lazy(() => import('./pages/Platforms'));
 const Resume = lazy(() => import('./pages/Resume'));
 const GitHubWrapped = lazy(() => import('./pages/GitHubWrapped'));
+const LeetCodeWrapped = lazy(() => import('./pages/LeetCodeWrapped'));
 
 function App() {
   const [showIntro, setShowIntro] = useState(true);
@@ -26,6 +27,7 @@ function App() {
         <Routes>
           {/* Standalone Route for GitHub Wrapped */}
           <Route path="/github-wrapped" element={<GitHubWrapped />} />
+          <Route path="/leetcode-wrapped" element={<LeetCodeWrapped />} />
 
           {/* Main Application Routes */}
           <Route path="/*" element={

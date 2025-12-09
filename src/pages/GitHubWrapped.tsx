@@ -12,11 +12,21 @@ const GitHubWrapped = () => {
     const stats = {
         commits: 711,
         prs: 84,
-        issues: 12, // Placeholder or inferred
-        reviews: 45, // Placeholder
+        issues: 12,
+        reviews: 45,
         streak: 88,
-        topLanguage: "Python"
+        topLanguage: "Python",
+        stars: 52,
+        forks: 35,
+        totalRepos: 42
     };
+
+    const languages = [
+        { name: "Py", percent: 45, color: "text-blue-400", bg: "bg-blue-400" },
+        { name: "Java", percent: 30, color: "text-blue-600", bg: "bg-blue-600" },
+        { name: "C", percent: 15, color: "text-cyan-400", bg: "bg-cyan-400" },
+        { name: "TS", percent: 10, color: "text-teal-400", bg: "bg-teal-400" },
+    ];
 
     const achievements = [
         { title: "Open Source Contributor", date: "2025", desc: "" },
@@ -121,72 +131,130 @@ const GitHubWrapped = () => {
 
 
     return (
-        <article className="min-h-screen bg-black text-green-500 font-pixelated p-4 md:p-8 relative overflow-hidden cursor-none">
-            {/* Custom Cursor explicitly rendered here since we are outside Layout */}
+        <article className="min-h-screen bg-black text-green-500 font-pixelated p-4 md:p-6 relative overflow-hidden cursor-none selection:bg-green-500 selection:text-black">
             <Cursor />
+            <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none opacity-20 z-0" />
 
-            {/* Matrix Rain Canvas */}
-            <canvas
-                ref={canvasRef}
-                className="fixed inset-0 pointer-events-none opacity-20 z-0"
-            />
+            {/* Header / Status Bar */}
+            <header className="fixed top-0 left-0 right-0 h-10 bg-black/90 border-b border-green-800 z-50 flex items-center justify-between px-6 text-xs font-mono">
+                <div className="flex gap-4">
+                    <button onClick={() => navigate(-1)} className="hover:bg-green-500 hover:text-black px-2 py-1 transition-colors">
+                        ← SYSTEM_EXIT
+                    </button>
+                    <span className="opacity-50">|</span>
+                    <span>USER: PRASAZ</span>
+                    <span className="hidden md:inline text-green-700">ID: 8092-A</span>
+                </div>
+                <div className="flex gap-4">
+                    <span className="hidden md:inline">SERVER: GITHUB-MAIN</span>
+                    <span>RANK: TOP 5%</span>
+                    <span className="animate-pulse">ONLINE</span>
+                </div>
+            </header>
 
-            <button
-                onClick={() => navigate(-1)}
-                className="fixed top-6 left-6 z-50 text-green-500 hover:text-white hover:bg-green-500 border border-green-500 px-4 py-2 text-xs transition-colors bg-black/50 backdrop-blur"
-            >
-                ← EXIT SYSTEM
-            </button>
+            {/* Main Grid - Widened to 95vw */}
+            <div className="w-full max-w-[95vw] mx-auto pt-16 grid grid-cols-1 md:grid-cols-12 gap-6 relative z-10">
 
-            <div className="max-w-7xl mx-auto pt-16 md:pt-10 grid grid-cols-1 md:grid-cols-12 gap-6 relative z-10">
+                {/* LEFT COL: Infographics (Span 4) - REPLACED Profile Info */}
+                <div className="md:col-span-4 flex flex-col gap-6">
 
-                {/* COLUMN 1: Profile (Span 4) */}
-                <motion.div
-                    initial={{ x: -50, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ duration: 0.5 }}
-                    className="md:col-span-4 bg-black/80 backdrop-blur shadow-[0_0_20px_rgba(0,255,0,0.2)] border border-green-500/50 p-6 rounded-lg flex flex-col items-center text-center h-full min-h-[500px]"
-                >
-                    <div className="w-48 h-48 md:w-64 md:h-64 mb-8 relative group">
-                        <div className="absolute inset-0 border-2 border-dashed border-green-500 rounded-full animate-spin-slow"></div>
-                        <img
-                            src="/assets/images/gitHubUnwrapped2025/bumblebee.jpg"
-                            alt="Profile Avatar"
-                            className="w-full h-full object-cover rounded-full border-4 border-black group-hover:grayscale transition-all"
-                        />
-                        <div className="absolute -bottom-4 bg-black border border-green-500 px-3 py-1 text-xs text-white">
-                            EPIC
-                        </div>
-                    </div>
-
-                    <h1 className="text-2xl md:text-3xl mb-2 text-white">PRASAZ</h1>
-                    <p className="text-green-500 text-xs mb-2">GitHub Unwrapped</p>
-                    <a
-                        href="https://www.linkedin.com/feed/update/urn:li:activity:7403640881175506945/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3BVvdpqojHQMuRdYdp63vszQ%3D%3D"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[10px] text-green-500 underline hover:text-white transition-colors cursor-pointer mb-6 block"
+                    {/* Widget 1: Language Distribution */}
+                    <motion.div
+                        initial={{ x: -50, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        className="bg-black/80 border border-green-800 rounded p-4 shadow-[0_0_10px_rgba(0,100,0,0.3)]"
                     >
-                        for more info click here
-                    </a>
+                        <h3 className="text-[10px] text-green-600 mb-3 border-b border-green-900 pb-1 flex justify-between">
+                            <span>~/analytics/languages.json</span>
+                            <span>USAGE %</span>
+                        </h3>
+                        <div className="space-y-3">
+                            {languages.map((lang, i) => (
+                                <div key={i} className="flex items-center gap-3 text-xs">
+                                    <span className={`font-bold w-20 shrink-0 ${lang.color}`}>{lang.name}</span>
+                                    <div className="flex-1 h-1.5 bg-gray-900 rounded-full overflow-hidden">
+                                        <motion.div
+                                            initial={{ width: 0 }}
+                                            animate={{ width: `${lang.percent}%` }}
+                                            transition={{ duration: 1, delay: 0.2 + i * 0.1 }}
+                                            className={`h-full rounded-full ${lang.bg}`}
+                                        />
+                                    </div>
+                                    <span className="text-gray-500 text-[10px] w-8 text-right">{lang.percent}%</span>
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
 
-                    <div className="w-full text-left space-y-4 font-mono text-sm opacity-80 mt-auto bg-green-900/10 p-4 rounded border border-green-500/20">
-                        <p>{`> Status: Online`}</p>
-                        <p>{`> Location: Chennai, IN`}</p>
-                        <p>{`> Current Objective: Build Cool sh*t`}</p>
-                        <p className="animate-pulse">{`> _`}</p>
-                    </div>
-                </motion.div>
+                    {/* Widget 2: Contribution Breakdown */}
+                    <motion.div
+                        initial={{ x: -50, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ delay: 0.1 }}
+                        className="bg-black/80 border border-green-800 rounded p-4 flex gap-4 items-center h-32"
+                    >
+                        {/* Donut Chart CSS */}
+                        <div className="relative w-24 h-24 shrink-0 rounded-full flex items-center justify-center"
+                            style={{ background: 'conic-gradient(#22c55e 0% 70%, #eab308 70% 90%, #ef4444 90% 100%)' }}
+                        >
+                            <div className="absolute inset-2 bg-black rounded-full flex flex-col items-center justify-center">
+                                <span className="text-xl text-white font-bold">{stats.commits + stats.prs + stats.issues}</span>
+                                <span className="text-[8px] text-green-600">ACTIONS</span>
+                            </div>
+                        </div>
+
+                        <div className="flex-1 space-y-1 text-[10px]">
+                            <h3 className="text-green-300 border-b border-green-900 mb-2 pb-1">ACTIVITY_TYPE</h3>
+                            <div className="flex justify-between items-center">
+                                <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span> Commits</span>
+                                <span className="text-white">{stats.commits}</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                                <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 bg-yellow-500 rounded-full"></span> PRs</span>
+                                <span className="text-white">{stats.prs}</span>
+                            </div>
+                            <div className="flex justify-between items-center">
+                                <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 bg-red-500 rounded-full"></span> Issues</span>
+                                <span className="text-white">{stats.issues}</span>
+                            </div>
+                        </div>
+                    </motion.div>
+
+                    {/* Widget 3: Repository Intelligence */}
+                    <motion.div
+                        initial={{ x: -50, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ delay: 0.2 }}
+                        className="bg-black/80 border border-green-800 rounded p-4 grid grid-cols-3 gap-2 text-center"
+                    >
+                        <div className="p-2 bg-green-900/10 rounded border border-green-500/10 hover:bg-green-500/20 transition-colors">
+                            <div className="text-xl mb-1">⭐</div>
+                            <div className="text-lg font-bold text-white">{stats.stars}</div>
+                            <div className="text-[8px] text-green-600 uppercase">Stars</div>
+                        </div>
+                        <div className="p-2 bg-green-900/10 rounded border border-green-500/10 hover:bg-green-500/20 transition-colors">
+                            <div className="text-xl mb-1">🍴</div>
+                            <div className="text-lg font-bold text-white">{stats.forks}</div>
+                            <div className="text-[8px] text-green-600 uppercase">Forks</div>
+                        </div>
+                        <div className="p-2 bg-green-900/10 rounded border border-green-500/10 hover:bg-green-500/20 transition-colors">
+                            <div className="text-xl mb-1">📦</div>
+                            <div className="text-lg font-bold text-white">{stats.totalRepos}</div>
+                            <div className="text-[8px] text-green-600 uppercase">Repos</div>
+                        </div>
+                    </motion.div>
+
+                </div>
 
 
-                {/* COLUMN 2: Center Stats (Span 5) */}
+                {/* COLUMN 2: Center Stats (Span 5) - Modified to Span 4 to Match Grid */}
                 <div className="md:col-span-4 flex flex-col gap-6">
                     {/* Top: Intro/Bio */}
                     <motion.div
                         initial={{ y: -50, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ duration: 0.5, delay: 0.1 }}
-                        className="bg-black/80 backdrop-blur border border-green-500/50 p-6 rounded-lg relative overflow-hidden"
+                        className="bg-black/80 backdrop-blur border border-green-500/50 p-6 rounded-lg relative overflow-hidden h-[200px]"
                     >
                         <h2 className="text-sm text-white mb-4 border-b border-green-500/30 pb-2">SYSTEM PROTOCOL</h2>
                         <div className="text-xs leading-relaxed font-mono space-y-4">
@@ -201,9 +269,9 @@ const GitHubWrapped = () => {
                             <div className="text-green-500">
                                 Currently executing code at{" "}
                                 <span className="bg-green-500 text-black px-1 font-bold">
-                                    Rajalakshmi Engineering College
+                                    REC
                                 </span>
-                                . Specializing in AI/DS and Web Technologies._
+                                .
                             </div>
                         </div>
                     </motion.div>
@@ -249,7 +317,7 @@ const GitHubWrapped = () => {
                     </div>
                 </div>
 
-                {/* COLUMN 3: Right (Span 3) */}
+                {/* COLUMN 3: Right (Span 4) */}
                 <div className="md:col-span-4 flex flex-col gap-6">
                     {/* Recent Achievements */}
                     <motion.div
@@ -340,21 +408,6 @@ const GitHubWrapped = () => {
 
                     </motion.div>
                 </div>
-
-                {/* ROW 2: GitHub Calendar (Span 12) */}
-                {/* <div className="md:col-span-12 mt-6">
-                    <motion.div
-                        initial={{ y: 50, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 0.5, delay: 0.6 }}
-                        className="bg-black/80 backdrop-blur border border-green-500/50 p-6 rounded-lg text-white"
-                    >
-                        <h2 className="text-sm text-green-500 mb-6 border-b border-green-500/30 pb-2">CONTRIBUTION GRAPH</h2>
-                        <div className="flex justify-center grayscale invert hue-rotate-180 brightness-150 contrast-125">
-                            <GitHubCalendar />
-                        </div>
-                    </motion.div>
-                </div> */}
 
             </div>
         </article>
