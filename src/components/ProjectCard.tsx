@@ -8,9 +8,11 @@ interface ProjectCardProps {
     link: string;
     onClick?: () => void;
     className?: string;
+    usePixelatedFont?: boolean;
+    video?: string; // Optional video path
 }
 
-const ProjectCard = ({ title, category, image, onClick, className }: ProjectCardProps) => {
+const ProjectCard = ({ title, category, image, onClick, className, usePixelatedFont = false, video }: ProjectCardProps) => {
     return (
         <motion.li
             layout
@@ -22,13 +24,25 @@ const ProjectCard = ({ title, category, image, onClick, className }: ProjectCard
             onClick={onClick}
             data-cursor="hover"
         >
-            {/* Image Background */}
-            <img
-                src={image}
-                alt={title}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 group-hover:blur-[2px]"
-                loading="lazy"
-            />
+            {/* Media Background (Video or Image) */}
+            {video ? (
+                <video
+                    src={video}
+                    poster={image}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 group-hover:blur-[2px]"
+                />
+            ) : (
+                <img
+                    src={image}
+                    alt={title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 group-hover:blur-[2px]"
+                    loading="lazy"
+                />
+            )}
 
             {/* Hover Content Overlay */}
             <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-4 text-center">
@@ -36,7 +50,7 @@ const ProjectCard = ({ title, category, image, onClick, className }: ProjectCard
                     <IoEyeOutline size={24} />
                 </div>
 
-                <h3 className="text-white text-xl font-bold mb-1 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100 font-pixelated">
+                <h3 className={`text-white text-xl font-bold mb-1 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100 ${usePixelatedFont ? 'font-pixelated' : ''}`}>
                     {title}
                 </h3>
 

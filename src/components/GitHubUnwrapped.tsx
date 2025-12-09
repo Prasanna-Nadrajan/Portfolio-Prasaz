@@ -16,9 +16,9 @@ const GitHubUnwrapped = () => {
 
     return (
         <section className="mb-10 animate-fade-in">
-            <h3 className="h3 service-title text-xl font-semibold mb-6 flex items-center gap-2">
+            <h3 className="h3 service-title text-xl font-semibold mb-6 flex items-center gap-2 font-pixelated">
                 GitHub Unwrapped! 🎁🚀
-                <span className="text-xs font-normal text-neon-blue border border-neon-blue px-2 py-0.5 rounded-full bg-neon-blue/10">
+                <span className="text-xs font-normal text-neon-blue border border-neon-blue px-2 py-0.5 rounded-full bg-neon-blue/10 font-sans">
                     2024-2025
                 </span>
             </h3>
@@ -28,14 +28,14 @@ const GitHubUnwrapped = () => {
 
                     {/* Video Section */}
                     <div className="mb-8">
-                        <h4 className="text-lg font-medium text-main-text mb-4 border-l-4 border-neon-blue pl-3">
+                        <h4 className="text-lg font-medium text-main-text mb-4 border-l-4 border-neon-blue pl-3 font-pixelated">
                             System Recap Protocol
                         </h4>
                         <div className="relative w-full max-w-md mx-auto aspect-square rounded-xl overflow-hidden border border-jet shadow-lg group">
                             <video
                                 className="w-full h-full object-cover"
                                 controls
-                                poster="/assets/images/gitHubUnwrapped2025/m1.png" // Use first image as poster
+                                poster="/assets/images/contact_me/github.png" // Use first image as poster
                             >
                                 <source src="/assets/videos/github-wrapped-2025.mp4" type="video/mp4" />
                                 Your browser does not support the video tag.
@@ -61,7 +61,7 @@ const GitHubUnwrapped = () => {
                     </div>
 
                     {/* Metrics Grid */}
-                    <h4 className="text-lg font-medium text-main-text mb-4 border-l-4 border-neon-blue pl-3">
+                    <h4 className="text-lg font-medium text-main-text mb-4 border-l-4 border-neon-blue pl-3 font-pixelated">
                         Performance Metrics
                     </h4>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

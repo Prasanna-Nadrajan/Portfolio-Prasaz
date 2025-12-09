@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import GitHubCalendar from '../components/GitHubCalendar';
 import LeetCodeCalendar from '../components/LeetCodeCalendar';
+import ProjectCard from '../components/ProjectCard';
 
 const platforms = [
     {
@@ -42,33 +43,18 @@ const Platforms = () => {
             <GitHubCalendar />
             <LeetCodeCalendar />
 
-            {/* GitHub Wrapped 2025 Link Box */}
+            {/* GitHub Wrapped 2025 Link Box - Styled as Project Card */}
             <section className="mb-10">
-                <div
+                <ProjectCard
+                    title="GitHub Wrapped 2025"
+                    category="Year in Review"
+                    image="/assets/images/contact_me/github.png"
+                    video="/assets/videos/github-wrapped-2025.mp4"
+                    link="/github-wrapped"
                     onClick={() => navigate('/github-wrapped')}
-                    className="cursor-pointer bg-border-gradient-onyx p-6 rounded-2xl shadow-neon relative z-10 before:absolute before:inset-[1px] before:bg-bg-gradient-jet before:rounded-2xl before:-z-10 hover:scale-[1.02] transition-transform duration-300 group"
-                >
-                    <div className="flex items-center gap-6">
-                        <div className="w-16 h-16 bg-onyx rounded-xl flex items-center justify-center shadow-neon group-hover:shadow-neon-hover transition-shadow">
-                            <img
-                                src="/assets/images/github.png"
-                                alt="GitHub Wrapped"
-                                className="w-10 h-10 object-contain"
-                            />
-                        </div>
-                        <div>
-                            <h3 className="text-xl font-bold text-white mb-1 group-hover:text-neon-blue transition-colors font-pixelated">
-                                GitHub Wrapped 2025
-                            </h3>
-                            <p className="text-secondary-text text-sm">
-                                Check out my coding year in review! 🚀
-                            </p>
-                        </div>
-                        <div className="ml-auto text-neon-blue opacity-0 group-hover:opacity-100 transition-opacity">
-                            →
-                        </div>
-                    </div>
-                </div>
+                    usePixelatedFont={true}
+                    className="w-full md:w-1/2 lg:w-1/3" // Adjust width to match grid look or keep full? User said "like the placeholder image... (projects boxes)". Project boxes are in a grid. This is a single item here. I'll stick to a reasonable max-width or let it fill. ProjectCard has h-72 fixed height. A full width h-72 card might look stretched. I'll restrict width."
+                />
             </section>
 
             <section className="platforms-list">

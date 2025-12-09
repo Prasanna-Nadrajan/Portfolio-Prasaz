@@ -26,12 +26,36 @@ export const projects: Project[] = [
         techStack: ["Python", "Streamlit", "Scikit-learn", "Pandas"]
     },
     {
-        title: "eDNA Analysis using unsupervised learning",
+        title: "eDNA Analyser - using unsupervised learning",
         category: "Python",
         image: "/assets/images/portfolio/eDNA_Pipeline.png",
         link: "https://github.com/Prasanna-Nadrajan/eDNA-VAI-Pipeline",
         description: "Engineered an AI pipeline for deep-sea biodiversity assessment using Variational Autoencoder (VAE) to cluster and analyze environmental DNA sequences.",
         techStack: ["Python", "VAE", "Deep Learning", "Bioinformatics"]
+    },
+    {
+        title: "Space explorer - website using React (Three.js)",
+        category: "Frontend",
+        image: "/assets/images/portfolio/space_exploration.png",
+        link: "",
+        description: "A visually stunning space exploration website built with React and Three.js, featuring interactive 3D models of planets and space missions.",
+        techStack: ["React", "Three.js", "JavaScript", "CSS"]
+    },
+    {
+        title: "Zenith - Event Management System",
+        category: "Full Stack",
+        image: "/assets/images/portfolio/zenith_event_management.png",
+        link: "https://github.com/Prasanna-Nadrajan/Zenith",
+        description: "A full-featured event management system with user registration, event scheduling, and real-time notifications.",
+        techStack: ["HTML", "CSS", "JS", "JAVA", "Spring Boot", "MySQL"]
+    },
+    {
+        title: "Retail Management System",
+        category: "Full Stack",
+        image: "/assets/images/portfolio/retail_management_system.png",
+        link: "https://github.com/Prasanna-Nadrajan/Retail-Management-System",
+        description: "A comprehensive retail management system with inventory, sales, and customer management features.",
+        techStack: ["HTML", "CSS", "JS", "Python", "Flask", "SQLite"]
     },
     {
         title: "Professional Blog",
