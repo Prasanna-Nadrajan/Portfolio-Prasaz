@@ -15,12 +15,15 @@ import ThemeToggle from './ThemeToggle';
 import { navItems } from '../data/navigation';
 import { CONFIG } from '../constants/config';
 
+import { IoNotificationsOutline } from 'react-icons/io5';
+
 interface NavbarProps {
     isSidebarOpen?: boolean;
     onToggleSidebar?: () => void;
+    onShowUpdate?: () => void;
 }
 
-const Navbar = ({ isSidebarOpen = true, onToggleSidebar }: NavbarProps) => {
+const Navbar = ({ isSidebarOpen = true, onToggleSidebar, onShowUpdate }: NavbarProps) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -44,13 +47,25 @@ const Navbar = ({ isSidebarOpen = true, onToggleSidebar }: NavbarProps) => {
                     </div>
                 </div>
 
-                <button
-                    onClick={toggleMenu}
-                    className="text-neon-blue p-2 rounded-lg hover:bg-jet/50 transition-colors"
-                    aria-label="Toggle Menu"
-                >
-                    {isMenuOpen ? <IoClose size={28} /> : <IoMenu size={28} />}
-                </button>
+                <div className="flex items-center gap-2">
+                    {/* Mobile Update Button in Top Bar for quick access */}
+                    {onShowUpdate && (
+                        <button
+                            onClick={onShowUpdate}
+                            className="text-neon-blue p-2 rounded-lg hover:bg-jet/50 transition-colors animate-pulse"
+                            aria-label="Show Updates"
+                        >
+                            <IoNotificationsOutline size={24} />
+                        </button>
+                    )}
+                    <button
+                        onClick={toggleMenu}
+                        className="text-neon-blue p-2 rounded-lg hover:bg-jet/50 transition-colors"
+                        aria-label="Toggle Menu"
+                    >
+                        {isMenuOpen ? <IoClose size={28} /> : <IoMenu size={28} />}
+                    </button>
+                </div>
             </nav>
 
             {/* Mobile Full Screen Menu */}

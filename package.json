@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.17",
+    "@types/canvas-confetti": "^1.9.0",
     "autoprefixer": "^10.4.22",
+    "canvas-confetti": "^1.9.4",
     "clsx": "^2.1.1",
     "emailjs-com": "^3.2.0",
     "framer-motion": "^12.23.24",
