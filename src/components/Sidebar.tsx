@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { IoChevronDown, IoMailOutline, IoLocationOutline, IoLogoLinkedin, IoLogoGithub, IoNotificationsOutline } from 'react-icons/io5';
-import LiveStatus from './LiveStatus';
+import AvailabilityStatus from './AvailabilityStatus';
 
 const roles = [
     "Sophomore at REC",
@@ -141,7 +141,9 @@ const Sidebar = ({ onShowUpdate }: SidebarProps) => {
                         </li>
                     </ul>
 
-                    <LiveStatus />
+                    <div className="flex justify-center mt-4">
+                        <AvailabilityStatus available={true} />
+                    </div>
                 </div>
             </aside>
 

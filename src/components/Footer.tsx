@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import { 
-    IoLogoGithub, 
-    IoLogoLinkedin, 
-    IoMailOutline, 
+import {
+    IoLogoGithub,
+    IoLogoLinkedin,
+    IoMailOutline,
     IoLogoInstagram,
     IoHomeOutline,
     IoPersonOutline,
@@ -11,6 +11,7 @@ import {
     IoCallOutline
 } from 'react-icons/io5';
 import VisitorCounter from './VisitorCounter';
+import SecretHint from './SecretHint';
 
 const Footer = () => {
     const navLinks = [
@@ -23,28 +24,28 @@ const Footer = () => {
 
     return (
         <footer className="mt-auto pt-16 pb-8 border-t border-jet bg-onyx/30 backdrop-blur-sm relative overflow-hidden">
-            
+            <SecretHint hint="Some text looks glitchy..." position="bottom-right" delay={10000} />
             {/* Dot Pattern Background - Bolder */}
             <div className="absolute inset-0 pointer-events-none opacity-40"
-                 style={{
-                     // Increased dot size to 2px for a "bold" look
-                     backgroundImage: 'radial-gradient(#999 2px, transparent 2px)',
-                     backgroundSize: '30px 30px' // Slightly spaced out to prevent clutter with larger dots
-                 }}
+                style={{
+                    // Increased dot size to 2px for a "bold" look
+                    backgroundImage: 'radial-gradient(#999 2px, transparent 2px)',
+                    backgroundSize: '30px 30px' // Slightly spaced out to prevent clutter with larger dots
+                }}
             ></div>
 
             {/* Gradient Overlay to fade dots at edges (Optional aesthetics) */}
             <div className="absolute inset-0 bg-gradient-to-t from-main-bg/80 to-transparent pointer-events-none"></div>
 
             <div className="container mx-auto px-4 max-w-4xl relative z-10">
-                
+
                 {/* 1. Visitor Counter Section */}
                 <VisitorCounter />
 
                 {/* 2. Navigation Links */}
                 <div className="flex flex-wrap justify-center gap-6 md:gap-10 mb-10 mt-12">
                     {navLinks.map((link) => (
-                        <Link 
+                        <Link
                             key={link.name}
                             to={link.path}
                             className="flex items-center gap-2 text-secondary-text hover:text-neon-blue transition-colors duration-300 text-sm md:text-base font-medium group"

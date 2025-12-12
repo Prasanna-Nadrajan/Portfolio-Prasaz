@@ -11,6 +11,8 @@ interface ProjectCardProps {
     className?: string;
     usePixelatedFont?: boolean;
     video?: string;
+    // Add projectType to props if needed, though strictly we just display title/cat/image
+    projectType?: string;
 }
 
 const ProjectCard = ({ title, category, image, onClick, className, usePixelatedFont = false, video }: ProjectCardProps) => {
@@ -61,7 +63,7 @@ const ProjectCard = ({ title, category, image, onClick, className, usePixelatedF
             }}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className={`project-item active group relative rounded-xl h-72 cursor-pointer ${className || ''}`}
+            className={`project-item active group relative rounded-xl h-[270px] cursor-pointer ${className || ''}`}
             onClick={onClick}
             data-cursor="hover"
         >
@@ -110,7 +112,7 @@ const ProjectCard = ({ title, category, image, onClick, className, usePixelatedF
                         <IoEyeOutline size={24} />
                     </div>
 
-                    <h3 className={`text-white text-xl font-bold mb-1 transform translate-z-30 ${usePixelatedFont ? 'font-pixelated' : ''}`}>
+                    <h3 className={`text-white text-base font-bold mb-1 transform translate-z-30 ${usePixelatedFont ? 'font-pixelated' : ''}`}>
                         {title}
                     </h3>
 

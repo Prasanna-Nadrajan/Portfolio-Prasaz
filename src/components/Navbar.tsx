@@ -12,6 +12,7 @@ import {
     IoChevronForward
 } from 'react-icons/io5';
 import ThemeToggle from './ThemeToggle';
+import DownloadButton from './DownloadButton';
 import { navItems } from '../data/navigation';
 import { CONFIG } from '../constants/config';
 
@@ -138,6 +139,10 @@ const Navbar = ({ isSidebarOpen = true, onToggleSidebar, onShowUpdate }: NavbarP
                                     <span className="text-sm text-light-gray-70">Theme</span>
                                     <ThemeToggle />
                                 </div>
+                            </div>
+
+                            <div className="mb-4 flex justify-center">
+                                <DownloadButton />
                             </div>
 
                             <NavLink

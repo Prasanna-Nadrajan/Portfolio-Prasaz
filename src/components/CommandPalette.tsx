@@ -11,7 +11,8 @@ import {
     IoLogoGithub,
     IoLogoLinkedin,
     IoMoonOutline,
-    IoCopyOutline
+    IoCopyOutline,
+    IoTerminalOutline
 } from 'react-icons/io5';
 
 interface CommandItem {
@@ -87,6 +88,7 @@ const CommandPalette = () => {
         // Actions
         { id: 'theme', title: 'Toggle Theme', icon: <IoMoonOutline />, type: 'action', action: toggleTheme, shortcut: 'T' },
         { id: 'email', title: 'Copy Email', icon: <IoCopyOutline />, type: 'action', action: copyEmail, shortcut: 'E' },
+        { id: 'hack', title: 'Access Mainframe', icon: <IoTerminalOutline />, type: 'action', action: () => window.dispatchEvent(new Event('trigger-hack')), shortcut: 'H' },
     ];
 
     const filteredItems = items.filter(item =>

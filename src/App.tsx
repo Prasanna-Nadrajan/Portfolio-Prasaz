@@ -1,10 +1,11 @@
-import { useState, lazy, Suspense } from 'react';
+import { useState, lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Layout from './components/Layout';
 import Intro from './components/Intro';
 
 import { AchievementProvider } from './context/AchievementContext';
+import HackingGame from './components/HackingGame';
 
 const About = lazy(() => import('./pages/About'));
 const Portfolio = lazy(() => import('./pages/Portfolio'));
@@ -19,6 +20,24 @@ const Terminal = lazy(() => import('./pages/Terminal'));
 
 function App() {
   const [showIntro, setShowIntro] = useState(true);
+  const [showHack, setShowHack] = useState(false);
+
+  useEffect(() => {
+    const handleHackTrigger = () => setShowHack(true);
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key.toLowerCase() === 'h') {
+        e.preventDefault();
+        setShowHack(prev => !prev);
+      }
+    };
+
+    window.addEventListener('trigger-hack', handleHackTrigger);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('trigger-hack', handleHackTrigger);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   return (
     <Router>
@@ -28,6 +47,7 @@ function App() {
         </div>
       }>
         <AchievementProvider>
+          {showHack && <HackingGame onClose={() => setShowHack(false)} />}
           <Routes>
             {/* Standalone Route for GitHub Wrapped */}
             <Route path="/github-wrapped" element={<GitHubWrapped />} />

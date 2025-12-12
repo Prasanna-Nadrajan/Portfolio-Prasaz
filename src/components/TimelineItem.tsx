@@ -1,24 +1,15 @@
 import { motion } from 'framer-motion';
-// Removed unused IoStar import
+import type { ExperienceItem } from '../types';
 
-interface TimelineItemProps {
-    date: string;
-    title: string;
-    subtitle: string;
-    description: string;
-    logo: string;
-    link: string;
-    side: 'left' | 'right';
-}
-
-const TimelineItem = ({ date, title, subtitle, description, logo, link, side }: TimelineItemProps) => {
+const TimelineItem = ({ date, title, subtitle, description, logo, link, side }: ExperienceItem) => {
     return (
         <motion.div
             initial={{ opacity: 0, x: side === 'left' ? -50 : 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className={`timeline-event relative mb-8 w-full md:w-1/2 ${side === 'left' ? 'md:pr-8 md:ml-0' : 'md:pl-8 md:ml-auto'}`}
+            className={`timeline-event relative mb-8 w-full md:w-1/2 ${side === 'left' ? 'md:pr-8 md:ml-0' : 'md:pl-8 md:ml-auto'
+                } group-hover/timeline:blur-sm hover:!blur-none transition-all duration-300 ease-out`}
         >
             {/* Timeline Dot - Hidden on Mobile */}
             <div className={`hidden md:block absolute top-0 w-4 h-4 bg-neon-blue rounded-full shadow-neon z-10 ${side === 'left' ? 'md:right-[-9px] md:left-auto' : 'md:left-[-9px]'}`}>

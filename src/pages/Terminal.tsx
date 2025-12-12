@@ -25,7 +25,7 @@ const Terminal = () => {
 
     // Scroll to bottom
     useEffect(() => {
-        bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+        bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }, [history]);
 
     const handleCommand = (cmd: string) => {

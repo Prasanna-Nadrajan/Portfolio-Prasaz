@@ -38,7 +38,7 @@ const Layout = ({ children }: LayoutProps) => {
 
             <Cursor />
 
-            <div className="fixed top-4 right-4 z-50 hidden md:block">
+            <div className="fixed top-18 right-2 z-50 hidden md:block">
                 <ThemeToggle />
             </div>
 

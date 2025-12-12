@@ -7,6 +7,8 @@ export interface Project {
     link: string;
     description: string;
     techStack: string[];
+    projectType?: 'Personal' | 'Freelance';
+    video?: string;
 }
 
 export interface ExperienceItem {
