@@ -6,6 +6,12 @@ import ThemeToggle from './ThemeToggle.tsx';
 import Footer from './Footer';
 import ScrollToTop from './ScrollToTop';
 import CelebrationModal from './CelebrationModal';
+import AchievementToast from './AchievementToast';
+import SystemHUD from './SystemHUD';
+
+import CommandPalette from './CommandPalette';
+import KonamiCode from './KonamiCode';
+import ParticleBackground from './ParticleBackground';
 
 interface LayoutProps {
     children: ReactNode;
@@ -21,23 +27,14 @@ const Layout = ({ children }: LayoutProps) => {
 
     return (
         <div className="min-h-screen bg-main-bg text-main-text font-poppins relative overflow-x-hidden transition-colors duration-300 flex flex-col">
+            <SystemHUD />
+            <CommandPalette />
+            <KonamiCode />
             <CelebrationModal isOpen={showCelebration} onClose={() => setShowCelebration(false)} />
+            <AchievementToast />
 
-            {/* Space Background Layers - Visible mainly in Dark Mode */}
-            <div className="fixed inset-0 z-0 pointer-events-none">
-                <div className="stars-sm absolute inset-0"></div>
-                <div className="stars-md absolute inset-0"></div>
-                <div className="stars-lg absolute inset-0"></div>
-
-                {/* Asteroids - Visible mainly in Dark Mode (handled by CSS opacity/visibility if needed, or just blend in) */}
-                <div className="asteroid w-8 h-8 top-10 left-10 animate-[float-asteroid_20s_linear_infinite] delay-0 hidden dark:block"></div>
-                <div className="asteroid w-6 h-6 top-1/3 left-[-20px] animate-[float-asteroid_25s_linear_infinite] delay-[5s] hidden dark:block"></div>
-                <div className="asteroid w-10 h-10 bottom-1/4 right-[-30px] animate-[float-asteroid_30s_linear_infinite_reverse] delay-[2s] hidden dark:block"></div>
-
-                {/* Optional: Subtle nebula glow */}
-                <div className="absolute top-[-20%] left-[-20%] w-[50vw] h-[50vw] bg-neon-blue/5 rounded-full blur-[100px] dark:opacity-100 opacity-0 transition-opacity duration-500"></div>
-                <div className="absolute bottom-[-20%] right-[-20%] w-[50vw] h-[50vw] bg-purple-500/5 rounded-full blur-[100px] dark:opacity-100 opacity-0 transition-opacity duration-500"></div>
-            </div>
+            {/* Interactive Particle Background */}
+            <ParticleBackground />
 
             <Cursor />
 

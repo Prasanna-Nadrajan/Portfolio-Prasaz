@@ -149,6 +149,12 @@
   .font-pixelated {
     font-family: var(--font-pixelated);
   }
+
+  /* God Mode - Konami Code Effect */
+  html.god-mode {
+    filter: invert(1) hue-rotate(180deg);
+    transition: filter 1s ease-in-out;
+  }
 }
 
 /* Custom Utilities */

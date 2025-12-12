@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { IoChevronDown, IoMailOutline, IoLocationOutline, IoLogoLinkedin, IoLogoGithub, IoNotificationsOutline } from 'react-icons/io5';
+import LiveStatus from './LiveStatus';
 
 const roles = [
     "Sophomore at REC",
@@ -139,6 +140,8 @@ const Sidebar = ({ onShowUpdate }: SidebarProps) => {
                             </a>
                         </li>
                     </ul>
+
+                    <LiveStatus />
                 </div>
             </aside>
 

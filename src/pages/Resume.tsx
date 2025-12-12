@@ -1,6 +1,8 @@
 import { IoDownloadOutline } from 'react-icons/io5';
+import { useAchievements } from '../context/AchievementContext';
 
 const Resume = () => {
+    const { unlockAchievement } = useAchievements();
     return (
         <article className="resume active animate-fade-in" data-page="resume">
             <header className="flex justify-between items-center mb-6">
@@ -9,6 +11,7 @@ const Resume = () => {
                     <a
                         href="/assets/Prasanna_Nadrajan_Resume.pdf"
                         download="Prasanna_Nadrajan_Resume.pdf"
+                        onClick={() => unlockAchievement('recruiter')}
                         className="flex items-center gap-2 bg-border-gradient-onyx px-4 py-2 rounded-lg text-neon-blue hover:text-white transition-colors shadow-neon"
                     >
                         <IoDownloadOutline />
