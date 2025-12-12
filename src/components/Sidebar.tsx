@@ -162,7 +162,7 @@ const Sidebar = ({ onShowUpdate }: SidebarProps) => {
 
                             {/* Tooltip style label on hover */}
                             <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] text-neon-blue opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                                300+ Views
+                                400+ Views
                             </span>
                         </button>
                     </div>
