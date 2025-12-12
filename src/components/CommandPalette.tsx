@@ -11,7 +11,6 @@ import {
     IoLogoGithub,
     IoLogoLinkedin,
     IoMoonOutline,
-    IoSunnyOutline,
     IoCopyOutline
 } from 'react-icons/io5';
 
@@ -178,8 +177,8 @@ const CommandPalette = () => {
                                                 }}
                                                 onMouseEnter={() => setSelectedIndex(index)}
                                                 className={`px-4 py-3 mx-2 rounded-lg flex items-center justify-between cursor-pointer transition-colors ${index === selectedIndex
-                                                        ? 'bg-neon-blue/10 text-neon-blue'
-                                                        : 'text-main-text hover:bg-onyx'
+                                                    ? 'bg-neon-blue/10 text-neon-blue'
+                                                    : 'text-main-text hover:bg-onyx'
                                                     }`}
                                             >
                                                 <div className="flex items-center gap-3">
