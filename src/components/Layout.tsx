@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react';
+import { useState, useEffect, type ReactNode } from 'react';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 import Cursor from './Cursor.tsx';
@@ -20,17 +20,42 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [showCelebration, setShowCelebration] = useState(false);
+    const [viewCount, setViewCount] = useState(0);
 
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
     };
+
+    useEffect(() => {
+        const fetchCount = async () => {
+            try {
+                const namespace = 'portfolio-prasanna-nadrajan';
+                const key = 'visits';
+                // Using 'up' endpoint to increment and get count
+                const response = await fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`);
+                if (!response.ok) throw new Error('Network response was not ok');
+
+                const data = await response.json();
+                setViewCount(data.count);
+            } catch (error) {
+                console.error("Error fetching visitor count:", error);
+                // Fallback or leave at 0, or read from localStorage if you wanted to implement that
+                setViewCount(400); // Default fallback matching previous hardcoded value
+            }
+        };
+
+        fetchCount();
+        // logic to prevent double counting in strict mode could be added, 
+        // but for this simple implementation just running it on mount is standard. 
+        // Note: In React 18 Strict Mode dev, this might run twice. 
+    }, []);
 
     return (
         <div className="min-h-screen bg-main-bg text-main-text font-poppins relative overflow-x-hidden transition-colors duration-300 flex flex-col">
             <SystemHUD />
             <CommandPalette />
             <KonamiCode />
-            <CelebrationModal isOpen={showCelebration} onClose={() => setShowCelebration(false)} />
+            <CelebrationModal isOpen={showCelebration} onClose={() => setShowCelebration(false)} viewCount={viewCount} />
             <AchievementToast />
 
             {/* Interactive Particle Background */}
@@ -46,7 +71,7 @@ const Layout = ({ children }: LayoutProps) => {
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
                     {/* Sidebar Column: Hidden in DOM if isSidebarOpen is false on Desktop */}
                     <div className={`md:col-span-3 lg:col-span-3 ${isSidebarOpen ? 'block' : 'hidden'}`}>
-                        <Sidebar onShowUpdate={() => setShowCelebration(true)} />
+                        <Sidebar onShowUpdate={() => setShowCelebration(true)} viewCount={viewCount} />
                     </div>
 
                     {/* Main Content Column: Expands to 12 if sidebar closed */}
@@ -62,7 +87,7 @@ const Layout = ({ children }: LayoutProps) => {
             </main>
 
             <div className="relative z-10">
-                <Footer />
+                <Footer viewCount={viewCount} />
             </div>
             <ScrollToTop />
         </div>

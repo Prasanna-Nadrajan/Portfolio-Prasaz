@@ -13,7 +13,11 @@ import {
 import VisitorCounter from './VisitorCounter';
 import SecretHint from './SecretHint';
 
-const Footer = () => {
+interface FooterProps {
+    viewCount?: number;
+}
+
+const Footer = ({ viewCount = 0 }: FooterProps) => {
     const navLinks = [
         { name: 'Home', path: '/', icon: <IoHomeOutline /> },
         { name: 'About', path: '/', icon: <IoPersonOutline /> },
@@ -40,7 +44,7 @@ const Footer = () => {
             <div className="container mx-auto px-4 max-w-4xl relative z-10">
 
                 {/* 1. Visitor Counter Section */}
-                <VisitorCounter />
+                <VisitorCounter count={viewCount} />
 
                 {/* 2. Navigation Links */}
                 <div className="flex flex-wrap justify-center gap-6 md:gap-10 mb-10 mt-12">

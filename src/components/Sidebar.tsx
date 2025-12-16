@@ -11,9 +11,10 @@ const roles = [
 
 interface SidebarProps {
     onShowUpdate?: () => void;
+    viewCount?: number;
 }
 
-const Sidebar = ({ onShowUpdate }: SidebarProps) => {
+const Sidebar = ({ onShowUpdate, viewCount = 0 }: SidebarProps) => {
     const [isActive, setIsActive] = useState(false);
 
     // Typewriter State
@@ -69,7 +70,7 @@ const Sidebar = ({ onShowUpdate }: SidebarProps) => {
             >
                 <div className="sidebar-info flex flex-col md:flex-col gap-4 relative">
 
-                    <figure className="avatar-box bg-bg-gradient-onyx rounded-2xl overflow-hidden w-32 mx-auto md:w-40">
+                    <figure className="avatar-box bg-bg-gradient-onyx rounded-2xl overflow-hidden w-64 mx-auto md:w-11/12">
                         <img
                             src="/assets/images/portfolio_image.png"
                             alt="Prasanna Nadrajan"
@@ -167,7 +168,7 @@ const Sidebar = ({ onShowUpdate }: SidebarProps) => {
 
                             {/* Tooltip style label on hover */}
                             <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] text-neon-blue opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                                400+ Views
+                                {Math.floor(viewCount / 100) * 100}+ Views
                             </span>
                         </button>
                     </div>

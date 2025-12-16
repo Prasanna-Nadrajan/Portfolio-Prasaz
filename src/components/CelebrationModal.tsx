@@ -6,9 +6,10 @@ import { IoClose, IoRocketSharp, IoStarSharp } from 'react-icons/io5';
 interface CelebrationModalProps {
     isOpen: boolean;
     onClose: () => void;
+    viewCount?: number;
 }
 
-const CelebrationModal = ({ isOpen, onClose }: CelebrationModalProps) => {
+const CelebrationModal = ({ isOpen, onClose, viewCount = 0 }: CelebrationModalProps) => {
 
     const fireConfetti = () => {
         // "Glitter papers falling down in the sides"
@@ -120,7 +121,7 @@ const CelebrationModal = ({ isOpen, onClose }: CelebrationModalProps) => {
                         <div className="my-8 relative group cursor-default">
                             <div className="absolute inset-0 bg-neon-blue/20 blur-xl group-hover:bg-neon-blue/30 transition-all duration-500 rounded-full"></div>
                             <div className="relative text-7xl font-bold text-white drop-shadow-[0_0_15px_rgba(0,191,255,0.8)] font-sans">
-                                400+
+                                {Math.floor(viewCount / 100) * 100}+
                             </div>
                             <div className="relative text-sm text-neon-blue tracking-[0.2em] uppercase mt-2 font-medium">
                                 Views Reached
@@ -128,7 +129,7 @@ const CelebrationModal = ({ isOpen, onClose }: CelebrationModalProps) => {
                         </div>
 
                         <p className="text-gray-300 text-lg leading-relaxed mb-8 max-w-sm mx-auto font-light">
-                            My portfolio views reached past <strong className="text-white">400</strong>!
+                            My portfolio views reached past <strong className="text-white">{Math.floor(viewCount / 100) * 100}</strong>!
                             <br />
                             <span className="text-sm mt-2 block text-gray-400">Thank you for your cooperation and support.</span>
                         </p>
@@ -147,7 +148,7 @@ const CelebrationModal = ({ isOpen, onClose }: CelebrationModalProps) => {
                         </button>
 
                         <div className="mt-6 text-[10px] text-gray-600 font-mono">
-                            SYSTEM_MSG_ID: 400_VIEWS_ACK
+                            SYSTEM_MSG_ID: {Math.floor(viewCount / 100) * 100}_VIEWS_ACK
                         </div>
                     </motion.div>
                 </motion.div>
