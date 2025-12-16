@@ -54,7 +54,7 @@ const Portfolio = () => {
                         Freelance Projects
                     </h2>
 
-                    <ul className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                    <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {filteredProjects
                             .filter(p => p.projectType === 'Freelance')
                             .map((project, index) => (
@@ -75,7 +75,7 @@ const Portfolio = () => {
                         Personal Projects
                     </h2>
 
-                    <ul className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                    <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {filteredProjects
                             .filter(p => !p.projectType || p.projectType === 'Personal')
                             .map((project, index) => (

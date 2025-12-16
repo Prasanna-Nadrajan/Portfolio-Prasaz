@@ -59,7 +59,7 @@ const Intro = ({ onComplete }: { onComplete: () => void }) => {
                                     className="flex items-center justify-center"
                                 >
                                     <GlitchEffect trigger="random">
-                                        <span className="text-6xl md:text-8xl font-bold font-poppins text-transparent bg-clip-text bg-gradient-to-r from-neon-blue to-purple-500 drop-shadow-[0_0_15px_rgba(0,191,255,0.5)]">
+                                        <span className="text-4xl md:text-8xl font-bold font-poppins text-transparent bg-clip-text bg-gradient-to-r from-neon-blue to-purple-500 drop-shadow-[0_0_15px_rgba(0,191,255,0.5)]">
                                             {languages[index]}
                                         </span>
                                     </GlitchEffect>

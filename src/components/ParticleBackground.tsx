@@ -20,7 +20,7 @@ const ParticleBackground = () => {
 
         // Star Properties
         const stars: { x: number; y: number; z: number; size: number }[] = [];
-        const numStars = 200; // Adjustable density
+        const numStars = window.innerWidth < 768 ? 50 : 200; // Reduced density for mobile
         const centerX = canvas.width / 2;
         const centerY = canvas.height / 2;
 

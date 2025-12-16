@@ -42,7 +42,7 @@ const VisitorCounter = ({ count = 0 }: VisitorCounterProps) => {
                 key={displayCount} // This might cause too many re-renders if key changes on every tick. better to remove key or use count
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="text-6xl md:text-7xl font-bold text-neon-blue drop-shadow-[0_0_15px_rgba(0,191,255,0.5)] font-mono my-2"
+                className="text-4xl md:text-7xl font-bold text-neon-blue drop-shadow-[0_0_15px_rgba(0,191,255,0.5)] font-mono my-2"
             >
                 {displayCount.toLocaleString()}
             </motion.div>

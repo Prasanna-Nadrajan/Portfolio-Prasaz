@@ -67,7 +67,7 @@ const Layout = ({ children }: LayoutProps) => {
                 <ThemeToggle />
             </div>
 
-            <main className="container mx-auto px-4 py-4 pt-20 md:py-8 lg:px-4 max-w-[95%] relative z-10 flex-grow">
+            <main className="container mx-auto px-4 py-6 pt-20 md:px-16 md:py-12 relative z-10 flex-grow overflow-hidden">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
                     {/* Sidebar Column: Hidden in DOM if isSidebarOpen is false on Desktop */}
                     <div className={`md:col-span-3 lg:col-span-3 ${isSidebarOpen ? 'block' : 'hidden'}`}>

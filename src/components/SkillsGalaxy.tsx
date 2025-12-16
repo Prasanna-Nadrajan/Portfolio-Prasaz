@@ -1,6 +1,6 @@
-import { useRef, useMemo, useState } from 'react';
+import { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import {Html, OrbitControls} from '@react-three/drei';
+import { Html, OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 
 // Skills data - could be moved to a separate data file
@@ -126,6 +126,35 @@ const Stars = () => {
 }
 
 export default function SkillsGalaxy() {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    if (isMobile) {
+        return (
+            <div className="w-full p-4 rounded-xl bg-black/40 border border-cyan-500/20 shadow-[0_0_15px_rgba(6,182,212,0.1)]">
+                <div className="flex flex-wrap gap-2 justify-center">
+                    {SKILLS.map((skill) => (
+                        <div
+                            key={skill.name}
+                            className="px-3 py-1 bg-jet/50 rounded-full text-white text-sm border border-cyan-500/30 flex items-center gap-2"
+                        >
+                            <span className="w-2 h-2 rounded-full" style={{ backgroundColor: skill.color }}></span>
+                            {skill.name}
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="w-full h-[400px] rounded-xl overflow-hidden bg-black/40 border border-cyan-500/20 shadow-[0_0_15px_rgba(6,182,212,0.1)]">
             <Canvas camera={{ position: [0, 10, 15], fov: 45 }}>

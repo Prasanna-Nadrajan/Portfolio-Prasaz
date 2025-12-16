@@ -120,7 +120,7 @@ const CelebrationModal = ({ isOpen, onClose, viewCount = 0 }: CelebrationModalPr
 
                         <div className="my-8 relative group cursor-default">
                             <div className="absolute inset-0 bg-neon-blue/20 blur-xl group-hover:bg-neon-blue/30 transition-all duration-500 rounded-full"></div>
-                            <div className="relative text-7xl font-bold text-white drop-shadow-[0_0_15px_rgba(0,191,255,0.8)] font-sans">
+                            <div className="relative text-5xl md:text-7xl font-bold text-white drop-shadow-[0_0_15px_rgba(0,191,255,0.8)] font-sans">
                                 {Math.floor(viewCount / 100) * 100}+
                             </div>
                             <div className="relative text-sm text-neon-blue tracking-[0.2em] uppercase mt-2 font-medium">
