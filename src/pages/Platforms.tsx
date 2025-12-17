@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import GitHubCalendar from '../components/GitHubCalendar';
 import LeetCodeCalendar from '../components/LeetCodeCalendar';
 import ProjectCard from '../components/ProjectCard';
+import SEO from '../components/SEO';
 
 const platforms = [
     {
@@ -35,6 +36,7 @@ const Platforms = () => {
 
     return (
         <article className="platforms active animate-fade-in" data-page="platforms">
+            <SEO title="Platforms" description="Check out my profiles on various coding platforms." />
             <header>
                 <h2 className="h2 article-title text-2xl font-semibold mb-4 border-b-2 border-neon-blue w-max pb-1">Platforms</h2>
             </header>

@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import SEO from '../components/SEO';
 
 interface CommandHistory {
     command: string;
@@ -150,6 +151,7 @@ const Terminal = () => {
             className="min-h-screen bg-onyx text-neon-blue font-mono p-4 md:p-8 pt-24 overflow-y-auto"
             onClick={() => inputRef.current?.focus()}
         >
+            <SEO title="Terminal" description="Interactive terminal interface for navigating the portfolio." />
             <div className="max-w-4xl mx-auto">
                 <div className="mb-4 text-gray-400">
                     <p>Welcome to Prasanna's Terminal [Version 1.0.0]</p>

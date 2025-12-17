@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://prasaz.vercel.app/sitemap.xml

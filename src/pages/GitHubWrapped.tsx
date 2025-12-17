@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Cursor from '../components/Cursor';
 import TerminalIntro from '../components/TerminalIntro';
+import SEO from '../components/SEO';
 // import GitHubCalendar from '../components/GitHubCalendar';
 
 const GitHubWrapped = () => {
@@ -136,6 +137,7 @@ const GitHubWrapped = () => {
 
     return (
         <article className="min-h-screen bg-black text-green-500 font-pixelated md:p-6 relative overflow-hidden cursor-none selection:bg-green-500 selection:text-black">
+            <SEO title="GitHub Wrapped" description="My GitHub Year in Review Style Assessment." />
             {showIntro && (
                 <TerminalIntro
                     command="git log --stat --summary --since='2024-01-01'"
