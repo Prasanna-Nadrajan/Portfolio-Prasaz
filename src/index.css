@@ -150,11 +150,7 @@
     font-family: var(--font-pixelated);
   }
 
-  /* God Mode - Konami Code Effect */
-  html.god-mode {
-    filter: invert(1) hue-rotate(180deg);
-    transition: filter 1s ease-in-out;
-  }
+
 }
 
 /* Custom Utilities */
@@ -269,6 +265,15 @@
 @layer components {
   .glass-card {
     @apply bg-container-bg/80 border border-border-color rounded-2xl p-4 shadow-neon backdrop-blur-md transition-colors duration-300;
+  }
+
+  .glass-nav {
+    @apply fixed top-0 left-0 w-full z-50 bg-main-bg/30 backdrop-blur-md border-b border-white/10 shadow-lg transition-all duration-300;
+  }
+  
+  /* Additional glass effect for light mode specifically if needed, or rely on main-bg opacity */
+  :root:not(.dark) .glass-nav {
+     @apply bg-white/40 border-black/5;
   }
 
   .icon-box {

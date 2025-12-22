@@ -2,6 +2,15 @@ import type { ExperienceItem } from '../types';
 
 export const experienceData: ExperienceItem[] = [
     {
+        date: "Dec 2025 - Jan 2026",
+        title: "Evo Astra Ventures Pvt.Ltd",
+        subtitle: "Data Science Intern",
+        description: "Applied statistical analysis and machine learning to real-world business problems, delivering insights through data visualization and predictive modeling.",
+        logo: "/assets/images/experience/evo_astra.png",
+        link: "https://drive.google.com/file/d/19GLDh-XVXrPyACkPfSDBf79aa0uf58bH/view?usp=sharing",
+        side: "left"
+    },
+    {
         date: "Sep 2025 - Present",
         title: "ARQ REC",
         subtitle: "Data Analyst Associate",
@@ -27,6 +36,15 @@ export const experienceData: ExperienceItem[] = [
         logo: "/assets/images/experience/ethics_club.png",
         link: "",
         side: "right"
+    },
+    {
+        date: "Jan 2025 - Present",
+        title: "Freelancing",
+        subtitle: "Frontend Engineer",
+        description: "Designed and developed responsive, user‑friendly web interfaces using modern frameworks and tools. Collaborated with clients to deliver optimized, accessible, and visually engaging digital experiences.",
+        logo: "/assets/images/experience/freelance.png",
+        link: "",
+        side: "left"
     }
 ];
 

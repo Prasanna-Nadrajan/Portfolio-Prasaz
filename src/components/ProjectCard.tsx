@@ -63,7 +63,7 @@ const ProjectCard = ({ title, category, image, onClick, className, usePixelatedF
             }}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className={`project-item active group relative rounded-xl h-[270px] cursor-pointer ${className || ''}`}
+            className={`project-item active group relative rounded-xl aspect-[3/4] cursor-pointer ${className || ''}`}
             onClick={onClick}
             data-cursor="hover"
         >

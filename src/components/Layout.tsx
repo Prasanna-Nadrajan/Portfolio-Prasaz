@@ -6,11 +6,6 @@ import ThemeToggle from './ThemeToggle.tsx';
 import Footer from './Footer';
 import ScrollToTop from './ScrollToTop';
 import CelebrationModal from './CelebrationModal';
-import AchievementToast from './AchievementToast';
-import SystemHUD from './SystemHUD';
-
-import CommandPalette from './CommandPalette';
-import KonamiCode from './KonamiCode';
 import ParticleBackground from './ParticleBackground';
 
 interface LayoutProps {
@@ -52,23 +47,19 @@ const Layout = ({ children }: LayoutProps) => {
 
     return (
         <div className="min-h-screen bg-main-bg text-main-text font-poppins relative overflow-x-hidden transition-colors duration-300 flex flex-col">
-            <SystemHUD />
-            <CommandPalette />
-            <KonamiCode />
             <CelebrationModal isOpen={showCelebration} onClose={() => setShowCelebration(false)} viewCount={viewCount} />
-            <AchievementToast />
 
             {/* Interactive Particle Background */}
             <ParticleBackground />
 
             <Cursor />
 
-            <div className="fixed top-18 right-2 z-50 hidden md:block">
+            <div className="fixed top-6 right-6 z-50 hidden md:block">
                 <ThemeToggle />
             </div>
 
-            <main className="container mx-auto px-4 py-6 pt-20 md:px-16 md:py-12 relative z-10 flex-grow overflow-hidden">
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+            <main className="container mx-auto px-4 py-6 pt-20 md:px-16 md:pt-28 md:pb-12 relative z-10 flex-grow">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
                     {/* Sidebar Column: Hidden in DOM if isSidebarOpen is false on Desktop */}
                     <div className={`md:col-span-3 lg:col-span-3 ${isSidebarOpen ? 'block' : 'hidden'}`}>
                         <Sidebar onShowUpdate={() => setShowCelebration(true)} viewCount={viewCount} />

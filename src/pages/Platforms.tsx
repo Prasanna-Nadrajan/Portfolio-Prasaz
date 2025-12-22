@@ -55,7 +55,7 @@ const Platforms = () => {
                     link="/github-wrapped"
                     onClick={() => navigate('/github-wrapped')}
                     usePixelatedFont={true}
-                    className="w-full md:w-1/2"
+                    className="w-full md:max-w-xs"
                 />
                 <ProjectCard
                     title="LeetCode Wrapped 2025"
@@ -65,7 +65,7 @@ const Platforms = () => {
                     link="/leetcode-wrapped"
                     onClick={() => navigate('/leetcode-wrapped')}
                     usePixelatedFont={true}
-                    className="w-full md:w-1/2"
+                    className="w-full md:max-w-xs"
                 />
             </section>
 

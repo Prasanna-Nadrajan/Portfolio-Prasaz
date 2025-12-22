@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import ProjectCard from '../components/ProjectCard';
 import ProjectModal from '../components/ProjectModal';
-import SecretHint from '../components/SecretHint';
+
 import ProjectStarmap from '../components/ProjectStarmap';
 import { projectCategories, projects } from '../data/projects';
 import type { Project } from '../types';
@@ -25,9 +25,11 @@ const Portfolio = () => {
             />
 
             <header>
-                <SecretHint hint="Try pressing Ctrl+Shift+H..." position="bottom-right" delay={3000} />
-
                 {/* Introduction Visualization */}
+                {/* <div>Portfolio</div> */}
+                {/* <header> */}
+                <h2 className="h2 article-title text-2xl font-semibold mb-4 border-b-2 border-neon-blue w-max pb-1">My Portfolio</h2>
+                {/* </header> */}
                 <div className="mb-12">
                     <ProjectStarmap />
                 </div>
@@ -54,7 +56,7 @@ const Portfolio = () => {
                         Freelance Projects
                     </h2>
 
-                    <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                         {filteredProjects
                             .filter(p => p.projectType === 'Freelance')
                             .map((project, index) => (
@@ -75,7 +77,7 @@ const Portfolio = () => {
                         Personal Projects
                     </h2>
 
-                    <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                         {filteredProjects
                             .filter(p => !p.projectType || p.projectType === 'Personal')
                             .map((project, index) => (

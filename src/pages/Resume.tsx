@@ -1,10 +1,7 @@
 import { IoDownloadOutline } from 'react-icons/io5';
-import { useAchievements } from '../context/AchievementContext';
-import SecretHint from '../components/SecretHint';
 import SEO from '../components/SEO';
 
 const Resume = () => {
-    const { unlockAchievement } = useAchievements();
     return (
         <article className="resume active animate-fade-in" data-page="resume">
             <SEO
@@ -12,15 +9,12 @@ const Resume = () => {
                 description="View and download my professional resume."
             />
 
-            <SecretHint hint="Try the download button in the navbar..." position="top-right" delay={2000} />
-
             <header className="flex justify-between items-center mb-6">
                 <h2 className="h2 article-title text-2xl font-semibold border-b-2 border-neon-blue w-max pb-1">Resume</h2>
                 <div className="flex gap-4">
                     <a
                         href="/assets/Prasanna_Nadrajan_Resume.pdf"
                         download="Prasanna_Nadrajan_Resume.pdf"
-                        onClick={() => unlockAchievement('recruiter')}
                         className="flex items-center gap-2 bg-border-gradient-onyx px-4 py-2 rounded-lg text-neon-blue hover:text-white transition-colors shadow-neon"
                     >
                         <IoDownloadOutline />

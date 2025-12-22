@@ -11,7 +11,6 @@ import {
     IoCallOutline
 } from 'react-icons/io5';
 import VisitorCounter from './VisitorCounter';
-import SecretHint from './SecretHint';
 
 interface FooterProps {
     viewCount?: number;
@@ -28,7 +27,6 @@ const Footer = ({ viewCount = 0 }: FooterProps) => {
 
     return (
         <footer className="mt-auto pt-16 pb-8 border-t border-jet bg-onyx/30 backdrop-blur-sm relative overflow-hidden">
-            <SecretHint hint="Some text looks glitchy..." position="bottom-right" delay={10000} />
             {/* Dot Pattern Background - Bolder */}
             <div className="absolute inset-0 pointer-events-none opacity-40"
                 style={{

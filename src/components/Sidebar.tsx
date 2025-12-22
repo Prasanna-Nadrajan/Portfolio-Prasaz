@@ -63,16 +63,16 @@ const Sidebar = ({ onShowUpdate, viewCount = 0 }: SidebarProps) => {
     }, [text, isDeleting, roleIndex]);
 
     return (
-        <div className="sidebar-wrapper md:sticky md:top-16 md:h-fit">
+        <div className="sidebar-wrapper md:sticky md:top-28 md:h-fit">
             <aside
-                className={`sidebar bg-container-bg border border-border-color rounded-2xl p-6 shadow-neon z-10 transition-all duration-500 ease-in-out overflow-hidden hidden md:block ${isActive ? 'max-h-[500px]' : 'max-h-[120px] md:max-h-full'}`}
+                className={`sidebar bg-container-bg/50 backdrop-blur-xl border border-white/20 rounded-2xl p-6 shadow-neon z-10 transition-all duration-500 ease-in-out overflow-hidden hidden md:block ${isActive ? 'max-h-[500px]' : 'max-h-[120px] md:max-h-full'}`}
                 data-sidebar
             >
                 <div className="sidebar-info flex flex-col md:flex-col gap-4 relative">
 
                     <figure className="avatar-box bg-bg-gradient-onyx rounded-2xl overflow-hidden w-64 mx-auto md:w-11/12">
                         <img
-                            src="/assets/images/portfolio_image.png"
+                            src="/assets/images/portfolio_image.jpg"
                             alt="Prasanna Nadrajan"
                             className="w-full h-auto"
                         />
@@ -154,7 +154,7 @@ const Sidebar = ({ onShowUpdate, viewCount = 0 }: SidebarProps) => {
                     <div className="hidden md:flex justify-center mt-4">
                         <button
                             onClick={onShowUpdate}
-                            className="relative w-12 h-12 bg-container-bg border border-border-color rounded-xl shadow-neon flex items-center justify-center text-neon-blue hover:bg-jet/30 hover:scale-105 transition-all duration-300 group"
+                            className="relative w-12 h-12 bg-container-bg/50 backdrop-blur-xl border border-white/20 rounded-xl shadow-neon flex items-center justify-center text-neon-blue hover:bg-jet/30 hover:scale-105 transition-all duration-300 group"
                             aria-label="View Updates"
                             title="New Updates Available"
                         >

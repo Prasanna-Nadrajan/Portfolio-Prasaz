@@ -19,7 +19,7 @@ const BlogPostCard = ({ title, category, date, description, image, link }: BlogP
             transition={{ duration: 0.5 }}
             className="blog-post-item bg-border-gradient-onyx rounded-2xl shadow-neon relative z-10 before:absolute before:inset-[1px] before:bg-bg-gradient-jet before:rounded-2xl before:-z-10 group hover:scale-[1.02] transition-transform duration-300"
             // Added data-cursor="hover" here to ensure the custom cursor reacts to the entire card
-            data-cursor="hover" 
+            data-cursor="hover"
         >
             <a href={link} target="_blank" rel="noopener noreferrer" className="block p-4 h-full flex flex-col">
                 <figure className="blog-banner-box rounded-xl overflow-hidden mb-4 aspect-video relative">
@@ -27,14 +27,14 @@ const BlogPostCard = ({ title, category, date, description, image, link }: BlogP
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-jet text-neon-blue p-3 rounded-xl text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 shadow-neon pointer-events-none">
                         <IoReaderOutline />
                     </div>
-                    
+
                     <img
                         src={image}
                         alt={title}
                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                         loading="lazy"
                     />
-                    
+
                     {/* Added Dark Overlay on Hover */}
                     <div className="absolute inset-0 bg-transparent group-hover:bg-black/50 transition-colors duration-300 z-10"></div>
                 </figure>

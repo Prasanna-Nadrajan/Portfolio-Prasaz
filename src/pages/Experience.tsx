@@ -2,7 +2,7 @@ import TimelineItem from '../components/TimelineItem';
 import SEO from '../components/SEO';
 import { experienceData, volunteeringData, educationData } from '../data/experience';
 
-import SecretHint from '../components/SecretHint';
+
 
 const Experience = () => {
     return (
@@ -12,7 +12,7 @@ const Experience = () => {
                 description="My professional journey and academic background."
             />
 
-            <SecretHint hint="↑ ↑ ↓ ↓ ← → ← → B A" position="bottom-left" delay={8000} />
+
 
             <header>
                 <h2 className="h2 article-title text-2xl font-semibold mb-4 border-b-2 border-neon-blue w-max pb-1">Experience</h2>
