@@ -11,10 +11,11 @@ const roles = [
 
 interface SidebarProps {
     onShowUpdate?: () => void;
+    onShowLinkedInUpdate?: () => void;
     viewCount?: number;
 }
 
-const Sidebar = ({ onShowUpdate, viewCount = 0 }: SidebarProps) => {
+const Sidebar = ({ onShowUpdate, onShowLinkedInUpdate, viewCount = 0 }: SidebarProps) => {
     const [isActive, setIsActive] = useState(false);
 
     // Typewriter State
@@ -148,10 +149,11 @@ const Sidebar = ({ onShowUpdate, viewCount = 0 }: SidebarProps) => {
                 </div>
             </aside>
 
-            {/* Update Button - Floating below sidebar on desktop */}
-            {
-                onShowUpdate && (
-                    <div className="hidden md:flex justify-center mt-4">
+            {/* Bottom Buttons Container */}
+            <div className="hidden md:flex justify-center mt-4 gap-4">
+                {/* Update Button - Floating below sidebar on desktop */}
+                {
+                    onShowUpdate && (
                         <button
                             onClick={onShowUpdate}
                             className="relative w-12 h-12 bg-container-bg/50 backdrop-blur-xl border border-white/20 rounded-xl shadow-neon flex items-center justify-center text-neon-blue hover:bg-jet/30 hover:scale-105 transition-all duration-300 group"
@@ -171,9 +173,34 @@ const Sidebar = ({ onShowUpdate, viewCount = 0 }: SidebarProps) => {
                                 {Math.floor(viewCount / 100) * 100}+ Views
                             </span>
                         </button>
-                    </div>
-                )
-            }
+                    )
+                }
+
+                {/* LinkedIn Celebration Button */}
+                {
+                    onShowLinkedInUpdate && (
+                        <button
+                            onClick={onShowLinkedInUpdate}
+                            className="relative w-12 h-12 bg-container-bg/50 backdrop-blur-xl border border-white/20 rounded-xl shadow-neon flex items-center justify-center text-neon-blue hover:bg-jet/30 hover:scale-105 transition-all duration-300 group"
+                            aria-label="LinkedIn 5000+ Impressions"
+                            title="LinkedIn Milestone Reached!"
+                        >
+                            <IoLogoLinkedin size={24} />
+
+                            {/* Blue Dot for Update */}
+                            <span className="absolute top-2 right-2 flex h-2.5 w-2.5">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-500"></span>
+                            </span>
+
+                            {/* Tooltip style label on hover */}
+                            <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] text-neon-blue opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                                5000+ Impressions
+                            </span>
+                        </button>
+                    )
+                }
+            </div>
         </div >
     );
 };

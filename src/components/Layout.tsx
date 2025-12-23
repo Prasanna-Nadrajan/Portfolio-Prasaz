@@ -15,6 +15,7 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [showCelebration, setShowCelebration] = useState(false);
+    const [celebrationType, setCelebrationType] = useState<'views' | 'linkedin'>('views');
     const [viewCount, setViewCount] = useState(0);
 
     const toggleSidebar = () => {
@@ -47,7 +48,12 @@ const Layout = ({ children }: LayoutProps) => {
 
     return (
         <div className="min-h-screen bg-main-bg text-main-text font-poppins relative overflow-x-hidden transition-colors duration-300 flex flex-col">
-            <CelebrationModal isOpen={showCelebration} onClose={() => setShowCelebration(false)} viewCount={viewCount} />
+            <CelebrationModal
+                isOpen={showCelebration}
+                onClose={() => setShowCelebration(false)}
+                viewCount={viewCount}
+                type={celebrationType}
+            />
 
             {/* Interactive Particle Background */}
             <ParticleBackground />
@@ -62,12 +68,29 @@ const Layout = ({ children }: LayoutProps) => {
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
                     {/* Sidebar Column: Hidden in DOM if isSidebarOpen is false on Desktop */}
                     <div className={`md:col-span-3 lg:col-span-3 ${isSidebarOpen ? 'block' : 'hidden'}`}>
-                        <Sidebar onShowUpdate={() => setShowCelebration(true)} viewCount={viewCount} />
+                        <Sidebar
+                            onShowUpdate={() => {
+                                setCelebrationType('views');
+                                setShowCelebration(true);
+                            }}
+                            onShowLinkedInUpdate={() => {
+                                setCelebrationType('linkedin');
+                                setShowCelebration(true);
+                            }}
+                            viewCount={viewCount}
+                        />
                     </div>
 
                     {/* Main Content Column: Expands to 12 if sidebar closed */}
                     <div className={`relative ${isSidebarOpen ? 'md:col-span-9 lg:col-span-9' : 'md:col-span-12 lg:col-span-12'}`}>
-                        <Navbar isSidebarOpen={isSidebarOpen} onToggleSidebar={toggleSidebar} onShowUpdate={() => setShowCelebration(true)} />
+                        <Navbar
+                            isSidebarOpen={isSidebarOpen}
+                            onToggleSidebar={toggleSidebar}
+                            onShowUpdate={() => {
+                                setCelebrationType('views');
+                                setShowCelebration(true);
+                            }}
+                        />
                         <div className="glass-card mt-4 md:mt-0 min-h-[calc(100vh-100px)] md:min-h-[calc(100vh-60px)] relative flex flex-col">
                             <div className="flex-grow">
                                 {children}

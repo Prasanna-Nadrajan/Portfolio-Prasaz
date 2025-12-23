@@ -33,31 +33,31 @@ const services = [
 const testimonials = [
     {
         name: "Chennai Data Circle - AI In BI (Boon Or Bane)?",
-        date: "Jan 25, 2025",
+        date: "Sep 25, 2025",
         avatar: "/assets/images/events/cdc_meeetup.png",
         text: "Participated in an insightful session discussing the impact of Artificial Intelligence on Business Intelligence, exploring whether it's a boon or a bane for the industry.",
-        link: "https://www.linkedin.com/"
+        link: "https://www.linkedin.com/posts/prasannanadrajan_chennai-data-circles-long-awaited-exclusive-activity-7377932101142114304-GKsu?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE0J_eAB7yG03MXXrYG4SgL18fkJkQAfEVs"
     },
     {
         name: "CII Connect 2024",
         date: "Dec 17, 2024",
         avatar: "/assets/images/events/cii_connect_2024.jpg",
         text: "Attended CII Connect 2024, a premier event bringing together industry leaders and technology experts to discuss the future of digital transformation and innovation.",
-        link: "https://www.linkedin.com/"
+        link: "https://www.linkedin.com/prasannanadrajan"
     },
     {
         name: "Investiture Ceremony ARQ REC",
         date: "Oct 10, 2025",
         avatar: "/assets/images/events/investiture.png",
         text: "Honored to be part of the Investiture Ceremony at ARQ REC, marking the beginning of a new leadership journey and commitment to excellence.",
-        link: "https://www.linkedin.com/"
+        link: "https://www.linkedin.com/posts/prasannanadrajan_arq-investitureceremony-ai-activity-7383012424318177280-G9Ur?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE0J_eAB7yG03MXXrYG4SgL18fkJkQAfEVs"
     },
     {
         name: "CodeSapiens - Students Community (Meetup)",
-        date: "Nov 15, 2024",
+        date: "Oct 15, 2025",
         avatar: "/assets/images/events/codesapiens_meetup.png",
         text: "Joined fellow student developers at the CodeSapiens meetup to share knowledge, collaborate on projects, and build a strong tech community.",
-        link: "https://www.linkedin.com/"
+        link: "https://www.linkedin.com/posts/prasannanadrajan_codesapiens-makoitlabs-techmeetup-activity-7382843878275534848-IpmF?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE0J_eAB7yG03MXXrYG4SgL18fkJkQAfEVs"
     }
 ];
 

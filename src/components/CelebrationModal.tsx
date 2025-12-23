@@ -1,15 +1,17 @@
+// ... imports kept same as much as possible ...
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { useEffect } from 'react';
-import { IoClose, IoRocketSharp, IoStarSharp } from 'react-icons/io5';
+import { IoClose, IoRocketSharp, IoStarSharp, IoLogoLinkedin } from 'react-icons/io5';
 
 interface CelebrationModalProps {
     isOpen: boolean;
     onClose: () => void;
     viewCount?: number;
+    type?: 'views' | 'linkedin';
 }
 
-const CelebrationModal = ({ isOpen, onClose, viewCount = 0 }: CelebrationModalProps) => {
+const CelebrationModal = ({ isOpen, onClose, viewCount = 0, type = 'views' }: CelebrationModalProps) => {
 
     const fireConfetti = () => {
         // "Glitter papers falling down in the sides"
@@ -109,7 +111,11 @@ const CelebrationModal = ({ isOpen, onClose, viewCount = 0 }: CelebrationModalPr
                         <div className="flex justify-center mb-6">
                             <div className="w-16 h-16 rounded-full bg-gradient-to-br from-neon-blue to-purple-600 p-[2px] shadow-lg animate-pulse-glow">
                                 <div className="w-full h-full bg-black rounded-full flex items-center justify-center">
-                                    <IoRocketSharp className="text-3xl text-white" />
+                                    {type === 'linkedin' ? (
+                                        <IoLogoLinkedin className="text-3xl text-white" />
+                                    ) : (
+                                        <IoRocketSharp className="text-3xl text-white" />
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -121,17 +127,27 @@ const CelebrationModal = ({ isOpen, onClose, viewCount = 0 }: CelebrationModalPr
                         <div className="my-8 relative group cursor-default">
                             <div className="absolute inset-0 bg-neon-blue/20 blur-xl group-hover:bg-neon-blue/30 transition-all duration-500 rounded-full"></div>
                             <div className="relative text-5xl md:text-7xl font-bold text-white drop-shadow-[0_0_15px_rgba(0,191,255,0.8)] font-sans">
-                                {Math.floor(viewCount / 100) * 100}+
+                                {type === 'linkedin' ? '5,000+' : `${Math.floor(viewCount / 100) * 100}+`}
                             </div>
                             <div className="relative text-sm text-neon-blue tracking-[0.2em] uppercase mt-2 font-medium">
-                                Views Reached
+                                {type === 'linkedin' ? 'Impressions' : 'Views Reached'}
                             </div>
                         </div>
 
                         <p className="text-gray-300 text-lg leading-relaxed mb-8 max-w-sm mx-auto font-light">
-                            My portfolio views reached past <strong className="text-white">{Math.floor(viewCount / 100) * 100}</strong>!
-                            <br />
-                            <span className="text-sm mt-2 block text-gray-400">Thank you for your cooperation and support.</span>
+                            {type === 'linkedin' ? (
+                                <>
+                                    My LinkedIn profile reached <strong className="text-white">5,000+</strong> impressions!
+                                    <br />
+                                    <span className="text-sm mt-2 block text-gray-400">Thanks for connecting!</span>
+                                </>
+                            ) : (
+                                <>
+                                    My portfolio views reached past <strong className="text-white">{Math.floor(viewCount / 100) * 100}</strong>!
+                                    <br />
+                                    <span className="text-sm mt-2 block text-gray-400">Thank you for your cooperation and support.</span>
+                                </>
+                            )}
                         </p>
 
                         <button
@@ -148,7 +164,7 @@ const CelebrationModal = ({ isOpen, onClose, viewCount = 0 }: CelebrationModalPr
                         </button>
 
                         <div className="mt-6 text-[10px] text-gray-600 font-mono">
-                            SYSTEM_MSG_ID: {Math.floor(viewCount / 100) * 100}_VIEWS_ACK
+                            SYSTEM_MSG_ID: {type === 'linkedin' ? 'LINKEDIN_IMPR_ACK' : `${Math.floor(viewCount / 100) * 100}_VIEWS_ACK`}
                         </div>
                     </motion.div>
                 </motion.div>
