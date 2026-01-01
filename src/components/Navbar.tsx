@@ -12,6 +12,7 @@ import {
     IoChevronForward
 } from 'react-icons/io5';
 import ThemeToggle from './ThemeToggle';
+import LeetCodeCelebration, { useLeetCodeCelebration } from './LeetCodeCelebration';
 import DownloadButton from './DownloadButton';
 import { navItems } from '../data/navigation';
 import { CONFIG } from '../constants/config';
@@ -30,11 +31,14 @@ const Navbar = ({ isSidebarOpen = true, onToggleSidebar, onShowUpdate }: NavbarP
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
     const closeMenu = () => setIsMenuOpen(false);
 
+    const { isActive, trigger, closeCelebration } = useLeetCodeCelebration();
+
     return (
         <>
+            <LeetCodeCelebration isActive={isActive} onComplete={closeCelebration} />
             {/* Mobile Top Navbar */}
             <nav className="fixed top-0 left-0 w-full h-16 z-50 bg-surface/90 backdrop-blur-md border-b border-border flex items-center justify-between px-4 md:hidden">
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 cursor-pointer select-none" onClick={trigger}>
                     <figure className="w-10 h-10 rounded-full overflow-hidden border border-border">
                         <img
                             src="/assets/images/portfolio_image.png"
@@ -170,27 +174,23 @@ const Navbar = ({ isSidebarOpen = true, onToggleSidebar, onShowUpdate }: NavbarP
                             {isSidebarOpen ? <IoChevronBack size={20} /> : <IoChevronForward size={20} />}
                         </button>
 
-                        {/* Conditional Profile Picture */}
-                        {!isSidebarOpen && (
-                            <motion.div
-                                initial={{ opacity: 0, x: -20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -20 }}
-                                className="flex items-center gap-3"
-                            >
-                                <figure className="w-10 h-10 rounded-full overflow-hidden border border-border">
-                                    <img
-                                        src="/assets/images/portfolio_image.jpg"
-                                        alt="Prasanna"
-                                        className="w-full h-full object-cover"
-                                    />
-                                </figure>
-                                <div className="flex flex-col">
-                                    <span className="text-text-main font-medium text-sm leading-tight">Prasanna Nadrajan</span>
-                                    <span className="text-xs text-text-muted font-light">Data Analyst</span>
-                                </div>
-                            </motion.div>
-                        )}
+                        {/* Profile Picture - Always visible for Celebration Trigger */}
+                        <div
+                            className="flex items-center gap-3 cursor-pointer select-none"
+                            onClick={trigger}
+                        >
+                            <figure className="w-10 h-10 rounded-full overflow-hidden border border-border">
+                                <img
+                                    src="/assets/images/portfolio_image.jpg"
+                                    alt="Prasanna"
+                                    className="w-full h-full object-cover"
+                                />
+                            </figure>
+                            <div className="flex flex-col">
+                                <span className="text-text-main font-medium text-sm leading-tight">Prasanna Nadrajan</span>
+                                <span className="text-xs text-text-muted font-light">Data Analyst</span>
+                            </div>
+                        </div>
                     </div>
 
                     {/* Nav Items */}

@@ -54,7 +54,16 @@ const Platforms = () => {
                     video="/assets/videos/github-wrapped-2025.mp4"
                     link="/github-wrapped"
                     onClick={() => navigate('/github-wrapped')}
-                    usePixelatedFont={true}
+                    // usePixelatedFont={true}
+                    className="w-full md:max-w-xs"
+                />
+                <ProjectCard
+                    title="LinkedIn Wrapped 2025"
+                    category="Professional Year"
+                    image="/assets/images/contact_me/linkedin.png"
+                    video="/assets/videos/linkedin-Wrapped-2025.mp4"
+                    link="/linkedin-wrapped"
+                    onClick={() => navigate('/linkedin-wrapped')}
                     className="w-full md:max-w-xs"
                 />
                 <ProjectCard
@@ -64,7 +73,7 @@ const Platforms = () => {
                     video="/assets/videos/leetcode-wrapped-2025.mp4"
                     link="/leetcode-wrapped"
                     onClick={() => navigate('/leetcode-wrapped')}
-                    usePixelatedFont={true}
+                    // usePixelatedFont={true}
                     className="w-full md:max-w-xs"
                 />
             </section>

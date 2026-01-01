@@ -14,11 +14,20 @@ const Contact = lazy(() => import('./pages/Contact'));
 const Platforms = lazy(() => import('./pages/Platforms'));
 const Resume = lazy(() => import('./pages/Resume'));
 const GitHubWrapped = lazy(() => import('./pages/GitHubWrapped'));
+const LinkedInWrapped = lazy(() => import('./pages/LinkedInWrapped'));
 const LeetCodeWrapped = lazy(() => import('./pages/LeetCodeWrapped'));
 const Terminal = lazy(() => import('./pages/Terminal'));
 
 function App() {
-  const [showIntro, setShowIntro] = useState(true);
+  const [showIntro, setShowIntro] = useState(() => {
+    // Check if intro has already been shown in this session
+    return !sessionStorage.getItem('introShown');
+  });
+
+  const handleIntroComplete = () => {
+    setShowIntro(false);
+    sessionStorage.setItem('introShown', 'true');
+  };
 
   return (
     <Router>
@@ -30,12 +39,13 @@ function App() {
         <Routes>
           {/* Standalone Route for GitHub Wrapped */}
           <Route path="/github-wrapped" element={<GitHubWrapped />} />
+          <Route path="/linkedin-wrapped" element={<LinkedInWrapped />} />
           <Route path="/leetcode-wrapped" element={<LeetCodeWrapped />} />
 
           {/* Main Application Routes */}
           <Route path="/*" element={
             showIntro ? (
-              <Intro onComplete={() => setShowIntro(false)} />
+              <Intro onComplete={handleIntroComplete} />
             ) : (
               <Layout>
                 <AnimatePresence mode='wait'>

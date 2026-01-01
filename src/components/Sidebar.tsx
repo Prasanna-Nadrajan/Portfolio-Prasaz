@@ -15,8 +15,12 @@ interface SidebarProps {
     viewCount?: number;
 }
 
+// import ThemeToggle from './ThemeToggle';
+import LeetCodeCelebration, { useLeetCodeCelebration } from './LeetCodeCelebration';
+
 const Sidebar = ({ onShowUpdate, onShowLinkedInUpdate, viewCount = 0 }: SidebarProps) => {
     const [isActive, setIsActive] = useState(false);
+    const { isActive: isCelebrationActive, trigger, closeCelebration } = useLeetCodeCelebration();
 
     // Typewriter State
     const [text, setText] = useState('');
@@ -65,13 +69,17 @@ const Sidebar = ({ onShowUpdate, onShowLinkedInUpdate, viewCount = 0 }: SidebarP
 
     return (
         <div className="sidebar-wrapper md:sticky md:top-28 md:h-fit">
+            <LeetCodeCelebration isActive={isCelebrationActive} onComplete={closeCelebration} />
             <aside
                 className={`sidebar bg-container-bg/50 backdrop-blur-xl border border-white/20 rounded-2xl p-6 shadow-neon z-10 transition-all duration-500 ease-in-out overflow-hidden hidden md:block ${isActive ? 'max-h-[500px]' : 'max-h-[120px] md:max-h-full'}`}
                 data-sidebar
             >
                 <div className="sidebar-info flex flex-col md:flex-col gap-4 relative">
 
-                    <figure className="avatar-box bg-bg-gradient-onyx rounded-2xl overflow-hidden w-64 mx-auto md:w-11/12">
+                    <figure
+                        className="avatar-box bg-bg-gradient-onyx rounded-2xl overflow-hidden w-64 mx-auto md:w-11/12 cursor-pointer transition-transform hover:scale-[1.02] active:scale-95"
+                        onClick={trigger}
+                    >
                         <img
                             src="/assets/images/portfolio_image.jpg"
                             alt="Prasanna Nadrajan"
@@ -80,7 +88,11 @@ const Sidebar = ({ onShowUpdate, onShowLinkedInUpdate, viewCount = 0 }: SidebarP
                     </figure>
 
                     <div className="info-content text-center">
-                        <h1 className="name text-main-text text-xl font-medium mb-2" title="Prasanna Nadrajan">
+                        <h1
+                            className="name text-main-text text-xl font-medium mb-2 cursor-pointer select-none hover:text-primary transition-colors"
+                            title="Prasanna Nadrajan"
+                            onClick={trigger}
+                        >
                             Prasanna Nadrajan
                         </h1>
 

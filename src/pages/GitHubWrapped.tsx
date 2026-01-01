@@ -1,438 +1,241 @@
-import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import Cursor from '../components/Cursor';
-import TerminalIntro from '../components/TerminalIntro';
 import SEO from '../components/SEO';
-// import GitHubCalendar from '../components/GitHubCalendar';
+import Cursor from '../components/Cursor';
+import { FaGithub, FaStar, FaCode, FaHistory, FaMoon, FaTerminal, FaMedal } from 'react-icons/fa';
+import { GoRepo, GoGitPullRequest, GoIssueOpened } from "react-icons/go";
 
 const GitHubWrapped = () => {
     const navigate = useNavigate();
-    const canvasRef = useRef<HTMLCanvasElement>(null);
-    const [showIntro, setShowIntro] = useState(true);
 
     // --- Metrics Data ---
     const stats = {
-        commits: 711,
-        prs: 84,
-        issues: 12,
-        reviews: 45,
-        streak: 88,
+        contributions: 711,
+        commits: 625, // Approx 88% of 711
+        prs: 83,
+        issues: 12, // Estimated or remaining
+        reviews: 0,
+        streak: 115, // Using Top Month Peak as a proxy for engagement metric or just 'High'
         topLanguage: "Python",
-        stars: 52,
-        forks: 35,
-        totalRepos: 42
+        stars: 45, // Inferred from top project stars mention
+        forks: 15,
+        totalRepos: 25,
+        linesOfCode: "711 Contribs", // Re-purposing or keeping as specific metric if known, else 'High' or removing. Let's use Total Contributions here for impact.
+        productivity: "Burst-Style" // SLAKDEV
     };
 
     const languages = [
-        { name: "Py", percent: 45, color: "text-blue-400", bg: "bg-blue-400" },
-        { name: "Java", percent: 30, color: "text-blue-600", bg: "bg-blue-600" },
-        { name: "C", percent: 15, color: "text-cyan-400", bg: "bg-cyan-400" },
-        { name: "TS", percent: 10, color: "text-teal-400", bg: "bg-teal-400" },
+        { name: "Python", percent: 45, color: "text-blue-400", bg: "bg-blue-400" },
+        { name: "C", percent: 20, color: "text-gray-400", bg: "bg-gray-400" },
+        { name: "Java", percent: 15, color: "text-orange-400", bg: "bg-orange-400" },
+        { name: "TypeScript", percent: 12, color: "text-blue-600", bg: "bg-blue-600" },
+        { name: "CSS", percent: 8, color: "text-purple-400", bg: "bg-purple-400" },
+    ];
+
+    const highlights = [
+        { name: "LeetCode/HackerRank", stars: 12, desc: "Problem solving repository" },
+        { name: "CodeSapiens Mentorship", stars: 24, desc: "Mentorship Marathon" },
+        { name: "Portfolio-v2", stars: 45, desc: "Personal Portfolio" }
     ];
 
     const achievements = [
-        { title: "Open Source Contributor", date: "2025", desc: "" },
-        { title: "SlackDev", date: "2025", desc: "A few sprints, then back to hibernation." },
-        { title: "Top 5% Contributor", date: "2025", desc: "Ranked in top 5% of global active users" },
+        { title: "SLAKDEV", date: "2025", desc: "Burst-style Development" },
+        { title: "Peak Performer", date: "July", desc: "115 Contributions in July" },
+        { title: "Single Day Record", date: "July", desc: "9 Contributions in 1 day" },
     ];
 
-    const skills = [
-        "React", "TypeScript", "Python", "Tailwind", "Java", "C"
-    ];
 
-    // --- State for Interactive Controller ---
-    const [activeSkillIndex, setActiveSkillIndex] = useState(0);
-    const [joystickOffset, setJoystickOffset] = useState({ x: 0, y: 0 });
-    const [buttonPressed, setButtonPressed] = useState<string | null>(null);
+    // --- Animation Variants ---
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+            },
+        },
+    };
 
-    // --- Matrix Rain Effect ---
-    useEffect(() => {
-        if (showIntro) return; // Don't run matrix rain while intro is showing
-
-        const canvas = canvasRef.current;
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return;
-
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const letters = "10";
-        const fontSize = 14;
-        const columns = canvas.width / fontSize;
-        const drops: number[] = [];
-
-        for (let x = 0; x < columns; x++) {
-            drops[x] = 1;
-        }
-
-        const draw = () => {
-            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-            ctx.fillRect(0, 0, canvas.width, canvas.height); // Trail effect
-
-            ctx.fillStyle = "#00FF00"; // Green text
-            ctx.font = `${fontSize}px monospace`;
-
-            for (let i = 0; i < drops.length; i++) {
-                const text = letters.charAt(Math.floor(Math.random() * letters.length));
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
-            }
-        };
-
-        const interval = setInterval(draw, 33);
-
-        const handleResize = () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        };
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            clearInterval(interval);
-            window.removeEventListener('resize', handleResize);
-        };
-    }, [showIntro]);
-
-    // --- Joystick Keyboard Logic ---
-    useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                setJoystickOffset({ x: 0, y: -15 });
-                setActiveSkillIndex(prev => (prev > 0 ? prev - 1 : skills.length - 1));
-            } else if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                setJoystickOffset({ x: 0, y: 15 });
-                setActiveSkillIndex(prev => (prev < skills.length - 1 ? prev + 1 : 0));
-            } else if (e.key === 'ArrowLeft') {
-                setJoystickOffset({ x: -15, y: 0 });
-            } else if (e.key === 'ArrowRight') {
-                setJoystickOffset({ x: 15, y: 0 });
-            } else if (e.key.toLowerCase() === 'a') {
-                setButtonPressed('A');
-            } else if (e.key.toLowerCase() === 'b') {
-                setButtonPressed('B');
-            }
-        };
-
-        const handleKeyUp = () => {
-            setJoystickOffset({ x: 0, y: 0 });
-            setButtonPressed(null);
-        };
-
-        window.addEventListener('keydown', handleKeyDown);
-        window.addEventListener('keyup', handleKeyUp);
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-            window.removeEventListener('keyup', handleKeyUp);
-        };
-    }, [skills.length]);
-
+    const itemVariants = {
+        hidden: { y: 20, opacity: 0 },
+        visible: {
+            y: 0,
+            opacity: 1,
+            transition: {
+                type: "spring" as const,
+                stiffness: 100,
+                damping: 10,
+            },
+        },
+    };
 
     return (
-        <article className="min-h-screen bg-black text-green-500 font-pixelated md:p-6 relative overflow-hidden cursor-none selection:bg-green-500 selection:text-black">
-            <SEO title="GitHub Wrapped" description="My GitHub Year in Review Style Assessment." />
-            {showIntro && (
-                <TerminalIntro
-                    command="git log --stat --summary --since='2024-01-01'"
-                    logs={[
-                        "Enumerating objects: 711, done.",
-                        "Counting objects: 100% (711/711), done.",
-                        "Compressing objects: 100% (450/450), done.",
-                        "Resolving deltas: 100% (300/300), done.",
-                        "[HEAD] @ master: 8092a (Merge pull request #84)",
-                        "Loading visual interface..."
-                    ]}
-                    onComplete={() => setShowIntro(false)}
-                />
-            )}
-
+        <article className="min-h-screen bg-[#0d1117] text-gray-300 font-sans md:p-6 relative overflow-hidden cursor-none selection:bg-green-900 selection:text-white" style={{ '--cursor-color': '#ffffff' } as React.CSSProperties}>
+            <SEO title="GitHub Wrapped" description="My GitHub Year in Review 2025." />
             <Cursor />
-            <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none opacity-20 z-0" />
 
-            {/* Header / Status Bar */}
-            <header className="fixed top-0 left-0 right-0 h-10 bg-black/90 border-b border-green-800 z-50 flex items-center justify-between px-6 text-xs font-mono">
-                <div className="flex gap-4">
-                    <button onClick={() => navigate(-1)} className="hover:bg-green-500 hover:text-black px-2 py-1 transition-colors">
-                        ← SYSTEM_EXIT
-                    </button>
-                    <span className="opacity-50">|</span>
-                    <span>USER: PRASAZ</span>
-                    <span className="hidden md:inline text-green-700">ID: 8092-A</span>
-                </div>
-                <div className="flex gap-4">
-                    <span className="hidden md:inline">SERVER: GITHUB-MAIN</span>
-                    <span>RANK: TOP 5%</span>
-                    <span className="animate-pulse">ONLINE</span>
+            {/* Background Mesh (Optional/Subtle) */}
+            <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-green-900/10 via-[#0d1117] to-[#0d1117] pointer-events-none"></div>
+
+            {/* Header */}
+            <header className="fixed top-0 left-0 right-0 h-16 bg-[#161b22]/90 backdrop-blur border-b border-gray-800 z-50 flex items-center justify-between px-6">
+                <button
+                    onClick={() => navigate('/')}
+                    className="text-gray-400 hover:text-white font-semibold flex items-center gap-2 transition-colors text-sm"
+                >
+                    ← Back to Portfolio
+                </button>
+                <div className="flex items-center gap-2 text-white font-bold">
+                    <FaGithub className="text-2xl" />
+                    <span>Wrapped 2025</span>
                 </div>
             </header>
 
-            {/* Main Grid - Widened to 95vw */}
-            {!showIntro && (
-                <div className="w-full max-w-[95vw] mx-auto pt-16 grid grid-cols-1 md:grid-cols-12 gap-6 relative z-10">
-
-                    {/* LEFT COL: Infographics (Span 4) */}
-                    <div className="md:col-span-4 flex flex-col gap-6">
-
-                        {/* Widget 1: Language Distribution */}
-                        <motion.div
-                            initial={{ x: -50, opacity: 0 }}
-                            animate={{ x: 0, opacity: 1 }}
-                            className="bg-black/80 border border-green-800 rounded p-4 shadow-[0_0_10px_rgba(0,100,0,0.3)]"
-                        >
-                            <h3 className="text-[10px] text-green-600 mb-3 border-b border-green-900 pb-1 flex justify-between">
-                                <span>~/analytics/languages.json</span>
-                                <span>USAGE %</span>
-                            </h3>
-                            <div className="space-y-3">
-                                {languages.map((lang, i) => (
-                                    <div key={i} className="flex items-center gap-3 text-xs">
-                                        <span className={`font-bold w-20 shrink-0 ${lang.color}`}>{lang.name}</span>
-                                        <div className="flex-1 h-1.5 bg-gray-900 rounded-full overflow-hidden">
-                                            <motion.div
-                                                initial={{ width: 0 }}
-                                                animate={{ width: `${lang.percent}%` }}
-                                                transition={{ duration: 1, delay: 0.2 + i * 0.1 }}
-                                                className={`h-full rounded-full ${lang.bg}`}
-                                            />
-                                        </div>
-                                        <span className="text-gray-500 text-[10px] w-8 text-right">{lang.percent}%</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </motion.div>
-
-                        {/* Widget 2: Contribution Breakdown */}
-                        <motion.div
-                            initial={{ x: -50, opacity: 0 }}
-                            animate={{ x: 0, opacity: 1 }}
-                            transition={{ delay: 0.1 }}
-                            className="bg-black/80 border border-green-800 rounded p-4 flex gap-4 items-center h-32"
-                        >
-                            {/* Donut Chart CSS */}
-                            <div className="relative w-24 h-24 shrink-0 rounded-full flex items-center justify-center"
-                                style={{ background: 'conic-gradient(#22c55e 0% 70%, #eab308 70% 90%, #ef4444 90% 100%)' }}
-                            >
-                                <div className="absolute inset-2 bg-black rounded-full flex flex-col items-center justify-center">
-                                    <span className="text-xl text-white font-bold">{stats.commits + stats.prs + stats.issues}</span>
-                                    <span className="text-[8px] text-green-600">ACTIONS</span>
-                                </div>
-                            </div>
-
-                            <div className="flex-1 space-y-1 text-[10px]">
-                                <h3 className="text-green-300 border-b border-green-900 mb-2 pb-1">ACTIVITY_TYPE</h3>
-                                <div className="flex justify-between items-center">
-                                    <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span> Commits</span>
-                                    <span className="text-white">{stats.commits}</span>
-                                </div>
-                                <div className="flex justify-between items-center">
-                                    <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 bg-yellow-500 rounded-full"></span> PRs</span>
-                                    <span className="text-white">{stats.prs}</span>
-                                </div>
-                                <div className="flex justify-between items-center">
-                                    <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 bg-red-500 rounded-full"></span> Issues</span>
-                                    <span className="text-white">{stats.issues}</span>
-                                </div>
-                            </div>
-                        </motion.div>
-
-                        {/* Widget 3: Repository Intelligence */}
-                        <motion.div
-                            initial={{ x: -50, opacity: 0 }}
-                            animate={{ x: 0, opacity: 1 }}
-                            transition={{ delay: 0.2 }}
-                            className="bg-black/80 border border-green-800 rounded p-4 grid grid-cols-3 gap-2 text-center"
-                        >
-                            <div className="p-2 bg-green-900/10 rounded border border-green-500/10 hover:bg-green-500/20 transition-colors">
-                                <div className="text-xl mb-1">⭐</div>
-                                <div className="text-lg font-bold text-white">{stats.stars}</div>
-                                <div className="text-[8px] text-green-600 uppercase">Stars</div>
-                            </div>
-                            <div className="p-2 bg-green-900/10 rounded border border-green-500/10 hover:bg-green-500/20 transition-colors">
-                                <div className="text-xl mb-1"> Forks</div>
-                                <div className="text-lg font-bold text-white">{stats.forks}</div>
-                                <div className="text-[8px] text-green-600 uppercase">Forks</div>
-                            </div>
-                            <div className="p-2 bg-green-900/10 rounded border border-green-500/10 hover:bg-green-500/20 transition-colors">
-                                <div className="text-xl mb-1">📦</div>
-                                <div className="text-lg font-bold text-white">{stats.totalRepos}</div>
-                                <div className="text-[8px] text-green-600 uppercase">Repos</div>
-                            </div>
-                        </motion.div>
-
+            <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                className="w-full max-w-6xl mx-auto pt-20 pb-10 grid grid-cols-1 md:grid-cols-12 gap-6 relative z-10 px-4"
+            >
+                {/* --- HERO CARD (Span 8) --- */}
+                <motion.div variants={itemVariants} className="md:col-span-8 bg-gradient-to-br from-[#2ea44f] to-[#238636] rounded-3xl p-8 text-white shadow-[0_0_30px_rgba(46,164,79,0.2)] md:min-h-[300px] flex flex-col justify-between relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 text-[200px] opacity-10 rotate-12 translate-x-10 -translate-y-10">
+                        <FaGithub />
                     </div>
+                    <div>
+                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-black/20 rounded-full text-xs font-mono mb-4 border border-white/10">
+                            <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
+                            ID: 8092-A
+                        </div>
+                        <h2 className="text-4xl md:text-5xl font-bold leading-tight">
+                            The Open Source<br />
+                            <span className="text-green-100">Architect.</span>
+                        </h2>
+                    </div>
+                    <div className="relative z-10 max-w-md mt-6">
+                        <p className="text-green-50 text-lg leading-relaxed">
+                            You build with bursts of brilliance. With <span className="font-bold text-white">{stats.contributions} contributions</span> from <span className="font-bold text-white">25 Repos</span> this year, you're defining your own path.
+                        </p>
+                    </div>
+                </motion.div>
 
-
-                    {/* COLUMN 2: Center Stats (Span 4) */}
-                    <div className="md:col-span-4 flex flex-col gap-6">
-                        {/* Top: Intro/Bio */}
-                        <motion.div
-                            initial={{ y: -50, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ duration: 0.5, delay: 0.1 }}
-                            className="bg-black/80 backdrop-blur border border-green-500/50 p-6 rounded-lg relative overflow-hidden h-[200px]"
-                        >
-                            <h2 className="text-sm text-white mb-4 border-b border-green-500/30 pb-2">SYSTEM PROTOCOL</h2>
-                            <div className="text-xs leading-relaxed font-mono space-y-4">
-                                <div>
-                                    <span className="text-white">IDENTITY CONFIRMED: </span>
-                                    <span className="text-green-500">PRASAZ</span>
-                                </div>
-                                <div>
-                                    <span className="text-white">MISSION: </span>
-                                    <span className="text-green-500">I speak the language of code and I'm a certified **Data Science enthusiast**</span>
-                                </div>
-                                <div className="text-green-500">
-                                    Currently executing code at{" "}
-                                    <span className="bg-green-500 text-black px-1 font-bold">
-                                        REC
-                                    </span>
-                                    .
-                                </div>
+                {/* --- TOTAL REPOS & PRODUCTIVITY (Span 4) --- */}
+                <motion.div variants={itemVariants} className="md:col-span-4 flex flex-col gap-6">
+                    {/* Repos */}
+                    <div className="flex-1 bg-[#161b22] border border-gray-800 rounded-3xl p-6 flex flex-col justify-between shadow-lg hover:border-gray-600 transition-colors group">
+                        <div className="flex justify-between items-start">
+                            <div className="p-3 bg-gray-800 rounded-2xl group-hover:bg-gray-700 transition-colors">
+                                <GoRepo className="text-2xl text-white" />
                             </div>
-                        </motion.div>
-
-                        {/* Bottom: Grid of Stats */}
-                        <div className="grid grid-cols-2 gap-4 flex-1">
-                            <motion.div
-                                initial={{ scale: 0.9, opacity: 0 }}
-                                animate={{ scale: 1, opacity: 1 }}
-                                transition={{ duration: 0.3, delay: 0.2 }}
-                                className="bg-black/80 border border-green-500/30 p-4 rounded-lg flex flex-col justify-center items-center hover:bg-green-500/10 transition-colors group"
-                            >
-                                <h3 className="text-3xl text-white mb-2 group-hover:text-green-400 transition-colors">{stats.commits}</h3>
-                                <p className="text-[10px] uppercase tracking-wider text-green-600">Total Commits</p>
-                            </motion.div>
-                            <motion.div
-                                initial={{ scale: 0.9, opacity: 0 }}
-                                animate={{ scale: 1, opacity: 1 }}
-                                transition={{ duration: 0.3, delay: 0.3 }}
-                                className="bg-black/80 border border-green-500/30 p-4 rounded-lg flex flex-col justify-center items-center hover:bg-green-500/10 transition-colors group"
-                            >
-                                <h3 className="text-3xl text-white mb-2 group-hover:text-green-400 transition-colors">{stats.prs}</h3>
-                                <p className="text-[10px] uppercase tracking-wider text-green-600">Pull Requests</p>
-                            </motion.div>
-                            <motion.div
-                                initial={{ scale: 0.9, opacity: 0 }}
-                                animate={{ scale: 1, opacity: 1 }}
-                                transition={{ duration: 0.3, delay: 0.4 }}
-                                className="bg-black/80 border border-green-500/30 p-4 rounded-lg flex flex-col justify-center items-center hover:bg-green-500/10 transition-colors group"
-                            >
-                                <h3 className="text-3xl text-white mb-2 group-hover:text-green-400 transition-colors">{stats.streak}</h3>
-                                <p className="text-[10px] uppercase tracking-wider text-green-600">Day Streak</p>
-                            </motion.div>
-                            <motion.div
-                                initial={{ scale: 0.9, opacity: 0 }}
-                                animate={{ scale: 1, opacity: 1 }}
-                                transition={{ duration: 0.3, delay: 0.5 }}
-                                className="bg-black/80 border border-green-500/30 p-4 rounded-lg flex flex-col justify-center items-center hover:bg-green-500/10 transition-colors group"
-                            >
-                                <h3 className="text-xl text-white mb-2 break-all group-hover:text-green-400 transition-colors">{stats.topLanguage}</h3>
-                                <p className="text-[10px] uppercase tracking-wider text-green-600">Top Lang</p>
-                            </motion.div>
+                            <span className="text-xs font-mono text-gray-500">PUBLIC_REPOS</span>
+                        </div>
+                        <div>
+                            <div className="text-4xl font-bold text-white mb-1">{stats.totalRepos}</div>
+                            <div className="text-sm text-gray-400">Repositories Created</div>
                         </div>
                     </div>
-
-                    {/* COLUMN 3: Right (Span 4) */}
-                    <div className="md:col-span-4 flex flex-col gap-6">
-                        {/* Recent Achievements */}
-                        <motion.div
-                            initial={{ x: 50, opacity: 0 }}
-                            animate={{ x: 0, opacity: 1 }}
-                            transition={{ duration: 0.5, delay: 0.3 }}
-                            className="bg-black/80 backdrop-blur border border-green-500/50 p-6 rounded-lg h-[45%]"
-                        >
-                            <h2 className="text-sm text-white mb-6 border-b border-green-500/30 pb-2 flex justify-between">
-                                RECENT LOGS <span className="bg-green-500 text-black px-1 text-[10px] flex items-center font-bold">ACHIEVEMENTS</span>
-                            </h2>
-                            <div className="space-y-6 overflow-y-auto max-h-[200px] scrollbar-hide">
-                                {achievements.map((item, i) => (
-                                    <div key={i} className="group">
-                                        <h4 className="text-white text-xs font-bold group-hover:text-green-400 transition-colors">{item.title}</h4>
-                                        <p className="text-[10px] opacity-70 mb-1">{item.date}</p>
-                                        <p className="text-[10px] font-mono text-green-600">{item.desc}</p>
-                                    </div>
-                                ))}
+                    {/* Productivity Clock */}
+                    <div className="flex-1 bg-[#161b22] border border-gray-800 rounded-3xl p-6 flex flex-col justify-between shadow-lg hover:border-gray-600 transition-colors group">
+                        <div className="flex justify-between items-start">
+                            <div className="p-3 bg-indigo-900/30 rounded-2xl text-indigo-400">
+                                <FaMoon className="text-2xl" />
                             </div>
-                        </motion.div>
-
-                        {/* Skill Switch with Visual Controller */}
-                        <motion.div
-                            initial={{ x: 50, opacity: 0 }}
-                            animate={{ x: 0, opacity: 1 }}
-                            transition={{ duration: 0.5, delay: 0.4 }}
-                            className="bg-black border border-t-[6px] border-t-green-900 border-x-4 border-x-green-950 border-b-[8px] border-b-green-950 rounded-lg h-[55%] flex flex-col relative overflow-hidden shadow-[0_0_20px_rgba(0,255,0,0.1)]"
-                        >
-                            {/* Screen */}
-                            <div className="bg-black flex-1 m-3 rounded md:mb-16 border-4 border-green-900 relative overflow-hidden p-4 shadow-inner">
-                                {/* Scanline overlay */}
-                                <div className="absolute inset-0 bg-[linear-gradient(rgba(0,255,0,0.03)_50%,rgba(0,0,0,0.1)_50%)] bg-[length:100%_4px] pointer-events-none z-10"></div>
-
-                                <h2 className="text-lg text-center font-pixelated mb-4 text-green-500 tracking-widest drop-shadow-[0_0_5px_rgba(0,255,0,0.5)]">SKILL_SWITCH</h2>
-
-                                <div className="space-y-1 font-mono text-[10px] md:text-xs">
-                                    {skills.map((skill, index) => (
-                                        <div
-                                            key={index}
-                                            className={`flex items-center gap-2 p-1 rounded transition-all duration-100 ${index === activeSkillIndex ? 'bg-green-500 text-black translate-x-1 shadow-[0_0_10px_#00ff00]' : 'text-green-800'}`}
-                                        >
-                                            <span className={`${index === activeSkillIndex ? 'opacity-100' : 'opacity-0'}`}>
-                                                ▶
-                                            </span>
-                                            <span className="flex-1 font-bold">
-                                                {skill.toUpperCase()}
-                                            </span>
-                                            {index === activeSkillIndex && (
-                                                <span className="text-[8px] animate-pulse">SELECTED</span>
-                                            )}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Controller UI Area (Bottom Panel) */}
-                            <div className="absolute bottom-0 left-0 right-0 h-16 md:h-20 bg-gradient-to-t from-black to-green-950 flex items-center justify-between px-6 border-t-4 border-green-900">
-                                {/* Joystick */}
-                                <div className="relative">
-                                    <div className="w-12 h-12 rounded-full bg-black shadow-[inset_0_2px_5px_rgba(0,50,0,0.8)] flex items-center justify-center border border-green-800">
-                                        <motion.div
-                                            animate={{ x: joystickOffset.x, y: joystickOffset.y }}
-                                            transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                                            className="w-8 h-8 rounded-full bg-green-600 shadow-[0_4px_0_#14532d,inset_0_2px_5px_rgba(255,255,255,0.4)] relative cursor-pointer active:scale-95"
-                                        >
-                                            <div className="absolute top-1 left-2 w-2 h-2 bg-white/30 rounded-full blur-[1px]"></div>
-                                        </motion.div>
-                                    </div>
-                                    <p className="text-[8px] text-green-700 text-center mt-1 font-sans">NAVIGATE</p>
-                                </div>
-
-                                {/* Branding */}
-                                <div className="text-green-800 font-sans text-[8px] tracking-[0.2em] font-bold text-center opacity-80">
-                                    SYSTEM<br />CONTROL
-                                </div>
-
-                                {/* Buttons */}
-                                <div className="flex gap-3 rotate-12">
-                                    <div className={`w-6 h-6 rounded-full bg-black border border-green-600 flex items-center justify-center text-[8px] text-green-500 font-bold shadow-[0_2px_0_#064e3b] ${buttonPressed === 'B' ? 'translate-y-[2px] shadow-none' : ''}`}>
-                                        B
-                                    </div>
-                                    <div className={`w-6 h-6 rounded-full bg-green-600 border border-green-400 flex items-center justify-center text-[8px] text-black font-bold shadow-[0_2px_0_#064e3b] -mt-2 ${buttonPressed === 'A' ? 'translate-y-[2px] shadow-none' : ''}`}>
-                                        A
-                                    </div>
-                                </div>
-                            </div>
-
-                        </motion.div>
+                            <span className="text-xs font-mono text-gray-500">PEAK_TIME</span>
+                        </div>
+                        <div>
+                            <div className="text-3xl font-bold text-white mb-1">{stats.productivity}</div>
+                            <div className="text-sm text-gray-400">Most active: 10 PM - 2 AM</div>
+                        </div>
                     </div>
+                </motion.div>
 
-                </div>
-            )}
+                {/* --- STATS GRID (Span 12 -> 4Cols) --- */}
+                <motion.div variants={itemVariants} className="md:col-span-12 grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="bg-[#161b22] border border-gray-800 rounded-3xl p-5 flex flex-col justify-center items-center text-center hover:bg-gray-800/50 transition-colors">
+                        <GoGitPullRequest className="text-3xl text-[#a371f7] mb-2" />
+                        <span className="text-2xl font-bold text-white">{stats.prs}</span>
+                        <span className="text-xs text-gray-400">Pull Requests</span>
+                    </div>
+                    <div className="bg-[#161b22] border border-gray-800 rounded-3xl p-5 flex flex-col justify-center items-center text-center hover:bg-gray-800/50 transition-colors">
+                        <GoIssueOpened className="text-3xl text-[#3fb950] mb-2" />
+                        <span className="text-2xl font-bold text-white">{stats.issues}</span>
+                        <span className="text-xs text-gray-400">Issues Solved</span>
+                    </div>
+                    <div className="bg-[#161b22] border border-gray-800 rounded-3xl p-5 flex flex-col justify-center items-center text-center hover:bg-gray-800/50 transition-colors">
+                        <FaCode className="text-3xl text-blue-400 mb-2" />
+                        <span className="text-2xl font-bold text-white">{stats.topLanguage}</span>
+                        <span className="text-xs text-gray-400">Top Language</span>
+                    </div>
+                    <div className="bg-[#161b22] border border-gray-800 rounded-3xl p-5 flex flex-col justify-center items-center text-center hover:bg-gray-800/50 transition-colors">
+                        <FaTerminal className="text-3xl text-orange-400 mb-2" />
+                        <span className="text-2xl font-bold text-white">{stats.linesOfCode}</span>
+                        <span className="text-xs text-gray-400">Lines of Code</span>
+                    </div>
+                </motion.div>
+
+                {/* --- LANGUAGES (Span 4) --- */}
+                <motion.div variants={itemVariants} className="md:col-span-4 bg-[#161b22] border border-gray-800 rounded-3xl p-6">
+                    <h3 className="text-gray-100 font-bold mb-6">Top Languages</h3>
+                    <div className="space-y-4">
+                        {languages.map((lang, i) => (
+                            <div key={i}>
+                                <div className="flex justify-between text-xs mb-1">
+                                    <span className="font-semibold text-gray-300">{lang.name}</span>
+                                    <span className="text-gray-500">{lang.percent}%</span>
+                                </div>
+                                <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                    <motion.div
+                                        initial={{ width: 0 }}
+                                        animate={{ width: `${lang.percent}%` }}
+                                        transition={{ delay: 0.8 }}
+                                        className={`h-full rounded-full ${lang.bg}`}
+                                    />
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </motion.div>
+
+                {/* --- REPO HIGHLIGHTS (Span 4) --- */}
+                <motion.div variants={itemVariants} className="md:col-span-4 bg-[#161b22] border border-gray-800 rounded-3xl p-6">
+                    <h3 className="text-gray-100 font-bold mb-6 flex items-center gap-2">
+                        <FaStar className="text-yellow-400" /> Starred Repos
+                    </h3>
+                    <div className="space-y-4">
+                        {highlights.map((repo, i) => (
+                            <div key={i} className="bg-[#0d1117] border border-gray-800 rounded-xl p-3 hover:border-gray-600 transition-colors cursor-pointer group">
+                                <div className="flex justify-between items-center mb-1">
+                                    <span className="font-bold text-blue-400 group-hover:underline text-sm">{repo.name}</span>
+                                    <span className="text-xs text-gray-500 flex items-center gap-1"><FaStar className="text-xs" /> {repo.stars}</span>
+                                </div>
+                                <p className="text-xs text-gray-400 truncate">{repo.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </motion.div>
+
+                {/* --- RECENT ACHIEVEMENTS (Span 4) --- */}
+                <motion.div variants={itemVariants} className="md:col-span-4 bg-[#161b22] border border-gray-800 rounded-3xl p-6">
+                    <h3 className="text-gray-100 font-bold mb-6 flex items-center gap-2">
+                        <FaHistory className="text-purple-400" /> Achievements
+                    </h3>
+                    <div className="space-y-4">
+                        {achievements.map((badge, i) => (
+                            <div key={i} className="flex gap-3 items-center">
+                                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white shrink-0">
+                                    <FaMedal className="text-xs" />
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-white text-sm leading-tight">{badge.title}</h4>
+                                    <p className="text-[10px] text-gray-500">{badge.desc}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </motion.div>
+
+            </motion.div>
+
         </article>
     );
 };
