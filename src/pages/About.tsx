@@ -58,6 +58,13 @@ const testimonials = [
         avatar: "/assets/images/events/codesapiens_meetup.png",
         text: "Joined fellow student developers at the CodeSapiens meetup to share knowledge, collaborate on projects, and build a strong tech community.",
         link: "https://www.linkedin.com/posts/prasannanadrajan_codesapiens-makoitlabs-techmeetup-activity-7382843878275534848-IpmF?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE0J_eAB7yG03MXXrYG4SgL18fkJkQAfEVs"
+    },
+    {
+        name: "Chennai Data Circle - Agentic AI 2026",
+        date: "Jan 10, 2026",
+        avatar: "/assets/images/events/cdc_agentic_ai.png",
+        text: "Participated in the Genesis X Chennai Data Circle's Agentic AI 2026 event, where I explored the latest trends and applications of AI in data analysis and business intelligence.",
+        link: "https://www.linkedin.com/posts/prasannanadrajan_agenticai2026-chennaidatacircle-genesys-activity-7416147428317384704-3sU2?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE0J_eAB7yG03MXXrYG4SgL18fkJkQAfEVs"
     }
 ];
 
