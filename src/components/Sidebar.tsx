@@ -81,7 +81,7 @@ const Sidebar = ({ onShowUpdate, onShowLinkedInUpdate, viewCount = 0 }: SidebarP
                         onClick={trigger}
                     >
                         <img
-                            src="/assets/images/portfolio_image.jpg"
+                            src="/assets/images/portfolio_image_1.png"
                             alt="Prasanna Nadrajan"
                             className="w-full h-auto"
                         />

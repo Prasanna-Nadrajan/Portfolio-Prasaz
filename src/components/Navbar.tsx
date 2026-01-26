@@ -1,224 +1,152 @@
-import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import {
-    IoMenu,
-    IoClose,
-    IoMailOutline,
-    IoLocationOutline,
-    IoLogoLinkedin,
-    IoLogoGithub,
-    IoChevronBack,
-    IoChevronForward
-} from 'react-icons/io5';
-import ThemeToggle from './ThemeToggle';
-import LeetCodeCelebration, { useLeetCodeCelebration } from './LeetCodeCelebration';
-import DownloadButton from './DownloadButton';
-import { navItems } from '../data/navigation';
-import { CONFIG } from '../constants/config';
+import React, { useState, useEffect } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Menu, X, Terminal as TerminalIcon, PanelLeftClose, PanelLeft } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
-import { IoNotificationsOutline } from 'react-icons/io5';
+const navItems = [
+  { name: "About", path: "/" },
+  { name: "Portfolio", path: "/portfolio" },
+  { name: "Blog", path: "/blog" },
+  { name: "Platforms", path: "/platforms" },
+  { name: "Experience", path: "/experience" },
+  { name: "Resume", path: "/resume" },
+  { name: "Contact", path: "/contact" },
+];
 
 interface NavbarProps {
-    isSidebarOpen?: boolean;
-    onToggleSidebar?: () => void;
-    onShowUpdate?: () => void;
+  isSidebarOpen?: boolean;
+  onToggleSidebar?: () => void;
 }
 
-const Navbar = ({ isSidebarOpen = true, onToggleSidebar, onShowUpdate }: NavbarProps) => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen = true, onToggleSidebar }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
-    const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-    const closeMenu = () => setIsMenuOpen(false);
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-    const { isActive, trigger, closeCelebration } = useLeetCodeCelebration();
+  // Close mobile menu on route change
+  useEffect(() => setIsOpen(false), [location]);
 
-    return (
-        <>
-            <LeetCodeCelebration isActive={isActive} onComplete={closeCelebration} />
-            {/* Mobile Top Navbar */}
-            <nav className="fixed top-0 left-0 w-full h-16 z-50 bg-surface/90 backdrop-blur-md border-b border-border flex items-center justify-between px-4 md:hidden">
-                <div className="flex items-center gap-3 cursor-pointer select-none" onClick={trigger}>
-                    <figure className="w-10 h-10 rounded-full overflow-hidden border border-border">
-                        <img
-                            src="/assets/images/portfolio_image.png"
-                            alt="Prasanna"
-                            className="w-full h-full object-cover"
-                        />
-                    </figure>
-                    <div className="flex flex-col">
-                        <span className="text-text-main font-medium text-lg leading-tight">Prasanna</span>
-                        <span className="text-xs text-text-muted font-light">Data Analyst</span>
-                    </div>
-                </div>
+  return (
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 font-outfit ${scrolled ? "py-4" : "py-6"
+        }`}
+    >
+      <div className="max-w-6xl mx-auto px-4">
+        <div
+          className={`relative flex items-center justify-between p-2 rounded-2xl transition-all duration-300 ${scrolled
+            ? "bg-white/80 dark:bg-black/80 backdrop-blur-md shadow-lg border border-slate-200/50 dark:border-white/10"
+            : "bg-transparent"
+            }`}
+        >
+          <NavLink to="/" className="flex items-center space-x-2 px-4 group">
+            <div className="w-8 h-8 bg-black dark:bg-white rounded-lg flex items-center justify-center group-hover:rotate-12 transition-transform">
+              <span className="text-white dark:text-black font-bold text-sm">
+                P
+              </span>
+            </div>
+            <span className="font-bold text-lg tracking-tight hidden sm:block">
+              Prasaz
+            </span>
+          </NavLink>
 
-                <div className="flex items-center gap-2">
-                    {/* Mobile Update Button in Top Bar for quick access */}
-                    {onShowUpdate && (
-                        <button
-                            onClick={onShowUpdate}
-                            className="text-primary p-2 rounded-lg hover:bg-surface-hover transition-colors animate-pulse"
-                            aria-label="Show Updates"
-                        >
-                            <IoNotificationsOutline size={24} />
-                        </button>
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center space-x-1 bg-slate-100 dark:bg-white/5 p-1 rounded-xl">
+            {navItems.map((item) => (
+              <NavLink
+                key={item.path}
+                to={item.path}
+                className={({ isActive }) => `
+                  relative px-5 py-2 text-sm font-medium rounded-lg transition-all
+                  ${isActive
+                    ? "text-black dark:text-white"
+                    : "text-slate-500 hover:text-slate-900 dark:hover:text-white"
+                  }
+                `}
+              >
+                {({ isActive }) => (
+                  <>
+                    <span className="relative z-10">{item.name}</span>
+                    {isActive && (
+                      <motion.div
+                        layoutId="nav-pill"
+                        className="absolute inset-0 bg-white dark:bg-white/10 rounded-lg shadow-sm"
+                        transition={{
+                          type: "spring",
+                          bounce: 0.25,
+                          duration: 0.5,
+                        }}
+                      />
                     )}
-                    <button
-                        onClick={toggleMenu}
-                        className="text-primary p-2 rounded-lg hover:bg-surface-hover transition-colors"
-                        aria-label="Toggle Menu"
-                    >
-                        {isMenuOpen ? <IoClose size={28} /> : <IoMenu size={28} />}
-                    </button>
-                </div>
-            </nav>
-
-            {/* Mobile Full Screen Menu */}
-            <AnimatePresence>
-                {isMenuOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.3 }}
-                        className="fixed inset-0 z-40 bg-background/95 backdrop-blur-xl pt-20 px-6 md:hidden flex flex-col overflow-y-auto"
-                    >
-                        <ul className="flex flex-col gap-4 mb-8">
-                            {navItems.map((item) => (
-                                <li key={item.name}>
-                                    <NavLink
-                                        to={item.path}
-                                        onClick={closeMenu}
-                                        className={({ isActive }) =>
-                                            `flex items-center gap-4 p-4 rounded-xl transition-all duration-300 ${isActive
-                                                ? 'bg-primary/10 text-primary border border-primary/20'
-                                                : 'text-text-secondary hover:text-text-main hover:bg-surface-hover'
-                                            }`
-                                        }
-                                    >
-                                        <span className="text-xl">{item.icon}</span>
-                                        <span className="text-lg font-medium">{item.name}</span>
-                                    </NavLink>
-                                </li>
-                            ))}
-                        </ul>
-
-                        {/* Sidebar Content Migrated to Menu */}
-                        <div className="mt-auto mb-8 border-t border-border pt-6">
-                            <ul className="flex flex-col gap-4 mb-6">
-                                <li className="flex items-center gap-4 text-text-secondary">
-                                    <div className="p-2 bg-surface-hover rounded-lg text-primary">
-                                        <IoMailOutline size={18} />
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <span className="text-xs uppercase text-text-muted">Email</span>
-                                        <a href={`mailto:${CONFIG.EMAIL}`} className="text-sm text-text-main hover:text-primary transition-colors">
-                                            {CONFIG.EMAIL}
-                                        </a>
-                                    </div>
-                                </li>
-                                <li className="flex items-center gap-4 text-text-secondary">
-                                    <div className="p-2 bg-surface-hover rounded-lg text-primary">
-                                        <IoLocationOutline size={18} />
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <span className="text-xs uppercase text-text-muted">Location</span>
-                                        <span className="text-sm text-text-main">{CONFIG.LOCATION}</span>
-                                    </div>
-                                </li>
-                            </ul>
-
-                            <div className="flex justify-center gap-6 mb-6">
-                                <a href={CONFIG.LINKEDIN} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-primary transition-colors">
-                                    <IoLogoLinkedin size={24} />
-                                </a>
-                                <a href={CONFIG.GITHUB} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-primary transition-colors">
-                                    <IoLogoGithub size={24} />
-                                </a>
-                            </div>
-
-                            {/* Theme Toggle for Mobile */}
-                            <div className="flex justify-center mb-6">
-                                <div className="bg-surface-hover p-2 rounded-xl flex items-center gap-3">
-                                    <span className="text-sm text-text-muted">Theme</span>
-                                    <ThemeToggle />
-                                </div>
-                            </div>
-
-                            <div className="mb-4 flex justify-center">
-                                <DownloadButton />
-                            </div>
-
-                            <NavLink
-                                to="/contact"
-                                onClick={closeMenu}
-                                className="flex items-center justify-center w-full py-4 bg-primary text-background rounded-xl font-semibold shadow-md hover:shadow-lg transition-all"
-                            >
-                                Contact Me
-                            </NavLink>
-                        </div>
-                    </motion.div>
+                  </>
                 )}
-            </AnimatePresence>
+              </NavLink>
+            ))}
+          </div>
 
-            {/* Desktop Navbar */}
-            <nav className="glass-nav hidden md:block">
-                <div className="container mx-auto px-4 md:px-16 h-20 flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                        {/* Collapse/Expand Sidebar Button - Integrated into Navbar */}
-                        <button
-                            onClick={onToggleSidebar}
-                            className="p-2 bg-surface hover:bg-surface-hover rounded-lg text-primary hover:text-primary-dark transition-colors shadow-sm border border-border"
-                            title={isSidebarOpen ? "Hide Sidebar" : "Show Sidebar"}
-                        >
-                            {isSidebarOpen ? <IoChevronBack size={20} /> : <IoChevronForward size={20} />}
-                        </button>
+          <div className="flex items-center space-x-2 px-2">
+            {/* Sidebar Toggle Button - Desktop only */}
+            {onToggleSidebar && (
+              <button
+                onClick={onToggleSidebar}
+                className="hidden md:flex p-2 hover:bg-slate-100 dark:hover:bg-white/10 rounded-lg transition-colors"
+                title={isSidebarOpen ? "Hide Sidebar" : "Show Sidebar"}
+              >
+                {isSidebarOpen ? <PanelLeftClose size={20} /> : <PanelLeft size={20} />}
+              </button>
+            )}
+            <NavLink
+              to="/terminal"
+              className="p-2 hover:bg-slate-100 dark:hover:bg-white/10 rounded-lg transition-colors"
+              title="Terminal Mode"
+            >
+              <TerminalIcon size={20} />
+            </NavLink>
+            <ThemeToggle />
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden p-2 hover:bg-slate-100 dark:hover:bg-white/10 rounded-lg"
+            >
+              {isOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
+        </div>
+      </div>
 
-                        {/* Profile Picture - Always visible for Celebration Trigger */}
-                        <div
-                            className="flex items-center gap-3 cursor-pointer select-none"
-                            onClick={trigger}
-                        >
-                            <figure className="w-10 h-10 rounded-full overflow-hidden border border-border">
-                                <img
-                                    src="/assets/images/portfolio_image.jpg"
-                                    alt="Prasanna"
-                                    className="w-full h-full object-cover"
-                                />
-                            </figure>
-                            <div className="flex flex-col">
-                                <span className="text-text-main font-medium text-sm leading-tight">Prasanna Nadrajan</span>
-                                <span className="text-xs text-text-muted font-light">Data Analyst</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Nav Items */}
-                    <ul className="flex items-center gap-8">
-                        {navItems.map((item) => (
-                            <li key={item.name}>
-                                <NavLink
-                                    to={item.path}
-                                    className={({ isActive }) =>
-                                        `text-sm font-medium transition-colors hover:text-primary ${isActive
-                                            ? 'text-primary'
-                                            : 'text-text-secondary'
-                                        }`
-                                    }
-                                >
-                                    {item.name}
-                                </NavLink>
-                            </li>
-                        ))}
-                    </ul>
-
-                    {/* Right side actions - empty for now but keeps layout balanced */}
-                    <div className="flex items-center gap-4">
-                    </div>
-                </div>
-            </nav>
-        </>
-    );
+      {/* Mobile Menu */}
+      <motion.div
+        initial={false}
+        animate={
+          isOpen ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }
+        }
+        className="md:hidden overflow-hidden bg-white dark:bg-black border-b border-slate-200 dark:border-white/10"
+      >
+        <div className="flex flex-col p-4 space-y-2">
+          {navItems.map((item) => (
+            <NavLink
+              key={item.path}
+              to={item.path}
+              className={({ isActive }) => `
+                px-4 py-3 rounded-xl font-medium transition-colors
+                ${isActive
+                  ? "bg-slate-100 dark:bg-white/10 text-blue-600 dark:text-blue-400"
+                  : "text-slate-600 dark:text-slate-400"
+                }
+              `}
+            >
+              {item.name}
+            </NavLink>
+          ))}
+        </div>
+      </motion.div>
+    </nav>
+  );
 };
 
 export default Navbar;

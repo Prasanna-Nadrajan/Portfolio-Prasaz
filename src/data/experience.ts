@@ -2,6 +2,15 @@ import type { ExperienceItem } from '../types';
 
 export const experienceData: ExperienceItem[] = [
     {
+        date: "Dec 2025 - Feb 2026",
+        title: "Indian Space Academy",
+        subtitle: "Intern Trainee",
+        description: "Worked on remote sensing and geospatial anlysis projects and integrated machine learning and deep learning to extract meaningful insights from satellite imagery.",
+        logo: "/assets/images/experience/isa_logo.png",
+        link: "https://drive.google.com/file/d/1nzoe-DH9uzCxkecMwGQZg_jWa_TMtqst/view?usp=sharing",
+        side: "right"
+    },
+    {
         date: "Dec 2025 - Jan 2026",
         title: "Evo Astra Ventures Pvt.Ltd",
         subtitle: "Data Science Intern",
