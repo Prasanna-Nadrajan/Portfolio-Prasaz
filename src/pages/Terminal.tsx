@@ -60,7 +60,6 @@ const Terminal = () => {
             case 'ls':
                 output = (
                     <div className="grid grid-cols-2 gap-4 text-neon-blue">
-                        <span>about/</span>
                         <span>portfolio/</span>
                         <span>blog/</span>
                         <span>experience/</span>
@@ -78,7 +77,7 @@ const Terminal = () => {
             case 'cd':
                 if (args[1]) {
                     const target = args[1].replace('/', '');
-                    const validRoutes = ['about', 'portfolio', 'blog', 'experience', 'platforms', 'resume', 'contact'];
+                    const validRoutes = ['portfolio', 'blog', 'experience', 'platforms', 'resume', 'contact'];
                     if (target === '..') {
                         navigate(-1);
                         output = 'Navigating back...';
