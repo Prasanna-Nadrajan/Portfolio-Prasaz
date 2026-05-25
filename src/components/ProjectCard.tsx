@@ -77,7 +77,7 @@ const ProjectCard = ({
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
-      className={`group relative rounded-2xl aspect-[3/4] cursor-pointer ${className || ""}`}
+      className={`group relative rounded-3xl aspect-[3/4] cursor-pointer bg-container-bg border border-border-color shadow-sm hover:border-neon-blue/50 hover:shadow-lg hover:shadow-neon-blue/20 transition-all duration-300 p-2 ${className || ""}`}
       onClick={onClick}
       data-cursor="hover"
     >
@@ -88,7 +88,7 @@ const ProjectCard = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute -inset-[1px] rounded-2xl z-0 pointer-events-none"
+            className="absolute -inset-[1px] rounded-3xl z-0 pointer-events-none"
             style={{
               background:
                 "linear-gradient(135deg, var(--neon-blue), rgba(168,85,247,0.8), var(--neon-blue))",

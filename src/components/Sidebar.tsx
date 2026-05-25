@@ -71,13 +71,13 @@ const Sidebar = ({ onShowUpdate, onShowLinkedInUpdate, viewCount = 0 }: SidebarP
         <div className="sidebar-wrapper md:sticky md:top-28 md:h-fit">
             <LeetCodeCelebration isActive={isCelebrationActive} onComplete={closeCelebration} />
             <aside
-                className={`sidebar bg-container-bg/50 backdrop-blur-xl border border-white/20 rounded-2xl p-6 shadow-neon z-10 transition-all duration-500 ease-in-out overflow-hidden hidden md:block ${isActive ? 'max-h-[500px]' : 'max-h-[120px] md:max-h-full'}`}
+                className={`sidebar bg-container-bg border border-border-color rounded-3xl p-10 shadow-sm z-10 transition-all duration-500 ease-in-out overflow-hidden hidden md:block ${isActive ? 'max-h-[500px]' : 'max-h-[120px] md:max-h-full'}`}
                 data-sidebar
             >
                 <div className="sidebar-info flex flex-col md:flex-col gap-4 relative">
 
                     <figure
-                        className="avatar-box bg-bg-gradient-onyx rounded-2xl overflow-hidden w-64 mx-auto md:w-11/12 cursor-pointer transition-transform hover:scale-[1.02] active:scale-95"
+                        className="avatar-box bg-bg-gradient-onyx rounded-3xl overflow-hidden w-64 mx-auto md:w-11/12 cursor-pointer transition-transform hover:scale-[1.02] active:scale-95 shadow-sm"
                         onClick={trigger}
                     >
                         <img
@@ -104,7 +104,7 @@ const Sidebar = ({ onShowUpdate, onShowLinkedInUpdate, viewCount = 0 }: SidebarP
                     </div>
 
                     <button
-                        className="info_more-btn md:hidden absolute top-0 right-0 text-neon-blue bg-border-gradient-onyx p-2 rounded-tr-xl rounded-bl-xl shadow-neon z-10"
+                        className="info_more-btn md:hidden absolute top-0 right-0 text-neon-blue bg-border-gradient-onyx p-2 rounded-tr-xl rounded-bl-xl shadow-sm z-10"
                         onClick={toggleSidebar}
                     >
                         <span className='hidden'>Show Contacts</span>
@@ -168,7 +168,7 @@ const Sidebar = ({ onShowUpdate, onShowLinkedInUpdate, viewCount = 0 }: SidebarP
                     onShowUpdate && (
                         <button
                             onClick={onShowUpdate}
-                            className="relative w-12 h-12 bg-container-bg/50 backdrop-blur-xl border border-white/20 rounded-xl shadow-neon flex items-center justify-center text-neon-blue hover:bg-jet/30 hover:scale-105 transition-all duration-300 group"
+                            className="relative w-12 h-12 bg-container-bg border border-border-color rounded-xl shadow-sm flex items-center justify-center text-neon-blue hover:border-neon-blue/50 hover:bg-jet/30 hover:scale-105 transition-all duration-300 group"
                             aria-label="View Updates"
                             title="New Updates Available"
                         >
@@ -193,7 +193,7 @@ const Sidebar = ({ onShowUpdate, onShowLinkedInUpdate, viewCount = 0 }: SidebarP
                     onShowLinkedInUpdate && (
                         <button
                             onClick={onShowLinkedInUpdate}
-                            className="relative w-12 h-12 bg-container-bg/50 backdrop-blur-xl border border-white/20 rounded-xl shadow-neon flex items-center justify-center text-neon-blue hover:bg-jet/30 hover:scale-105 transition-all duration-300 group"
+                            className="relative w-12 h-12 bg-container-bg border border-border-color rounded-xl shadow-sm flex items-center justify-center text-neon-blue hover:border-neon-blue/50 hover:bg-jet/30 hover:scale-105 transition-all duration-300 group"
                             aria-label="LinkedIn 5000+ Impressions"
                             title="LinkedIn Milestone Reached!"
                         >

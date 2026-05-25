@@ -49,66 +49,66 @@
 }
 
 @layer base {
-  /* --- LIGHT MODE DEFAULTS (DIMMED / DARKER-LIGHT) --- */
+  /* --- LIGHT MODE DEFAULTS (NEUTRAL MATTE) --- */
   :root {
-    --neon-blue: #005c8a;      
-    --dark-accent-blue: #00476b;
+    --neon-blue: #5b21b6;      /* Violet-800 - Royal Purple Accent */
+    --dark-accent-blue: #4c1d95; /* Violet-900 */
     
-    --main-bg: #CBD5E1;        
-    --container-bg: #E2E8F0;   
-    --border-color: #94A3B8;   
+    --main-bg: #fafafa;        /* Zinc-50 */
+    --container-bg: #ffffff;   /* White */
+    --border-color: #e4e4e7;   /* Zinc-200 */
     
-    --main-text: #020617;      
-    --secondary-text: #1E293B; 
-    --light-gray-70: #334155;  
+    --main-text: #18181b;      /* Zinc-900 */
+    --secondary-text: #52525b; /* Zinc-500 */
+    --light-gray-70: #71717a;  /* Zinc-500 */
     
-    --onyx: #E2E8F0;           
-    --jet: #CBD5E1;            
+    --onyx: #ffffff;
+    --jet: #f4f4f5;            /* Zinc-100 */
     
-    --shadow-color: hsla(215, 28%, 10%, 0.2);
-    --shadow-color-hover: hsla(215, 28%, 10%, 0.3);
+    --shadow-color: hsla(270, 50%, 20%, 0.05);
+    --shadow-color-hover: hsla(270, 50%, 20%, 0.15);
 
-    /* Star Color for Light Mode - Dark Gray/Black so they are visible */
-    --star-color: #1E293B; 
+    /* Star Color for Light Mode */
+    --star-color: #3b0764;
 
     /* Cursor Color for Light Mode */
     --cursor-color: #000000;
 
-    --gradient-start: #F1F5F9; 
-    --gradient-end: #CBD5E1;
-    --gradient-jet-start: hsla(210, 20%, 85%, 0.8);
-    --gradient-jet-end: hsla(210, 20%, 85%, 0);
-    --gradient-jet-base: #CBD5E1;
+    --gradient-start: #ffffff;
+    --gradient-end: #fafafa;
+    --gradient-jet-start: #f4f4f5;
+    --gradient-jet-end: #ffffff;
+    --gradient-jet-base: #fafafa;
   }
 
-  /* --- DARK MODE OVERRIDES (SPACE THEME) --- */
+  /* --- DARK MODE OVERRIDES (DARK MATTE) --- */
   :root.dark {
-    --neon-blue: #00BFFF;
-    --dark-accent-blue: #009ACD;
+    --neon-blue: #7c3aed;      /* Violet-600 - Royal Purple Accent */
+    --dark-accent-blue: #8b5cf6; /* Violet-500 */
 
-    --main-bg: #050507; /* Deep space black/blue */
-    --container-bg: #0f1014;
-    --border-color: #1A1A1A;
-    --main-text: #EEEEEE;
-    --secondary-text: #AAAAAA;
-    --onyx: #1e1e24;
-    --jet: #25252b;
-    --light-gray-70: #b3b3b3;
+    --main-bg: #09090b; /* Zinc-950 */
+    --container-bg: #18181b; /* Zinc-900 */
+    --border-color: #27272a; /* Zinc-800 */
+    --main-text: #fafafa; /* Zinc-50 */
+    --secondary-text: #a1a1aa; /* Zinc-400 */
+    --onyx: #18181b; /* Zinc-900 */
+    --jet: #27272a; /* Zinc-800 */
+    --light-gray-70: #a1a1aa; /* Zinc-400 */
 
-    --shadow-color: hsla(195, 100%, 50%, 0.1);
-    --shadow-color-hover: hsla(195, 100%, 50%, 0.15);
+    --shadow-color: hsla(270, 80%, 20%, 0.2);
+    --shadow-color-hover: hsla(270, 80%, 30%, 0.4);
 
-    /* Star Color for Dark Mode - White/Bright for space */
-    --star-color: #FFF;
+    /* Star Color for Dark Mode */
+    --star-color: #e9d5ff;
 
     /* Cursor Color for Dark Mode */
     --cursor-color: #ffffff;
 
-    --gradient-start: hsl(220, 20%, 10%);
-    --gradient-end: hsla(220, 20%, 5%, 0);
-    --gradient-jet-start: hsla(240, 1%, 18%, 0.251);
-    --gradient-jet-end: hsla(240, 2%, 11%, 0);
-    --gradient-jet-base: hsl(240, 2%, 13%);
+    --gradient-start: #18181b;
+    --gradient-end: #09090b;
+    --gradient-jet-start: #27272a;
+    --gradient-jet-end: #18181b;
+    --gradient-jet-base: #09090b;
   }
 
   html {

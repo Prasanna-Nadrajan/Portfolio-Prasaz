@@ -20,7 +20,7 @@ const ThemeToggle = () => {
     return (
         <button
             onClick={toggleTheme}
-            className="p-2 rounded-full bg-onyx border border-jet text-neon-blue hover:bg-jet transition-colors duration-300 shadow-neon"
+            className="p-2 rounded-lg bg-zinc-200 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:text-violet-700 dark:hover:text-violet-500 hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors duration-300"
             aria-label="Toggle Theme"
         >
             {theme === 'dark' ? <IoSunnyOutline size={20} /> : <IoMoonOutline size={20} />}
