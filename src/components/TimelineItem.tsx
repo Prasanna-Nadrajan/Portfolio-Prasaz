@@ -21,9 +21,9 @@ const TimelineItem = ({ date, title, subtitle, description, logo, link, side }: 
                 {date}
             </div>
 
-            <a href={link} target="_blank" rel="noopener noreferrer" className="experience-card block bg-border-gradient-onyx p-5 rounded-xl shadow-neon relative z-10 before:absolute before:inset-[1px] before:bg-bg-gradient-jet before:rounded-xl before:-z-10 hover:scale-[1.02] transition-transform duration-300">
+            <a href={link} target="_blank" rel="noopener noreferrer" className="experience-card block bg-white/10 dark:bg-white/5 backdrop-blur-xl border border-white/20 p-8 rounded-3xl shadow-purple-900/50 shadow-xl relative z-10 hover:scale-[1.02] transition-transform duration-300">
                 <div className="flex items-center gap-4 mb-3">
-                    <figure className="logo-box bg-white p-1 rounded-lg shrink-0">
+                    <figure className="logo-box bg-white p-1 rounded-lg shrink-0 shadow-purple-900/40 shadow-md">
                         <img src={logo} alt={title} width="40" className="rounded" />
                     </figure>
                     <div>

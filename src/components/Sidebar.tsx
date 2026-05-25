@@ -71,13 +71,13 @@ const Sidebar = ({ onShowUpdate, onShowLinkedInUpdate, viewCount = 0 }: SidebarP
         <div className="sidebar-wrapper md:sticky md:top-28 md:h-fit">
             <LeetCodeCelebration isActive={isCelebrationActive} onComplete={closeCelebration} />
             <aside
-                className={`sidebar bg-container-bg/50 backdrop-blur-xl border border-white/20 rounded-2xl p-6 shadow-neon z-10 transition-all duration-500 ease-in-out overflow-hidden hidden md:block ${isActive ? 'max-h-[500px]' : 'max-h-[120px] md:max-h-full'}`}
+                className={`sidebar bg-white/10 dark:bg-white/5 backdrop-blur-xl border border-white/20 rounded-3xl p-10 shadow-purple-900/50 shadow-2xl z-10 transition-all duration-500 ease-in-out overflow-hidden hidden md:block ${isActive ? 'max-h-[500px]' : 'max-h-[120px] md:max-h-full'}`}
                 data-sidebar
             >
                 <div className="sidebar-info flex flex-col md:flex-col gap-4 relative">
 
                     <figure
-                        className="avatar-box bg-bg-gradient-onyx rounded-2xl overflow-hidden w-64 mx-auto md:w-11/12 cursor-pointer transition-transform hover:scale-[1.02] active:scale-95"
+                        className="avatar-box bg-bg-gradient-onyx rounded-3xl overflow-hidden w-64 mx-auto md:w-11/12 cursor-pointer transition-transform hover:scale-[1.02] active:scale-95 shadow-purple-900/40 shadow-lg"
                         onClick={trigger}
                     >
                         <img

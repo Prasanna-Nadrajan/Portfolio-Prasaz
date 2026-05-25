@@ -10,6 +10,6 @@ describe('Navbar', () => {
                 <Navbar />
             </BrowserRouter>
         );
-        expect(screen.getByText('Prasanna')).toBeInTheDocument();
+        expect(screen.getByText('Prasaz')).toBeInTheDocument();
     });
 });

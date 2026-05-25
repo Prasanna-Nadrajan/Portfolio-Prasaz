@@ -51,64 +51,64 @@
 @layer base {
   /* --- LIGHT MODE DEFAULTS (DIMMED / DARKER-LIGHT) --- */
   :root {
-    --neon-blue: #005c8a;      
-    --dark-accent-blue: #00476b;
+    --neon-blue: #9333ea;      /* Purple-600 */
+    --dark-accent-blue: #7e22ce; /* Purple-700 */
     
-    --main-bg: #CBD5E1;        
-    --container-bg: #E2E8F0;   
-    --border-color: #94A3B8;   
+    --main-bg: #e9d5ff;        /* Purple-200 */
+    --container-bg: #f3e8ff;   /* Purple-100 */
+    --border-color: #d8b4fe;   /* Purple-300 */
     
-    --main-text: #020617;      
-    --secondary-text: #1E293B; 
-    --light-gray-70: #334155;  
+    --main-text: #2e1065;      /* Purple-950 */
+    --secondary-text: #4c1d95; /* Purple-900 */
+    --light-gray-70: #581c87;  /* Purple-900 */
     
-    --onyx: #E2E8F0;           
-    --jet: #CBD5E1;            
+    --onyx: #f3e8ff;
+    --jet: #e9d5ff;
     
-    --shadow-color: hsla(215, 28%, 10%, 0.2);
-    --shadow-color-hover: hsla(215, 28%, 10%, 0.3);
+    --shadow-color: hsla(270, 50%, 20%, 0.2);
+    --shadow-color-hover: hsla(270, 50%, 20%, 0.3);
 
-    /* Star Color for Light Mode - Dark Gray/Black so they are visible */
-    --star-color: #1E293B; 
+    /* Star Color for Light Mode - Dark Purple so they are visible */
+    --star-color: #3b0764;
 
     /* Cursor Color for Light Mode */
     --cursor-color: #000000;
 
-    --gradient-start: #F1F5F9; 
-    --gradient-end: #CBD5E1;
-    --gradient-jet-start: hsla(210, 20%, 85%, 0.8);
-    --gradient-jet-end: hsla(210, 20%, 85%, 0);
-    --gradient-jet-base: #CBD5E1;
+    --gradient-start: #faf5ff;
+    --gradient-end: #e9d5ff;
+    --gradient-jet-start: hsla(270, 50%, 85%, 0.8);
+    --gradient-jet-end: hsla(270, 50%, 85%, 0);
+    --gradient-jet-base: #e9d5ff;
   }
 
   /* --- DARK MODE OVERRIDES (SPACE THEME) --- */
   :root.dark {
-    --neon-blue: #00BFFF;
-    --dark-accent-blue: #009ACD;
+    --neon-blue: #c084fc;      /* Purple-400 */
+    --dark-accent-blue: #a855f7; /* Purple-500 */
 
-    --main-bg: #050507; /* Deep space black/blue */
-    --container-bg: #0f1014;
-    --border-color: #1A1A1A;
-    --main-text: #EEEEEE;
-    --secondary-text: #AAAAAA;
-    --onyx: #1e1e24;
-    --jet: #25252b;
-    --light-gray-70: #b3b3b3;
+    --main-bg: #1e1b4b; /* Deep royal purple (indigo-950) */
+    --container-bg: #2e1065; /* Purple-950 */
+    --border-color: #4c1d95; /* Purple-900 */
+    --main-text: #f3e8ff; /* Purple-100 */
+    --secondary-text: #d8b4fe; /* Purple-300 */
+    --onyx: #3b0764; /* Purple-950 variant */
+    --jet: #4c1d95; /* Purple-900 */
+    --light-gray-70: #a855f7; /* Purple-500 */
 
-    --shadow-color: hsla(195, 100%, 50%, 0.1);
-    --shadow-color-hover: hsla(195, 100%, 50%, 0.15);
+    --shadow-color: hsla(270, 80%, 20%, 0.5);
+    --shadow-color-hover: hsla(270, 80%, 30%, 0.7);
 
-    /* Star Color for Dark Mode - White/Bright for space */
-    --star-color: #FFF;
+    /* Star Color for Dark Mode - Soft Violet/Gold for space */
+    --star-color: #e9d5ff;
 
     /* Cursor Color for Dark Mode */
     --cursor-color: #ffffff;
 
-    --gradient-start: hsl(220, 20%, 10%);
-    --gradient-end: hsla(220, 20%, 5%, 0);
-    --gradient-jet-start: hsla(240, 1%, 18%, 0.251);
-    --gradient-jet-end: hsla(240, 2%, 11%, 0);
-    --gradient-jet-base: hsl(240, 2%, 13%);
+    --gradient-start: hsl(270, 80%, 15%);
+    --gradient-end: hsla(270, 80%, 10%, 0);
+    --gradient-jet-start: hsla(270, 80%, 20%, 0.251);
+    --gradient-jet-end: hsla(270, 80%, 15%, 0);
+    --gradient-jet-base: hsl(270, 80%, 18%);
   }
 
   html {

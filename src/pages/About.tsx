@@ -164,11 +164,11 @@ const About = () => {
             <li
               key={index}
               data-cursor="hover"
-              className="testimonials-item bg-border-gradient-onyx p-5 rounded-2xl shadow-neon relative z-10 before:absolute before:inset-[1px] before:bg-bg-gradient-jet before:rounded-2xl before:-z-10 cursor-pointer hover:scale-[1.02] transition-transform duration-300 h-full"
+              className="testimonials-item bg-white/10 dark:bg-white/5 backdrop-blur-xl border border-white/20 p-8 rounded-3xl shadow-purple-900/50 shadow-xl relative z-10 cursor-pointer hover:scale-[1.02] transition-transform duration-300 h-full"
               onClick={() => openModal(item)}
             >
               <div className="content-card flex flex-col h-full">
-                <figure className="testimonials-avatar-box w-full h-48 rounded-xl overflow-hidden mb-4 shadow-neon shrink-0">
+                <figure className="testimonials-avatar-box w-full h-48 rounded-2xl overflow-hidden mb-4 shadow-purple-900/40 shadow-md shrink-0">
                   <img
                     src={item.avatar}
                     alt={item.name}
