@@ -1,4 +1,8 @@
-import { Helmet } from 'react-helmet-async';
+/**
+ * SEO component using React 19's native document metadata support.
+ * React 19 automatically hoists <title>, <meta>, and <link> tags
+ * rendered anywhere in the component tree to the <head>.
+ */
 
 interface SEOProps {
     title: string;
@@ -16,7 +20,7 @@ const SEO = ({
     const siteTitle = `${title} | ${name}`;
 
     return (
-        <Helmet>
+        <>
             {/* Standard metadata tags */}
             <title>{siteTitle}</title>
             <meta name='description' content={description} />
@@ -31,7 +35,7 @@ const SEO = ({
             <meta name="twitter:card" content={type} />
             <meta name="twitter:title" content={siteTitle} />
             <meta name="twitter:description" content={description} />
-        </Helmet>
+        </>
     );
 };
 
