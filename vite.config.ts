@@ -16,24 +16,16 @@ export default defineConfig({
         // won't bust the framer-motion or three.js chunks.
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            // React core — rarely changes
-            if (id.includes('react-dom') || id.includes('react/') || id.includes('react-router')) {
-              return 'vendor-react';
+            // Three.js stack is massive (~900KB unminified) — must be separate
+            if (id.includes('three') || id.includes('@react-three')) {
+              return 'vendor-three';
             }
             // Framer Motion is ~120KB — worth isolating
             if (id.includes('framer-motion')) {
               return 'vendor-motion';
             }
-            // Three.js stack is massive (~900KB unminified) — must be separate
-            if (id.includes('three') || id.includes('@react-three')) {
-              return 'vendor-three';
-            }
-            // Lucide icon set
-            if (id.includes('lucide-react')) {
-              return 'vendor-lucide';
-            }
             // All other node_modules into a shared vendor chunk
-            return 'vendor-misc';
+            return 'vendor';
           }
         },
       },
