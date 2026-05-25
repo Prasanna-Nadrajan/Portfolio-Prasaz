@@ -77,7 +77,7 @@ const ProjectCard = ({
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
-      className={`group relative rounded-3xl aspect-[3/4] cursor-pointer bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/10 shadow-purple-900/50 shadow-xl p-2 ${className || ""}`}
+      className={`group relative rounded-3xl aspect-[3/4] cursor-pointer bg-container-bg border border-border-color shadow-sm hover:border-neon-blue/50 hover:shadow-lg hover:shadow-neon-blue/20 transition-all duration-300 p-2 ${className || ""}`}
       onClick={onClick}
       data-cursor="hover"
     >
