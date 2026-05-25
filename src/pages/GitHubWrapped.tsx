@@ -26,7 +26,7 @@ const GitHubWrapped = () => {
     topLanguage: "Python",
     stars: 45,
     forks: 15,
-    totalRepos: 25,
+    totalRepos: 59,
     linesOfCode: "711 Contribs",
     productivity: "Burst-Style",
   };
@@ -69,7 +69,7 @@ const GitHubWrapped = () => {
     {
       title: "Single Day Record",
       date: "July",
-      desc: "9 Contributions in 1 day",
+      desc: "30 Contributions in 1 day",
     },
   ];
 
@@ -143,7 +143,7 @@ const GitHubWrapped = () => {
             <span className="font-bold text-white">
               {stats.contributions} contributions
             </span>{" "}
-            from <span className="font-bold text-white">25 Repos</span> this
+            from <span className="font-bold text-white">{stats.totalRepos} Repos</span> this
             year, you're defining your own path.
           </p>
         </motion.div>

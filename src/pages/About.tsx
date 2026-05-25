@@ -75,11 +75,26 @@ const testimonials = [
     avatar: "/assets/images/events/aiday.jpg",
     text: "Volunteered in the Chennai Data Circle X Ford's AI DAY @ Ford event, where I explored the latest trends and applications of AI in data analysis and business intelligence.Experienced a day filled with insightful discussions and innovative ideas on how AI is transforming the automotive industry.Excellent insights from panel speakers and lightning talks lit the show",
     link: "https://www.linkedin.com/posts/prasannanadrajan_aidayatford2026-chennaidatacircle-fordfibonacci-activity-7431371113001299969-nf1P?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE0J_eAB7yG03MXXrYG4SgL18fkJkQAfEVs",
+  },
+  {
+    name: "CodeSapiens x Tamilpreneuers Meetup @ M2P Fintech",
+    date: "April 2026",
+    avatar: "/assets/images/events/cstp.jpeg",
+    text: "Participated in the CodeSapiens x Tamilpreneuers Meetup @ M2P Fintech event, where I explored the latest trends and applications of AI in Entrepreneuership and startups .Experienced a day filled with insightful discussions.",
+    link: "https://www.linkedin.com/posts/prasannanadrajan_codesapiens-tamilpreneur-m2pfintech-ugcPost-7449062615831511041-jq_R/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE0J_eAB7yG03MXXrYG4SgL18fkJkQAfEVs"
+  },
+  {
+    name: "Chennai Data Circle - AI and Data day @ IIT Madras",
+    date: "Feb 2026",
+    avatar: "/assets/images/events/aidataday.jpeg",
+    text: "Volunteered in the Chennai Data Circle X IIT Madras's AI and Data Day event, where I explored the latest trends and applications of AI in data analysis and business intelligence.Experienced a day filled with insightful discussions and innovative ideas on how AI is transforming the automotive industry.Excellent insights from panel speakers and lightning talks lit the show",
+    link: "https://www.linkedin.com/posts/prasannanadrajan_dataaiday-cdc-zerveai-ugcPost-7441723220459757568-05_6/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE0J_eAB7yG03MXXrYG4SgL18fkJkQAfEVs",
   }
 ];
 
 const About = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [showAllEvents, setShowAllEvents] = useState(false);
   const [selectedTestimonial, setSelectedTestimonial] = useState<
     (typeof testimonials)[0] | null
   >(null);
@@ -145,7 +160,7 @@ const About = () => {
           Favourites
         </h3>
         <ul className="testimonials-list grid grid-cols-1 md:grid-cols-2 gap-6">
-          {testimonials.map((item, index) => (
+          {(showAllEvents ? testimonials : testimonials.slice(0, 4)).map((item, index) => (
             <li
               key={index}
               data-cursor="hover"
@@ -180,6 +195,17 @@ const About = () => {
             </li>
           ))}
         </ul>
+
+        {testimonials.length > 4 && (
+          <div className="flex justify-center mt-8">
+            <button
+              onClick={() => setShowAllEvents(!showAllEvents)}
+              className="px-8 py-3 rounded-xl text-base font-bold transition-all duration-300 border-2 border-neon-blue text-neon-blue shadow-neon hover:bg-neon-blue hover:text-gray-900 hover:scale-105 cursor-pointer"
+            >
+              {showAllEvents ? "Show less" : `View all events (${testimonials.length})`}
+            </button>
+          </div>
+        )}
       </section>
 
       <TestimonialModal

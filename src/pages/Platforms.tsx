@@ -56,7 +56,6 @@ const Platforms = () => {
           title="GitHub Wrapped 2025"
           category="Year in Review"
           image="/assets/images/contact_me/github.png"
-          video="/assets/videos/github-wrapped-2025.mp4"
           link="/github-wrapped"
           onClick={() => navigate("/github-wrapped")}
           // usePixelatedFont={true}
@@ -65,8 +64,7 @@ const Platforms = () => {
         <ProjectCard
           title="LinkedIn Wrapped 2025"
           category="Professional Year"
-          image="/assets/images/linked_in.jpg"
-          video="/assets/videos/linkedin-Wrapped-2025.mp4"
+          image="public/assets/images/linked_in.png"
           link="/linkedin-wrapped"
           onClick={() => navigate("/linkedin-wrapped")}
           className="w-full md:max-w-xs"
@@ -75,7 +73,6 @@ const Platforms = () => {
           title="LeetCode Wrapped 2025"
           category="Coding Journey"
           image="/assets/images/contact_me/code.png"
-          video="/assets/videos/leetcode-wrapped-2025.mp4"
           link="/leetcode-wrapped"
           onClick={() => navigate("/leetcode-wrapped")}
           // usePixelatedFont={true}

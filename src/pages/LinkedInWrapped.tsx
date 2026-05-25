@@ -42,14 +42,14 @@ const LinkedInUnwrapped = () => {
     },
     {
       icon: <IoCodeSlashOutline />,
-      label: "Community Leader",
-      title: "CodeSapiens Host",
+      label: "Community Volunteer",
+      title: "Chennai Data Circle",
       color: "bg-purple-100 text-purple-700",
     },
   ];
 
   const supporters = [
-    { name: "Raghavan P", role: "Top Fan" },
+    { name: "Raghavan P", role: "Motivator" },
     { name: "SUBASH R", role: "Consistent Supporter" },
     { name: "Dhanush .T.S", role: "Engager" },
     { name: "Ruban Kumar R", role: "Insightful" },

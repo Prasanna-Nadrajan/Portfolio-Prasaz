@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Menu, X, Terminal as TerminalIcon, PanelLeftClose, PanelLeft } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 
 const navItems = [
-  { name: "About", path: "/" },
-  { name: "Portfolio", path: "/portfolio" },
-  { name: "Blog", path: "/blog" },
-  { name: "Platforms", path: "/platforms" },
+  { name: "About",      path: "/" },
+  { name: "Portfolio",  path: "/portfolio" },
+  { name: "Blog",       path: "/blog" },
+  { name: "Platforms",  path: "/platforms" },
   { name: "Experience", path: "/experience" },
-  { name: "Resume", path: "/resume" },
-  { name: "Contact", path: "/contact" },
+  { name: "Resume",     path: "/resume" },
+  { name: "Contact",    path: "/contact" },
 ];
 
 interface NavbarProps {
@@ -19,14 +19,15 @@ interface NavbarProps {
   onToggleSidebar?: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen = true, onToggleSidebar }) => {
+const Navbar: React.FC<NavbarProps> = memo(({ isSidebarOpen = true, onToggleSidebar }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
+    // passive: true prevents the browser from waiting for preventDefault() on every scroll tick
     const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -35,25 +36,23 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen = true, onToggleSidebar }
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 font-outfit ${scrolled ? "py-4" : "py-6"
-        }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 font-outfit ${
+        scrolled ? "py-4" : "py-6"
+      }`}
     >
       <div className="max-w-6xl mx-auto px-4">
         <div
-          className={`relative flex items-center justify-between p-2 rounded-2xl transition-all duration-300 ${scrolled
-            ? "bg-white/80 dark:bg-black/80 backdrop-blur-md shadow-lg border border-slate-200/50 dark:border-white/10"
-            : "bg-transparent"
-            }`}
+          className={`relative flex items-center justify-between p-2 rounded-2xl transition-all duration-300 ${
+            scrolled
+              ? "bg-white/80 dark:bg-black/80 backdrop-blur-md shadow-lg border border-slate-200/50 dark:border-white/10"
+              : "bg-transparent"
+          }`}
         >
           <NavLink to="/" className="flex items-center space-x-2 px-4 group">
             <div className="w-8 h-8 bg-black dark:bg-white rounded-lg flex items-center justify-center group-hover:rotate-12 transition-transform">
-              <span className="text-white dark:text-black font-bold text-sm">
-                P
-              </span>
+              <span className="text-white dark:text-black font-bold text-sm">P</span>
             </div>
-            <span className="font-bold text-lg tracking-tight hidden sm:block">
-              Prasaz
-            </span>
+            <span className="font-bold text-lg tracking-tight hidden sm:block">Prasaz</span>
           </NavLink>
 
           {/* Desktop Nav */}
@@ -77,11 +76,7 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen = true, onToggleSidebar }
                       <motion.div
                         layoutId="nav-pill"
                         className="absolute inset-0 bg-white dark:bg-white/10 rounded-lg shadow-sm"
-                        transition={{
-                          type: "spring",
-                          bounce: 0.25,
-                          duration: 0.5,
-                        }}
+                        transition={{ type: "spring", bounce: 0.25, duration: 0.5 }}
                       />
                     )}
                   </>
@@ -91,7 +86,7 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen = true, onToggleSidebar }
           </div>
 
           <div className="flex items-center space-x-2 px-2">
-            {/* Sidebar Toggle Button - Desktop only */}
+            {/* Sidebar toggle — desktop only */}
             {onToggleSidebar && (
               <button
                 onClick={onToggleSidebar}
@@ -122,9 +117,7 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen = true, onToggleSidebar }
       {/* Mobile Menu */}
       <motion.div
         initial={false}
-        animate={
-          isOpen ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }
-        }
+        animate={isOpen ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
         className="md:hidden overflow-hidden bg-white dark:bg-black border-b border-slate-200 dark:border-white/10"
       >
         <div className="flex flex-col p-4 space-y-2">
@@ -147,6 +140,8 @@ const Navbar: React.FC<NavbarProps> = ({ isSidebarOpen = true, onToggleSidebar }
       </motion.div>
     </nav>
   );
-};
+});
+
+Navbar.displayName = "Navbar";
 
 export default Navbar;

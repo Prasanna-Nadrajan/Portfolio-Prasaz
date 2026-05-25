@@ -32,14 +32,11 @@ const GitHubUnwrapped = () => {
                             System Recap Protocol
                         </h4>
                         <div className="relative w-full max-w-md mx-auto aspect-square rounded-xl overflow-hidden border border-jet shadow-lg group">
-                            <video
+                            <img
                                 className="w-full h-full object-cover"
-                                controls
-                                poster="/assets/images/contact_me/github.png" // Use first image as poster
-                            >
-                                <source src="/assets/videos/github-wrapped-2025.mp4" type="video/mp4" />
-                                Your browser does not support the video tag.
-                            </video>
+                                src="/assets/images/contact_me/github.png"
+                                alt="GitHub Wrapped Icon"
+                            />
 
                             {/* Fallback / Download Prompt if video is missing (User needs to place it) */}
                             <div className="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">

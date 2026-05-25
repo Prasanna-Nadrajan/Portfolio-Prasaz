@@ -44,7 +44,7 @@ const Terminal = () => {
         switch (mainCmd) {
             case 'help':
                 output = (
-                    <div className="text-gray-300">
+                    <div className="text-secondary-text">
                         <p className="mb-2">Available commands:</p>
                         <ul className="grid grid-cols-1 gap-1 ml-4">
                             <li><span className="text-neon-blue font-bold">ls</span> - List files/projects</li>
@@ -147,12 +147,14 @@ const Terminal = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="min-h-screen bg-onyx text-neon-blue font-mono p-4 md:p-8 pt-24 overflow-y-auto"
+            // bg-[var(--onyx)] & text-[var(--neon-blue)] adapt automatically to light/dark via CSS variables
+            className="min-h-screen bg-[var(--onyx)] text-[var(--neon-blue)] font-mono p-4 md:p-8 pt-24 overflow-y-auto"
             onClick={() => inputRef.current?.focus()}
         >
             <SEO title="Terminal" description="Interactive terminal interface for navigating the portfolio." />
             <div className="max-w-4xl mx-auto">
-                <div className="mb-4 text-gray-400">
+                {/* Welcome banner — uses semantic secondary-text so it's readable in both modes */}
+                <div className="mb-4 text-secondary-text">
                     <p>Welcome to Prasanna's Terminal [Version 1.0.0]</p>
                     <p>(c) 2025 Prasanna Nadrajan. All rights reserved.</p>
                     <p className="mt-2">Type <span className="text-neon-blue">help</span> for a list of commands.</p>
@@ -163,9 +165,10 @@ const Terminal = () => {
                         <div key={i} className="break-words">
                             <div className="flex gap-2">
                                 <span className="text-green-500">guest@prasaz:~$</span>
-                                <span className="text-gray-100">{entry.command}</span>
+                                {/* text-main-text adapts: near-black in light, near-white in dark */}
+                                <span className="text-main-text">{entry.command}</span>
                             </div>
-                            <div className="ml-0 mt-1 mb-2 text-gray-300 w-full whitespace-pre-wrap">
+                            <div className="ml-0 mt-1 mb-2 text-secondary-text w-full whitespace-pre-wrap">
                                 {entry.output}
                             </div>
                         </div>
@@ -180,10 +183,10 @@ const Terminal = () => {
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         onKeyDown={handleKeyDown}
-                        className="bg-transparent border-none outline-none text-gray-100 w-full caret-neon-blue"
+                        className="bg-transparent border-none outline-none text-main-text w-full caret-[var(--neon-blue)]"
                         autoFocus
                         autoComplete="off"
-                        spellCheck="false"
+                        spellCheck={false}
                     />
                 </div>
                 <div ref={bottomRef} />

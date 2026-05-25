@@ -18,11 +18,11 @@ const LeetCodeWrapped = () => {
   const navigate = useNavigate();
 
   const stats = {
-    solved: { total: 149, easy: 80, medium: 58, hard: 11 },
+    solved: { total: 203, easy: 110, medium: 78, hard: 11 },
     acceptance: "47.6%",
     contestRating: 1650,
     globalRank: "Top 10.5%",
-    submissions: 724,
+    submissions: 720,
     activeDays: 490,
     maxStreak: 100,
     topTopics: [
@@ -45,7 +45,7 @@ const LeetCodeWrapped = () => {
       {
         name: "Problem Solver",
         icon: <FaTrophy className="text-orange-400" />,
-        desc: "149+ Solved",
+        desc: "200+ Solved",
       },
       {
         name: "Consistent",
@@ -326,7 +326,7 @@ const LeetCodeWrapped = () => {
           className="md:col-span-12 bg-[#262626] border border-[#333] rounded-3xl p-6"
         >
           <h3 className="text-gray-100 font-bold mb-4 text-xs uppercase tracking-widest text-center">
-            2024 Submission Activity
+            2025 Submission Activity
           </h3>
           <div className="flex gap-1 justify-center flex-wrap">
             {activityHeatmap.map((intensity, i) => (
