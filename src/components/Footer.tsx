@@ -68,7 +68,7 @@ const Footer = ({ viewCount = 0 }: FooterProps) => {
                 {/* 4. Credits */}
                 <div className="text-center mb-8">
                     <p className="text-main-text text-sm font-medium">
-                        ~ Designed and Developed by <span className="text-neon-blue">Prasanna Nadrajan</span> ~
+                        ~ Designed and Developed by <span className="text-neon-blue">Prasanna Nadrajan</span> with ❤️ ~
                     </p>
                 </div>
 
