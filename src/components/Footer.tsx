@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import MatrixBackground from './MatrixBackground';
 import {
     IoLogoGithub,
     IoLogoLinkedin,
@@ -28,13 +29,7 @@ const Footer = ({ viewCount = 0 }: FooterProps) => {
     return (
         <footer className="mt-auto pt-16 pb-8 border-t border-jet bg-onyx/30 backdrop-blur-sm relative overflow-hidden">
             {/* Code Symbols Pattern Background */}
-            <div className="absolute inset-0 pointer-events-none opacity-30 font-mono text-slate-500 overflow-hidden"
-                style={{
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Ctext x='10' y='20' font-size='16' fill='%23666' opacity='0.4'%3E%7B%3C/text%3E%3Ctext x='40' y='45' font-size='14' fill='%23555' opacity='0.35'%3E%3C/text%3E%3Ctext x='70' y='60' font-size='15' fill='%23777' opacity='0.4'%3E%28%3C/text%3E%3Ctext x='25' y='85' font-size='14' fill='%23666' opacity='0.35'%3E%3E%3C/text%3E%3Ctext x='60' y='100' font-size='16' fill='%23555' opacity='0.4'%3E%7D%3C/text%3E%3Ctext x='90' y='35' font-size='15' fill='%23777' opacity='0.35'%3E%29%3C/text%3E%3Ctext x='15' y='110' font-size='14' fill='%23666' opacity='0.4'%3E%3B%3C/text%3E%3Ctext x='75' y='20' font-size='15' fill='%23555' opacity='0.35'%3E%5B%3C/text%3E%3Ctext x='45' y='70' font-size='14' fill='%23777' opacity='0.4'%3E%5D%3C/text%3E%3Ctext x='10' y='50' font-size='15' fill='%23666' opacity='0.35'%3E%3A%3C/text%3E%3C/svg%3E")`,
-                    backgroundSize: '120px 120px',
-                    backgroundRepeat: 'repeat'
-                }}
-            ></div>
+            <MatrixBackground className="absolute inset-0 w-full h-full pointer-events-none z-0" opacity={0.4} />
 
             {/* Gradient Overlay to fade dots at edges (Optional aesthetics) */}
             <div className="absolute inset-0 bg-gradient-to-t from-main-bg/80 to-transparent pointer-events-none"></div>

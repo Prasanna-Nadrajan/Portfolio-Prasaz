@@ -6,7 +6,7 @@ import ThemeToggle from "./ThemeToggle.tsx";
 import Footer from "./Footer";
 import ScrollToTop from "./ScrollToTop";
 import CelebrationModal from "./CelebrationModal";
-import ParticleBackground from "./ParticleBackground";
+import MatrixBackground from "./MatrixBackground";
 
 interface LayoutProps {
   children: ReactNode;
@@ -59,8 +59,8 @@ const Layout = ({ children }: LayoutProps) => {
         type={celebrationType}
       />
 
-      {/* Interactive Particle Background */}
-      <ParticleBackground />
+      {/* Interactive Matrix Background */}
+      <MatrixBackground />
 
       <Cursor />
 

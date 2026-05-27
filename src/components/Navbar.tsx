@@ -44,19 +44,19 @@ const Navbar: React.FC<NavbarProps> = memo(({ isSidebarOpen = true, onToggleSide
         <div
           className={`relative flex items-center justify-between p-2 rounded-2xl transition-all duration-300 ${
             scrolled
-              ? "bg-white/80 dark:bg-black/80 backdrop-blur-md shadow-lg border border-slate-200/50 dark:border-white/10"
-              : "bg-transparent"
+              ? "bg-white/95 dark:bg-black/80 backdrop-blur-md shadow-lg border border-slate-200/80 dark:border-white/10"
+              : "bg-white/80 dark:bg-transparent backdrop-blur-sm border border-slate-200/50 dark:border-transparent"
           }`}
         >
           <NavLink to="/" className="flex items-center space-x-2 px-4 group">
-            <div className="w-8 h-8 bg-black dark:bg-white rounded-lg flex items-center justify-center group-hover:rotate-12 transition-transform">
+            <div className="w-8 h-8 bg-slate-900 dark:bg-white rounded-lg flex items-center justify-center group-hover:rotate-12 transition-transform shadow-sm">
               <span className="text-white dark:text-black font-bold text-sm">P</span>
             </div>
-            <span className="font-bold text-lg tracking-tight hidden sm:block">Prasaz</span>
+            <span className="font-bold text-lg tracking-tight hidden sm:block text-slate-800 dark:text-white">Prasaz</span>
           </NavLink>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center space-x-1 bg-slate-100 dark:bg-white/5 p-1 rounded-xl">
+          <div className="hidden md:flex items-center space-x-1 bg-slate-100 dark:bg-white/5 p-1 rounded-xl border border-slate-200/80 dark:border-transparent">
             {navItems.map((item) => (
               <NavLink
                 key={item.path}
@@ -64,8 +64,8 @@ const Navbar: React.FC<NavbarProps> = memo(({ isSidebarOpen = true, onToggleSide
                 className={({ isActive }) => `
                   relative px-5 py-2 text-sm font-medium rounded-lg transition-all
                   ${isActive
-                    ? "text-black dark:text-white"
-                    : "text-slate-500 hover:text-slate-900 dark:hover:text-white"
+                    ? "text-slate-900 bg-white shadow-sm dark:bg-transparent dark:shadow-none dark:text-white"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-200/50 dark:text-slate-400 dark:hover:text-white dark:hover:bg-transparent"
                   }
                 `}
               >
@@ -90,7 +90,7 @@ const Navbar: React.FC<NavbarProps> = memo(({ isSidebarOpen = true, onToggleSide
             {onToggleSidebar && (
               <button
                 onClick={onToggleSidebar}
-                className="hidden md:flex p-2 hover:bg-slate-100 dark:hover:bg-white/10 rounded-lg transition-colors"
+                className="hidden md:flex p-2 text-slate-600 hover:bg-slate-200 dark:text-slate-300 dark:hover:bg-white/10 rounded-lg transition-colors"
                 title={isSidebarOpen ? "Hide Sidebar" : "Show Sidebar"}
               >
                 {isSidebarOpen ? <PanelLeftClose size={20} /> : <PanelLeft size={20} />}
@@ -98,7 +98,7 @@ const Navbar: React.FC<NavbarProps> = memo(({ isSidebarOpen = true, onToggleSide
             )}
             <NavLink
               to="/terminal"
-              className="p-2 hover:bg-slate-100 dark:hover:bg-white/10 rounded-lg transition-colors"
+              className="p-2 text-slate-600 hover:bg-slate-200 dark:text-slate-300 dark:hover:bg-white/10 rounded-lg transition-colors"
               title="Terminal Mode"
             >
               <TerminalIcon size={20} />
@@ -106,7 +106,7 @@ const Navbar: React.FC<NavbarProps> = memo(({ isSidebarOpen = true, onToggleSide
             <ThemeToggle />
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2 hover:bg-slate-100 dark:hover:bg-white/10 rounded-lg"
+              className="md:hidden p-2 text-slate-600 hover:bg-slate-200 dark:text-slate-300 dark:hover:bg-white/10 rounded-lg"
             >
               {isOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -118,7 +118,7 @@ const Navbar: React.FC<NavbarProps> = memo(({ isSidebarOpen = true, onToggleSide
       <motion.div
         initial={false}
         animate={isOpen ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
-        className="md:hidden overflow-hidden bg-white dark:bg-black border-b border-slate-200 dark:border-white/10"
+        className="md:hidden overflow-hidden bg-white/95 dark:bg-black/95 backdrop-blur-md border-b border-slate-200 dark:border-white/10 shadow-lg"
       >
         <div className="flex flex-col p-4 space-y-2">
           {navItems.map((item) => (
@@ -128,8 +128,8 @@ const Navbar: React.FC<NavbarProps> = memo(({ isSidebarOpen = true, onToggleSide
               className={({ isActive }) => `
                 px-4 py-3 rounded-xl font-medium transition-colors
                 ${isActive
-                  ? "bg-slate-100 dark:bg-white/10 text-blue-600 dark:text-blue-400"
-                  : "text-slate-600 dark:text-slate-400"
+                  ? "bg-slate-100 dark:bg-white/10 text-blue-700 dark:text-blue-400"
+                  : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-transparent"
                 }
               `}
             >

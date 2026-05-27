@@ -64,7 +64,7 @@ const Platforms = () => {
         <ProjectCard
           title="LinkedIn Wrapped 2025"
           category="Professional Year"
-          image="public/assets/images/linked_in.png"
+          image="/assets/images/linked_in.png"
           link="/linkedin-wrapped"
           onClick={() => navigate("/linkedin-wrapped")}
           className="w-full md:max-w-xs"

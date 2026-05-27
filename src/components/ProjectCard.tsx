@@ -113,7 +113,7 @@ const ProjectCard = ({
 
       <motion.div
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-        className="relative w-full h-full rounded-2xl overflow-hidden bg-gray-900 z-10"
+        className="relative w-full h-full rounded-2xl overflow-hidden bg-white dark:bg-gray-900 z-10 border border-slate-200 dark:border-transparent shadow-md dark:shadow-none"
       >
         {/* Specular shine layer */}
         <motion.div
@@ -125,7 +125,7 @@ const ProjectCard = ({
 
         {/* Category badge — top-left */}
         <div className="absolute top-3 left-3 z-20 flex items-center gap-1.5">
-          <span className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-widest uppercase bg-black/60 text-neon-blue border border-neon-blue/30 backdrop-blur-sm">
+          <span className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-widest uppercase bg-white/95 dark:bg-black/60 text-blue-700 dark:text-neon-blue border border-blue-200 dark:border-neon-blue/30 backdrop-blur-sm shadow-sm dark:shadow-none">
             <IoCodeSlashOutline className="text-[8px]" />
             {category}
           </span>
@@ -139,9 +139,9 @@ const ProjectCard = ({
               isHovered ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }
             }
             transition={{ type: "spring", bounce: 0.4, duration: 0.4 }}
-            className="w-8 h-8 rounded-full bg-neon-blue flex items-center justify-center shadow-[0_0_10px_rgba(0,191,255,0.8)]"
+            className="w-8 h-8 rounded-full bg-white dark:bg-neon-blue flex items-center justify-center shadow-lg dark:shadow-[0_0_10px_rgba(0,191,255,0.8)] border border-slate-200 dark:border-transparent"
           >
-            <IoOpenOutline className="text-black text-sm" />
+            <IoOpenOutline className="text-slate-900 dark:text-black text-sm" />
           </motion.div>
         </div>
 
@@ -175,12 +175,12 @@ const ProjectCard = ({
           initial={false}
         >
           {/* Gradient fog from bottom */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white/95 via-white/70 dark:from-black/95 dark:via-black/70 to-transparent pointer-events-none" />
 
           {/* Title */}
           <h3
             className={`
-              relative text-white text-sm font-bold leading-tight drop-shadow-lg
+              relative text-slate-900 dark:text-white text-sm font-bold leading-tight drop-shadow-sm dark:drop-shadow-lg
               ${usePixelatedFont ? "font-pixelated text-[10px]" : ""}
             `}
           >
@@ -200,13 +200,13 @@ const ProjectCard = ({
                 {techStack.slice(0, 3).map((tech) => (
                   <span
                     key={tech}
-                    className="px-1.5 py-0.5 rounded text-[9px] font-semibold bg-neon-blue/20 text-neon-blue border border-neon-blue/30 backdrop-blur-sm"
+                    className="px-1.5 py-0.5 rounded text-[9px] font-semibold bg-white/95 dark:bg-neon-blue/20 text-blue-700 dark:text-neon-blue border border-blue-200/60 dark:border-neon-blue/30 backdrop-blur-sm shadow-sm dark:shadow-none"
                   >
                     {tech}
                   </span>
                 ))}
                 {techStack.length > 3 && (
-                  <span className="px-1.5 py-0.5 rounded text-[9px] font-semibold bg-white/10 text-white/60 border border-white/10">
+                  <span className="px-1.5 py-0.5 rounded text-[9px] font-semibold bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-white/60 border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-none">
                     +{techStack.length - 3}
                   </span>
                 )}
@@ -222,7 +222,7 @@ const ProjectCard = ({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
                 transition={{ delay: 0.05 }}
-                className="relative flex items-center gap-1.5 text-neon-blue text-[10px] font-semibold tracking-widest uppercase"
+                className="relative flex items-center gap-1.5 text-blue-700 dark:text-neon-blue text-[10px] font-semibold tracking-widest uppercase"
               >
                 <IoEyeOutline />
                 View Project
