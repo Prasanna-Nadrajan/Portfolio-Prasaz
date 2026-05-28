@@ -2,7 +2,7 @@ import { useState, useEffect, type ReactNode } from "react";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 import Cursor from "./Cursor.tsx";
-import ThemeToggle from "./ThemeToggle.tsx";
+// import ThemeToggle from "./ThemeToggle.tsx";
 import Footer from "./Footer";
 import ScrollToTop from "./ScrollToTop";
 import CelebrationModal from "./CelebrationModal";
@@ -64,9 +64,7 @@ const Layout = ({ children }: LayoutProps) => {
 
       <Cursor />
 
-      <div className="fixed top-6 right-6 z-50 hidden md:block">
-        <ThemeToggle />
-      </div>
+
 
       <main className="container mx-auto px-4 py-6 pt-20 md:px-16 md:pt-28 md:pb-12 relative z-10 flex-grow">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
@@ -91,8 +89,8 @@ const Layout = ({ children }: LayoutProps) => {
           {/* Main Content Column: Expands to 12 if sidebar closed */}
           <div
             className={`relative transition-all duration-300 ${isSidebarOpen
-                ? "md:col-span-9 lg:col-span-9"
-                : "md:col-span-12 lg:col-span-12"
+              ? "md:col-span-9 lg:col-span-9"
+              : "md:col-span-12 lg:col-span-12"
               }`}
           >
             <Navbar

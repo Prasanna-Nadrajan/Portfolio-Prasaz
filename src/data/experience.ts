@@ -2,12 +2,12 @@ import type { ExperienceItem } from '../types';
 
 export const experienceData: ExperienceItem[] = [
     {
-        date: "Dec 2025 - Feb 2026",
-        title: "Indian Space Academy",
-        subtitle: "Intern Trainee",
-        description: "Worked on remote sensing and geospatial anlysis projects and integrated machine learning and deep learning to extract meaningful insights from satellite imagery.",
-        logo: "/assets/images/experience/isa_logo.png",
-        link: "https://drive.google.com/file/d/1nzoe-DH9uzCxkecMwGQZg_jWa_TMtqst/view?usp=sharing",
+        date: "Sep 2025 - Present",
+        title: "ARQ REC",
+        subtitle: "Data Analyst Associate",
+        description: "Utilized data visualization tools (Power BI) and SQL/Python for business intelligence reporting and operational efficiency improvements.",
+        logo: "/assets/images/experience/arq_rec_logo.jpg",
+        link: "https://drive.google.com/file/d/1wcf2VrSWUfjEsIXIQeqzqqbNERYEGGUb/view?usp=sharing",
         side: "right"
     },
     {
@@ -20,12 +20,12 @@ export const experienceData: ExperienceItem[] = [
         side: "left"
     },
     {
-        date: "Sep 2025 - Present",
-        title: "ARQ REC",
-        subtitle: "Data Analyst Associate",
-        description: "Utilized data visualization tools (Power BI) and SQL/Python for business intelligence reporting and operational efficiency improvements.",
-        logo: "/assets/images/experience/arq_rec_logo.jpg",
-        link: "https://drive.google.com/file/d/1wcf2VrSWUfjEsIXIQeqzqqbNERYEGGUb/view?usp=sharing",
+        date: "Dec 2025 - Feb 2026",
+        title: "Indian Space Academy",
+        subtitle: "Intern Trainee",
+        description: "Worked on remote sensing and geospatial anlysis projects and integrated machine learning and deep learning to extract meaningful insights from satellite imagery.",
+        logo: "/assets/images/experience/isa_logo.png",
+        link: "https://drive.google.com/file/d/1nzoe-DH9uzCxkecMwGQZg_jWa_TMtqst/view?usp=sharing",
         side: "right"
     },
     {
@@ -59,6 +59,15 @@ export const experienceData: ExperienceItem[] = [
 
 export const volunteeringData: ExperienceItem[] = [
     {
+        date: "2026 - Present",
+        title: "Chennai Data Circle",
+        subtitle: "Data Community of Chennai",
+        description: "Active member of Chennai's data science community, participating in meetups, workshops, and collaborative projects to foster knowledge sharing and networking among data professionals.",
+        logo: "/assets/images/experience/cdc.png",
+        link: "https://chennaidatacircle.in",
+        side: "right"
+    },
+    {
         date: "2024",
         title: "CII Connect 2024",
         subtitle: "Confederation of Indian Industries",
@@ -86,7 +95,7 @@ export const educationData: ExperienceItem[] = [
         description: "Pursuing Bachelor's degree. Actively involved in technical societies and hackathons.",
         logo: "/assets/images/experience/rec.png",
         link: "https://www.rajalakshmi.org/",
-        side: "left"
+        side: "right"
     },
     {
         date: "Upto 2024",
@@ -95,6 +104,6 @@ export const educationData: ExperienceItem[] = [
         description: "Completed schooling with a strong foundation in core subjects.",
         logo: "/assets/images/experience/hsss.png",
         link: "",
-        side: "right"
+        side: "left"
     }
 ];
