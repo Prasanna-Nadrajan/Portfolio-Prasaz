@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { IoChevronDown, IoMailOutline, IoLocationOutline, IoLogoLinkedin, IoLogoGithub, IoNotificationsOutline } from 'react-icons/io5';
+import { SiLeetcode } from 'react-icons/si';
 import AvailabilityStatus from './AvailabilityStatus';
 
 const roles = [
@@ -12,13 +13,14 @@ const roles = [
 interface SidebarProps {
     onShowUpdate?: () => void;
     onShowLinkedInUpdate?: () => void;
+    onShowLeetCodeUpdate?: () => void;
     viewCount?: number;
 }
 
 // import ThemeToggle from './ThemeToggle';
 import LeetCodeCelebration, { useLeetCodeCelebration } from './LeetCodeCelebration';
 
-const Sidebar = ({ onShowUpdate, onShowLinkedInUpdate, viewCount = 0 }: SidebarProps) => {
+const Sidebar = ({ onShowUpdate, onShowLinkedInUpdate, onShowLeetCodeUpdate, viewCount = 0 }: SidebarProps) => {
     const [isActive, setIsActive] = useState(false);
     const { isActive: isCelebrationActive, trigger, closeCelebration } = useLeetCodeCelebration();
 
@@ -194,7 +196,7 @@ const Sidebar = ({ onShowUpdate, onShowLinkedInUpdate, viewCount = 0 }: SidebarP
                         <button
                             onClick={onShowLinkedInUpdate}
                             className="relative w-12 h-12 bg-container-bg/50 backdrop-blur-xl border border-white/20 rounded-xl shadow-neon flex items-center justify-center text-neon-blue hover:bg-jet/30 hover:scale-105 transition-all duration-300 group"
-                            aria-label="LinkedIn 5000+ Impressions"
+                            aria-label="LinkedIn 10000+ Impressions"
                             title="LinkedIn Milestone Reached!"
                         >
                             <IoLogoLinkedin size={24} />
@@ -207,11 +209,32 @@ const Sidebar = ({ onShowUpdate, onShowLinkedInUpdate, viewCount = 0 }: SidebarP
 
                             {/* Tooltip style label on hover */}
                             <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] text-neon-blue opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                                5000+ Impressions
+                                10000+ Impressions
                             </span>
                         </button>
                     )
                 }
+
+                {/* LeetCode Achievement Button */}
+                <button
+                    onClick={onShowLeetCodeUpdate}
+                    className="relative w-12 h-12 bg-container-bg/50 backdrop-blur-xl border border-white/20 rounded-xl shadow-neon flex items-center justify-center text-[#FFA116] hover:bg-jet/30 hover:scale-105 transition-all duration-300 group"
+                    aria-label="LeetCode 200+ Problems Solved"
+                    title="LeetCode Achievement!"
+                >
+                    <SiLeetcode size={22} />
+
+                    {/* Gold Dot for Achievement */}
+                    <span className="absolute top-2 right-2 flex h-2.5 w-2.5">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-yellow-500"></span>
+                    </span>
+
+                    {/* Tooltip style label on hover */}
+                    <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] text-[#FFA116] opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                        200+ Problems Solved
+                    </span>
+                </button>
             </div>
         </div >
     );

@@ -3,12 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { useEffect } from 'react';
 import { IoClose, IoRocketSharp, IoStarSharp, IoLogoLinkedin } from 'react-icons/io5';
+import { SiLeetcode } from 'react-icons/si';
 
 interface CelebrationModalProps {
     isOpen: boolean;
     onClose: () => void;
     viewCount?: number;
-    type?: 'views' | 'linkedin';
+    type?: 'views' | 'linkedin' | 'leetcode';
 }
 
 const CelebrationModal = ({ isOpen, onClose, viewCount = 0, type = 'views' }: CelebrationModalProps) => {
@@ -33,7 +34,7 @@ const CelebrationModal = ({ isOpen, onClose, viewCount = 0, type = 'views' }: Ce
                 startVelocity: 30,
                 spread: 80,
                 origin: { x: 0, y: 0.2 },
-                colors: ['#00BFFF', '#FFD700', '#C0C0C0', '#FFFFFF'], // Cyan, Gold, Silver, White
+                colors: type === 'leetcode' ? ['#FFA116', '#FFD700', '#FF6B00', '#FFFFFF'] : ['#00BFFF', '#FFD700', '#C0C0C0', '#FFFFFF'],
                 shapes: ['square', 'circle'],
                 zIndex: 9999
             });
@@ -44,7 +45,7 @@ const CelebrationModal = ({ isOpen, onClose, viewCount = 0, type = 'views' }: Ce
                 startVelocity: 30,
                 spread: 80,
                 origin: { x: 1, y: 0.2 },
-                colors: ['#00BFFF', '#FFD700', '#C0C0C0', '#FFFFFF'],
+                colors: type === 'leetcode' ? ['#FFA116', '#FFD700', '#FF6B00', '#FFFFFF'] : ['#00BFFF', '#FFD700', '#C0C0C0', '#FFFFFF'],
                 shapes: ['square', 'circle'],
                 zIndex: 9999
             });
@@ -84,7 +85,7 @@ const CelebrationModal = ({ isOpen, onClose, viewCount = 0, type = 'views' }: Ce
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-md p-4"
+                    className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 dark:bg-black/60 backdrop-blur-md p-4"
                     onClick={onClose}
                 >
                     {/* Modal Content */}
@@ -93,7 +94,7 @@ const CelebrationModal = ({ isOpen, onClose, viewCount = 0, type = 'views' }: Ce
                         animate={{ scale: 1, opacity: 1, y: 0 }}
                         exit={{ scale: 0.8, opacity: 0, y: 100 }}
                         transition={{ type: "spring", damping: 15, stiffness: 100 }}
-                        className="glass-card max-w-lg w-full relative p-8 text-center border border-neon-blue/30 shadow-[0_0_80px_rgba(0,191,255,0.2)] bg-gradient-to-b from-gray-900 to-black overflow-hidden"
+                        className="glass-card max-w-lg w-full relative p-8 text-center border border-neon-blue/30 shadow-[0_0_80px_rgba(0,191,255,0.2)] bg-gradient-to-b from-slate-100 to-slate-200 dark:from-gray-900 dark:to-black overflow-hidden"
                         onClick={(e) => e.stopPropagation()}
                     >
                         {/* Decorative Background Elements */}
@@ -103,49 +104,65 @@ const CelebrationModal = ({ isOpen, onClose, viewCount = 0, type = 'views' }: Ce
 
                         <button
                             onClick={onClose}
-                            className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+                            className="absolute top-4 right-4 text-secondary-text hover:text-main-text transition-colors"
                         >
                             <IoClose size={24} />
                         </button>
 
                         <div className="flex justify-center mb-6">
                             <div className="w-16 h-16 rounded-full bg-gradient-to-br from-neon-blue to-purple-600 p-[2px] shadow-lg animate-pulse-glow">
-                                <div className="w-full h-full bg-black rounded-full flex items-center justify-center">
+                                <div className="w-full h-full bg-slate-200 dark:bg-black rounded-full flex items-center justify-center">
                                     {type === 'linkedin' ? (
-                                        <IoLogoLinkedin className="text-3xl text-white" />
+                                        <IoLogoLinkedin className="text-3xl text-neon-blue" />
+                                    ) : type === 'leetcode' ? (
+                                        <SiLeetcode className="text-3xl text-[#FFA116]" />
                                     ) : (
-                                        <IoRocketSharp className="text-3xl text-white" />
+                                        <IoRocketSharp className="text-3xl text-neon-blue" />
                                     )}
                                 </div>
                             </div>
                         </div>
 
-                        <h2 className="text-xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 mb-2 font-pixelated tracking-wider">
+                        <h2 className="text-xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-main-text to-secondary-text mb-2 font-pixelated tracking-wider">
                             MILESTONE UNLOCKED
                         </h2>
 
                         <div className="my-8 relative group cursor-default">
                             <div className="absolute inset-0 bg-neon-blue/20 blur-xl group-hover:bg-neon-blue/30 transition-all duration-500 rounded-full"></div>
-                            <div className="relative text-5xl md:text-7xl font-bold text-white drop-shadow-[0_0_15px_rgba(0,191,255,0.8)] font-sans">
-                                {type === 'linkedin' ? '5,000+' : `${Math.floor(viewCount / 100) * 100}+`}
+                            <div className="relative text-5xl md:text-7xl font-bold text-main-text drop-shadow-[0_0_15px_rgba(0,191,255,0.8)] font-sans">
+                                {type === 'linkedin' ? '10,000+' : type === 'leetcode' ? '200+' : `${Math.floor(viewCount / 100) * 100}+`}
                             </div>
-                            <div className="relative text-sm text-neon-blue tracking-[0.2em] uppercase mt-2 font-medium">
-                                {type === 'linkedin' ? 'Impressions' : 'Views Reached'}
+                            <div className={`relative text-sm tracking-[0.2em] uppercase mt-2 font-medium ${type === 'leetcode' ? 'text-[#FFA116]' : 'text-neon-blue'}`}>
+                                {type === 'linkedin' ? 'Impressions' : type === 'leetcode' ? 'Problems Solved' : 'Views Reached'}
                             </div>
                         </div>
 
-                        <p className="text-gray-300 text-lg leading-relaxed mb-8 max-w-sm mx-auto font-light">
+                        <p className="text-secondary-text text-lg leading-relaxed mb-8 max-w-sm mx-auto font-light">
                             {type === 'linkedin' ? (
                                 <>
-                                    My LinkedIn profile reached <strong className="text-white">5,000+</strong> impressions!
+                                    My LinkedIn profile reached <strong className="text-main-text">10,000+</strong> impressions!
                                     <br />
-                                    <span className="text-sm mt-2 block text-gray-400">Thanks for connecting!</span>
+                                    <span className="text-sm mt-2 block text-light-gray-70">Thanks for connecting!</span>
+                                </>
+                            ) : type === 'leetcode' ? (
+                                <>
+                                    Solved over <strong className="text-[#FFA116]">200+ problems</strong> on LeetCode!
+                                    <br />
+                                    <span className="text-sm mt-2 block text-light-gray-70">Grinding DSA one problem at a time. 🔥</span>
+                                    <a
+                                        href="https://leetcode.com/u/prasannanadrajan/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-block mt-4 text-xs text-[#FFA116] underline hover:text-yellow-400 transition-colors"
+                                    >
+                                        View LeetCode Profile →
+                                    </a>
                                 </>
                             ) : (
                                 <>
-                                    My portfolio views reached past <strong className="text-white">{Math.floor(viewCount / 100) * 100}</strong>!
+                                    My portfolio views reached past <strong className="text-main-text">{Math.floor(viewCount / 100) * 100}</strong>!
                                     <br />
-                                    <span className="text-sm mt-2 block text-gray-400">Thank you for your cooperation and support.</span>
+                                    <span className="text-sm mt-2 block text-light-gray-70">Thank you for your cooperation and support.</span>
                                 </>
                             )}
                         </p>
@@ -156,15 +173,15 @@ const CelebrationModal = ({ isOpen, onClose, viewCount = 0, type = 'views' }: Ce
                         >
                             <div className="absolute inset-0 bg-gradient-to-r from-neon-blue to-cyan-500 opacity-20 group-hover:opacity-100 transition-opacity duration-300"></div>
                             <div className="absolute inset-0 border border-neon-blue/50 rounded-lg group-hover:border-neon-blue transition-colors"></div>
-                            <span className="relative flex items-center justify-center gap-2 text-neon-blue group-hover:text-white font-medium transition-colors">
+                            <span className="relative flex items-center justify-center gap-2 text-neon-blue group-hover:text-main-text dark:group-hover:text-white font-medium transition-colors">
                                 <IoStarSharp />
                                 <span>Celebrate</span>
                                 <IoStarSharp />
                             </span>
                         </button>
 
-                        <div className="mt-6 text-[10px] text-gray-600 font-mono">
-                            SYSTEM_MSG_ID: {type === 'linkedin' ? 'LINKEDIN_IMPR_ACK' : `${Math.floor(viewCount / 100) * 100}_VIEWS_ACK`}
+                        <div className="mt-6 text-[10px] text-light-gray-70/50 font-mono">
+                            SYSTEM_MSG_ID: {type === 'linkedin' ? 'LINKEDIN_IMPR_ACK' : type === 'leetcode' ? 'LEETCODE_200_ACK' : `${Math.floor(viewCount / 100) * 100}_VIEWS_ACK`}
                         </div>
                     </motion.div>
                 </motion.div>

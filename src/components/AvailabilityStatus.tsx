@@ -10,9 +10,9 @@ export default function AvailabilityStatus({ available = true }: { available?: b
                     {available ? 'Available for work' : 'Busy'}
                 </span>
             </div>
-            <a 
-                href="https://linkedin.com/in/prasanna-nadrajan" 
-                target="_blank" 
+            <a
+                href="https://linkedin.com/in/prasanna-nadrajan"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-1 bg-neon-blue/10 hover:bg-neon-blue/20 text-neon-blue px-4 py-1.5 rounded-full border border-neon-blue/30 transition-all duration-300 text-xs font-semibold hover:shadow-neon"
             >

@@ -15,7 +15,7 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [showCelebration, setShowCelebration] = useState(false);
-  const [celebrationType, setCelebrationType] = useState<"views" | "linkedin">(
+  const [celebrationType, setCelebrationType] = useState<"views" | "linkedin" | "leetcode">(
     "views",
   );
   const [viewCount, setViewCount] = useState(0);
@@ -80,6 +80,10 @@ const Layout = ({ children }: LayoutProps) => {
               }}
               onShowLinkedInUpdate={() => {
                 setCelebrationType("linkedin");
+                setShowCelebration(true);
+              }}
+              onShowLeetCodeUpdate={() => {
+                setCelebrationType("leetcode");
                 setShowCelebration(true);
               }}
               viewCount={viewCount}
