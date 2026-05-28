@@ -25,7 +25,7 @@ const MatrixBackground = ({
         canvas.width = width;
         canvas.height = height;
 
-        const chars = '01{}[];.<>()'.split('');
+        const chars = '10'.split('');
         const fontSize = 16;
         let columns = Math.floor(width / fontSize);
         let drops: number[] = [];
@@ -51,6 +51,19 @@ const MatrixBackground = ({
 
         window.addEventListener('resize', resizeCanvas);
 
+        let isDarkMode = document.documentElement.classList.contains('dark');
+        const getNeonBlue = () => getComputedStyle(document.documentElement).getPropertyValue('--neon-blue').trim();
+        let currentNeonBlue = getNeonBlue() || (isDarkMode ? '#00BFFF' : '#005c8a');
+
+        const observer = new MutationObserver(() => {
+            const newIsDarkMode = document.documentElement.classList.contains('dark');
+            if (isDarkMode !== newIsDarkMode) {
+                isDarkMode = newIsDarkMode;
+                currentNeonBlue = getNeonBlue() || (isDarkMode ? '#00BFFF' : '#005c8a');
+            }
+        });
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
         let animationFrameId: number;
         let lastDrawTime = 0;
         const fps = 30;
@@ -70,15 +83,12 @@ const MatrixBackground = ({
             // Draw new characters
             ctx.globalCompositeOperation = 'source-over';
 
-            let drawColor = color;
-            if (!drawColor) {
-                const computedStyle = getComputedStyle(document.documentElement);
-                drawColor = computedStyle.getPropertyValue('--neon-blue').trim() || '#00BFFF';
-            }
+            let drawColor = color || currentNeonBlue;
 
             ctx.fillStyle = drawColor;
             ctx.font = `${fontSize}px monospace`;
-            ctx.globalAlpha = opacity;
+            // Boost opacity in light mode for better visibility
+            ctx.globalAlpha = isDarkMode ? opacity : Math.min(1.0, opacity * 2.5);
 
             for (let i = 0; i < drops.length; i++) {
                 const text = chars[Math.floor(Math.random() * chars.length)];
@@ -97,6 +107,7 @@ const MatrixBackground = ({
 
         return () => {
             window.removeEventListener('resize', resizeCanvas);
+            observer.disconnect();
             cancelAnimationFrame(animationFrameId);
         };
     }, [color, opacity]);
