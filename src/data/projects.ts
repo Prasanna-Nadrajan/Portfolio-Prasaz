@@ -2,6 +2,16 @@ import type { Project } from "../types";
 
 export const projects: Project[] = [
   {
+    title: "Multi-Modal 48-Hour Sepsis Forecasting",
+    category: "Python",
+    image: "/assets/images/portfolio/sepsis.png",
+    link: "https://github.com/Prasanna-Nadrajan/Sentinal-AI",
+    description:
+      "Developed a Machine Learning model for 48-hour sepsis forecasting using clinical data, achieving high accuracy in early detection and improving patient outcomes.",
+    techStack: ["Python", "TensorFlow", "Keras", "Clinical Data"],
+    projectType: "Personal",
+  },
+  {
     title: "LULC classification using satellite imagery and ensemble learning",
     category: "Python",
     image: "/assets/images/portfolio/LULC_classification.png",
