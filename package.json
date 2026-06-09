@@ -11,6 +11,7 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.4.2",
     "@tailwindcss/postcss": "^4.1.17",
@@ -20,6 +21,7 @@
     "clsx": "^2.1.1",
     "emailjs-com": "^3.2.0",
     "framer-motion": "^12.23.24",
+    "gsap": "^3.15.0",
     "lucide-react": "^0.563.0",
     "postcss": "^8.5.6",
     "react": "^19.2.0",
