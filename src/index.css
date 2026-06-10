@@ -41,6 +41,7 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body {
@@ -370,7 +371,7 @@ nav.scrolled {
 
 .hero-title {
     font-family: 'Syne', sans-serif;
-    font-size: clamp(72px, 12vw, 176px);
+    font-size: clamp(52px, 10vw, 152px);
     font-weight: 800;
     line-height: 0.88;
     letter-spacing: -0.05em;
@@ -1186,8 +1187,8 @@ nav.scrolled {
 }
 
 @media (max-width: 480px) {
-    .hero-title { font-size: 11vw; white-space: nowrap; }
-    .s-title { font-size: 14vw; }
+    .hero-title { font-size: 8.5vw; white-space: nowrap; }
+    .s-title { font-size: 11vw; word-break: break-word; }
     .pname { font-size: 7vw; }
     .pcard-info { padding: 28px 24px; }
 }

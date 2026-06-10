@@ -132,8 +132,8 @@ export default function Contact({ scrollTriggerReady }: ContactProps) {
       <div style={{ marginTop: '100px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '100px 0 60px 0', borderTop: '1px solid var(--border)', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translate(-50%, -50%)', width: '60vw', height: '300px', background: 'var(--accent)', filter: 'blur(150px)', opacity: 0.1, pointerEvents: 'none' }}></div>
 
-        <h2 style={{ fontSize: 'clamp(40px, 15vw, 180px)', fontWeight: 800, fontFamily: '"Blanka", sans-serif', letterSpacing: '0.04em', margin: '0 0 16px 0', color: 'var(--text)', opacity: 0.9, lineHeight: 1 }}>PRASAZ</h2>
-        <p style={{ fontSize: 'clamp(14px, 1.5vw, 20px)', color: 'var(--muted)', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '80px', fontWeight: 600 }}>Data Scientist | Pre-Final Year | Undergrad</p>
+        <h2 style={{ fontSize: 'clamp(40px, 15vw, 180px)', fontWeight: 800, fontFamily: '"Blanka", sans-serif', letterSpacing: '0.04em', margin: '16px 0px 16px 0px', color: 'var(--text)', opacity: 0.9, lineHeight: 1, padding: '100px' }}>PRASAZ</h2>
+        {/* <p style={{ fontSize: 'clamp(14px, 1.5vw, 20px)', color: 'var(--muted)', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '80px', fontWeight: 600 }}>Data Scientist | Pre-Final Year | Undergrad</p> */}
 
         <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%', justifyContent: 'space-between', alignItems: 'center', gap: '24px', zIndex: 1 }}>
           <p style={{ fontSize: '13px', color: 'var(--muted)', margin: 0 }}>© 2026 All Rights Reserved</p>

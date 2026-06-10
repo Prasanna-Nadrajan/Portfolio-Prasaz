@@ -89,7 +89,7 @@ export default function Blog({ scrollTriggerReady }: BlogProps) {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '32px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '32px' }}>
         
         {articles.map((article, index) => (
           <a key={index} href={article.link} target="_blank" rel="noreferrer" className="blog-card" style={{ border: '1px solid var(--border)', borderRadius: 'var(--radius)', padding: '0', display: 'flex', flexDirection: 'column', transition: 'border-color 0.4s ease, transform 0.4s ease', cursor: 'none', overflow: 'hidden' }} 

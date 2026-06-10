@@ -51,7 +51,7 @@ export default function Platforms({ scrollTriggerReady }: PlatformsProps) {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '32px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '32px' }}>
 
         {/* GitHub */}
         <div className="plat-card" style={{ border: '1px solid var(--border)', borderRadius: 'var(--radius)', padding: '32px', display: 'flex', flexDirection: 'column', gap: '20px', transition: 'border-color 0.4s ease' }}>
