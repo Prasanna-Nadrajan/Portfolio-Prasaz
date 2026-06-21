@@ -5,18 +5,18 @@ import { useRef, useEffect } from 'react';
 // ─────────────────────────────────────────────────────────
 const CONFIG = {
   /** Base particle count at 1920px width */
-  BASE_COUNT: 80,
+  BASE_COUNT: 100,
   /** Min particle count (mobile) */
   MIN_COUNT: 35,
   /** Max particle count (ultra-wide) */
-  MAX_COUNT: 200,
+  MAX_COUNT: 120,
   /** Particle radius range */
-  RADIUS_MIN: 2,
-  RADIUS_MAX: 4,
+  RADIUS_MIN: 0.2,
+  RADIUS_MAX: 2,
 
   /** Maximum speed magnitude per axis */
   SPEED_MIN: 0.15,
-  SPEED_MAX: 0.45,
+  SPEED_MAX: 0.55,
 
   /** Distance threshold for drawing edges (squared to avoid sqrt) */
   LINK_DISTANCE: 150,
@@ -30,11 +30,11 @@ const CONFIG = {
   /** Accent color for particles (matches --accent: #FF3D00) */
   PARTICLE_COLOR: { r: 5, g: 2, b: 255 },
   /** Secondary glow color */
-  PARTICLE_GLOW_COLOR: { r: 255, g: 0, b: 92 },
+  PARTICLE_GLOW_COLOR: { r: 5, g: 0, b: 255 },
   /** Line color for edges */
-  LINE_COLOR: { r: 255, g: 61, b: 0 },
+  LINE_COLOR: { r: 5, g: 5, b: 255 },
   /** Mouse line color (slightly different tint) */
-  MOUSE_LINE_COLOR: { r: 255, g: 122, b: 92 },
+  MOUSE_LINE_COLOR: { r: 5, g: 12, b: 255 },
 } as const;
 
 // ─────────────────────────────────────────────────────────
