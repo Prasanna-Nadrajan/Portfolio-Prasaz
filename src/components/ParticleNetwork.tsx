@@ -5,11 +5,11 @@ import { useRef, useEffect } from 'react';
 // ─────────────────────────────────────────────────────────
 const CONFIG = {
   /** Base particle count at 1920px width */
-  BASE_COUNT: 100,
+  BASE_COUNT: 300,
   /** Min particle count (mobile) */
   MIN_COUNT: 35,
   /** Max particle count (ultra-wide) */
-  MAX_COUNT: 120,
+  MAX_COUNT: 320,
   /** Particle radius range */
   RADIUS_MIN: 0.2,
   RADIUS_MAX: 2,
@@ -69,7 +69,7 @@ function createParticle(canvasW: number, canvasH: number): Particle {
     vx: randomBetween(-CONFIG.SPEED_MAX, CONFIG.SPEED_MAX) || CONFIG.SPEED_MIN,
     vy: randomBetween(-CONFIG.SPEED_MAX, CONFIG.SPEED_MAX) || CONFIG.SPEED_MIN,
     radius: randomBetween(CONFIG.RADIUS_MIN, CONFIG.RADIUS_MAX),
-    baseAlpha: randomBetween(0.5, 1),
+    baseAlpha: randomBetween(0.15, 0.5),
   };
 }
 
@@ -220,14 +220,14 @@ export default function ParticleNetwork() {
       for (let i = 0; i < len; i++) {
         const p = particles[i];
 
-        // Outer glow
-        ctx!.fillStyle = `rgba(${PARTICLE_COLOR.r},${PARTICLE_COLOR.g},${PARTICLE_COLOR.b},${p.baseAlpha * 0.15})`;
+        // Outer glow (softer and larger for blur effect)
+        ctx!.fillStyle = `rgba(${PARTICLE_COLOR.r},${PARTICLE_COLOR.g},${PARTICLE_COLOR.b},${p.baseAlpha * 0.4})`;
         ctx!.beginPath();
-        ctx!.arc(p.x, p.y, p.radius * 2.5, 0, Math.PI * 2);
+        ctx!.arc(p.x, p.y, p.radius * 4, 0, Math.PI * 2);
         ctx!.fill();
 
-        // Core dot
-        ctx!.fillStyle = `rgba(${PARTICLE_COLOR.r},${PARTICLE_COLOR.g},${PARTICLE_COLOR.b},${p.baseAlpha})`;
+        // Core dot (reduced alpha)
+        ctx!.fillStyle = `rgba(${PARTICLE_COLOR.r},${PARTICLE_COLOR.g},${PARTICLE_COLOR.b},${p.baseAlpha * 0.7})`;
         ctx!.beginPath();
         ctx!.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx!.fill();
@@ -297,6 +297,8 @@ export default function ParticleNetwork() {
         height: '100%',
         zIndex: -1,
         pointerEvents: 'none',
+        filter: 'blur(1.5px)',
+        opacity: 0.65,
       }}
       aria-hidden="true"
     />

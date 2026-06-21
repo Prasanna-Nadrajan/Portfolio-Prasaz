@@ -69,15 +69,18 @@ export default function About({ scrollTriggerReady }: AboutProps) {
       <div className="about-grid">
         <div className="about-bio">
           <p>
-            <strong>Data Scientist and Frontend Engineer</strong>, passionate about building intelligent systems and engaging user interfaces. I bridge the gap between machine learning algorithms and user experience.
+            Undergraduate student pursuing <u>Artificial Intelligence & Data Science</u>, driven by curiosity, continuous learning, and a passion for building with technology.
           </p>
           <p>
-            <strong>My process is data-driven.</strong> Whether I'm analyzing satellite imagery or optimizing a frontend component, I rely on solid statistical foundations and clean code.
+            My journey revolves around exploring the intersection of <strong>AI, Data Science, Software Development, and Problem Solving</strong>. I enjoy <u>transforming ideas into practical solutions</u>, whether it's developing AI-powered applications, participating in hackathons, experimenting with new technologies, or contributing to community-driven initiatives.
           </p>
           <p>
-            <strong>Active community member.</strong> I volunteer with the Chennai Data Circle and regularly write technical articles on Medium to share my knowledge on data science and machine learning.
+            <u>Active community member.</u> I volunteer with the Chennai Data Circle and regularly write technical articles on Medium to <u>share my knowledge on data science and machine learning</u>.
           </p>
-          
+          <p>
+            I beleive <u>every project teaches something new, every challenge builds resilience, and every connection opens a new opportunity to learn</u>. 🚀
+          </p>
+
           <a href="#" target="_blank" rel="noopener" className="cv-btn" style={{ marginTop: '20px', opacity: 0, transform: 'translateY(16px)' }}>
             View Resume
             <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -96,6 +99,13 @@ export default function About({ scrollTriggerReady }: AboutProps) {
                   <span className="aw-issuer">Undergraduate Student</span>
                 </div>
                 <span className="aw-yr">2024 - Present</span>
+              </li>
+              <li className="award-item">
+                <div className="aw-l">
+                  <span className="aw-title">THSSS, Triplicane</span>
+                  <span className="aw-issuer">High School</span>
+                </div>
+                <span className="aw-yr">2022 - 2024</span>
               </li>
             </ul>
           </div>
@@ -135,6 +145,6 @@ export default function About({ scrollTriggerReady }: AboutProps) {
           </div>
         </div>
       </div>
-    </section>
+    </section >
   );
 }
