@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { motion } from 'framer-motion';
+// import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -114,13 +114,13 @@ export default function SkillMap({ scrollTriggerReady = true }: { scrollTriggerR
         <p className="skill-map-desc" style={{ textAlign: 'left', marginBottom: '40px' }}>
           A comprehensive map of my technical expertise across multiple disciplines.
         </p>
-        
+
         <div className="skills-tree">
           <div className="st-tree-head">
             <div className="st-head-pill">CORE EXPERTISE</div>
           </div>
           <div className="st-stem"></div>
-          
+
           <div className="st-categories">
             {skillCategories.map((cat, i) => (
               <div key={i} className="st-category-col">
@@ -128,9 +128,9 @@ export default function SkillMap({ scrollTriggerReady = true }: { scrollTriggerR
                   <div className="st-dot"></div>
                   <div className="st-line-v-cat"></div>
                 </div>
-                
+
                 <div className="st-cat-pill">{cat.category}</div>
-                
+
                 <div className="st-items-grid">
                   {cat.skills.map((skill, j) => (
                     <div key={j} className="st-skill-card">
