@@ -117,6 +117,15 @@ export default function Blog({ scrollTriggerReady }: BlogProps) {
         )}
 
       </div>
+
+      <div style={{ marginTop: '56px', display: 'flex', justifyContent: 'center' }}>
+        <a href="https://medium.com/@prasaznat" target="_blank" rel="noreferrer" className="cv-btn">
+          View all on Medium
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
+             <path d="M1 11L11 1M11 1H3.5M11 1V8.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </a>
+      </div>
     </section>
   );
 }

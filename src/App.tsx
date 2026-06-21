@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import Preloader from './components/Preloader';
 import CustomCursor from './components/CustomCursor';
+import ParticleNetwork from './components/ParticleNetwork';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Marquee from './components/Marquee';
+import SkillMap from './components/SkillMap';
 import Work from './components/Work';
 import Platforms from './components/Platforms';
 import Blog from './components/Blog';
 import About from './components/About';
+import Experience from './components/Experience';
 import Contact from './components/Contact';
 import './index.css';
 
@@ -20,6 +22,7 @@ export default function App() {
 
   return (
     <>
+      <ParticleNetwork />
       <Preloader onComplete={handlePreloaderComplete} />
       <CustomCursor />
       
@@ -32,11 +35,12 @@ export default function App() {
           <Navbar />
           <main>
             <Hero heroInTrigger={preloaderComplete} />
-            <Marquee />
+            <About scrollTriggerReady={preloaderComplete} />
+            <Experience scrollTriggerReady={preloaderComplete} />
+            <SkillMap scrollTriggerReady={preloaderComplete} />
             <Work scrollTriggerReady={preloaderComplete} />
             <Platforms scrollTriggerReady={preloaderComplete} />
             <Blog scrollTriggerReady={preloaderComplete} />
-            <About scrollTriggerReady={preloaderComplete} />
             <Contact scrollTriggerReady={preloaderComplete} />
           </main>
         </>

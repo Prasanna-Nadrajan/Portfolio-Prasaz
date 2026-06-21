@@ -43,14 +43,16 @@ export default function CustomCursor() {
     document.addEventListener('mouseleave', onMouseLeave);
     document.addEventListener('mouseenter', onMouseEnter);
 
-    const interactiveSelectors = 'a, button, .pcard:not(.pcard--wip)';
+    const interactiveSelectors = 'a, button, .pcard:not(.pcard--wip), [data-cursor]';
     
     const onTargetEnter = (e: Event) => {
       document.body.classList.add('is-hovering');
       const target = e.currentTarget as HTMLElement;
-      if (target.dataset.cursor === 'hi') {
+      const cursorText = target.dataset.cursor;
+      
+      if (cursorText) {
         gsap.to('#cursorLabelText', { opacity: 0, duration: 0.12, onComplete: () => {
-          setText('Say hi! 👋');
+          setText(cursorText === 'hi' ? 'Say hi! 👋' : cursorText);
           gsap.to('#cursorLabelText', { opacity: 1, duration: 0.12 });
         }});
       }

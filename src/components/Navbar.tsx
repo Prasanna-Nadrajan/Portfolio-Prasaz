@@ -37,10 +37,11 @@ export default function Navbar() {
       <a href="#hero" className="nav-logo" onClick={(e) => scrollToSection(e, 'hero')}>prasaz</a>
       <div className="nav-right">
         <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
+          <li><a href="#about" onClick={(e) => scrollToSection(e, 'about')}>About</a></li>
+          <li><a href="#experience" onClick={(e) => scrollToSection(e, 'experience')}>Experience</a></li>
           <li><a href="#work" onClick={(e) => scrollToSection(e, 'work')}>Work</a></li>
           <li><a href="#platforms" onClick={(e) => scrollToSection(e, 'platforms')}>Platforms</a></li>
           <li><a href="#blog" onClick={(e) => scrollToSection(e, 'blog')}>Blog</a></li>
-          <li><a href="#about" onClick={(e) => scrollToSection(e, 'about')}>About</a></li>
           <li><a href="#contact" onClick={(e) => scrollToSection(e, 'contact')}>Contact</a></li>
         </ul>
         <button className="theme-btn" id="themeBtn" aria-label="Toggle colour scheme" onClick={toggleTheme}>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:ital,wght@0,300;0,400;0,600;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:ital,wght@0,300;0,400;0,600;1,300&family=Smooch+Sans:wght@100..900&display=swap');
 @import url('https://fonts.cdnfonts.com/css/blanka');
 
 /* ============================================
@@ -110,7 +110,7 @@ body::after {
     top: 0;
     left: 0;
     pointer-events: none;
-    z-index: 9999;
+    z-index: 99999;
     will-change: transform;
     opacity: 0;
 }
@@ -355,6 +355,50 @@ nav.scrolled {
     position: relative;
 }
 
+.hero-image-wrapper {
+    position: absolute;
+    top: 110px;
+    right: 120px;
+    width: 320px;
+    height: 420px;
+    z-index: 10;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    pointer-events: auto;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="light"] .hero-image-wrapper {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+.hero-image:hover {
+    transform: scale(1.08);
+}
+
+@media (max-width: 768px) {
+    .hero-image-wrapper {
+        position: relative;
+        top: auto;
+        right: auto;
+        width: 100%;
+        max-width: 280px;
+        height: 360px;
+        margin: 0 auto 40px auto;
+        z-index: 1;
+    }
+}
+
 .hero-eyebrow {
     font-size: 11px;
     letter-spacing: 0.14em;
@@ -498,49 +542,6 @@ nav.scrolled {
 @keyframes shline {
     0% { top: -100% }
     100% { top: 100% }
-}
-
-/* ============================================
-    MARQUEE
-============================================ */
-.marquee-wrap {
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    padding: 14px 0;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-.marquee-track {
-    display: inline-flex;
-    animation: mq 28s linear infinite;
-}
-
-.marquee-wrap:hover .marquee-track {
-    animation-play-state: paused;
-}
-
-.mq-item {
-    font-family: 'Syne', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    padding: 0 28px;
-    display: inline-flex;
-    align-items: center;
-    gap: 56px;
-}
-
-.mq-item::after {
-    content: '✦';
-    font-size: 7px;
-}
-
-@keyframes mq {
-    from { transform: translateX(0) }
-    to { transform: translateX(-50%) }
 }
 
 /* ============================================
@@ -960,6 +961,201 @@ nav.scrolled {
 }
 
 /* ============================================
+    EXPERIENCE TIMELINE
+============================================ */
+#experience {
+    padding: 120px 44px;
+}
+
+.exp-tl-wrap {
+    position: relative;
+    margin-top: 80px;
+    padding-bottom: 40px;
+}
+
+/* Central vertical track line */
+.exp-tl-track {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.exp-tl-track-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, var(--accent), var(--accent2));
+    transform-origin: top center;
+    transform: scaleY(0);
+    border-radius: 2px;
+}
+
+/* Each timeline item */
+.exp-tl-item {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    width: 50%;
+    padding: 0 48px;
+    margin-bottom: 64px;
+    opacity: 0; /* animated in via GSAP */
+}
+
+.exp-tl-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Left-aligned items: sit on the left half, card on the right edge */
+.exp-tl-left {
+    justify-content: flex-end;
+    margin-right: 50%;
+    padding-right: 48px;
+    padding-left: 0;
+    text-align: right;
+}
+
+/* Right-aligned items: sit on the right half */
+.exp-tl-right {
+    justify-content: flex-start;
+    margin-left: 50%;
+    padding-left: 48px;
+    padding-right: 0;
+    text-align: left;
+}
+
+/* Dot on the track */
+.exp-tl-dot {
+    position: absolute;
+    top: 20px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    background: var(--bg);
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.exp-tl-left .exp-tl-dot {
+    right: -8px;
+}
+
+.exp-tl-right .exp-tl-dot {
+    left: -8px;
+}
+
+.exp-tl-dot-inner {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    transform: scale(0); /* animated in via GSAP */
+}
+
+/* Card */
+.exp-tl-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    max-width: 400px;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.exp-tl-card:hover {
+    border-color: var(--border-hover);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+}
+
+.exp-tl-period {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.exp-tl-company {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+    margin-bottom: 4px;
+}
+
+.exp-tl-role {
+    display: block;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 14px;
+    letter-spacing: 0.02em;
+}
+
+.exp-tl-desc {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--muted);
+    font-weight: 300;
+}
+
+/* ---- Responsive: collapse to single column ---- */
+@media (max-width: 900px) {
+    #experience {
+        padding: 80px 24px;
+    }
+
+    .exp-tl-wrap {
+        margin-top: 48px;
+    }
+
+    .exp-tl-track {
+        left: 20px;
+    }
+
+    .exp-tl-item {
+        width: 100%;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 56px !important;
+        padding-right: 0 !important;
+        text-align: left !important;
+        justify-content: flex-start !important;
+    }
+
+    .exp-tl-left .exp-tl-dot,
+    .exp-tl-right .exp-tl-dot {
+        left: 12px;
+        right: auto;
+    }
+
+    .exp-tl-card {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .exp-tl-card {
+        padding: 20px 20px;
+    }
+
+    .exp-tl-company {
+        font-size: 17px;
+    }
+}
+
+/* ============================================
     CONTACT
 ============================================ */
 #contact {
@@ -1133,7 +1329,7 @@ nav.scrolled {
     .hero-bottom { flex-direction: column; align-items: flex-start; }
     .hero-right { align-items: flex-start; }
     .scroll-hint { top: auto; bottom: 56px; }
-    #work, #about, #contact, #platforms, #blog { padding: 80px 24px !important; }
+    #work, #about, #experience, #contact, #platforms, #blog { padding: 80px 24px !important; }
     .s-header { margin-bottom: 40px; }
     .projects { grid-template-columns: 1fr; }
     .about-grid { grid-template-columns: 1fr; gap: 48px; margin-top: 48px; }
@@ -1223,4 +1419,472 @@ nav.scrolled {
     opacity: 0;
     will-change: transform, border-radius;
     animation: liquidMorph 10s ease-in-out infinite alternate;
+}
+
+/* ============================================
+    SKILL MAP
+============================================ */
+.skill-map-section {
+  padding: 96px 24px;
+  position: relative;
+  overflow-x: clip;
+  overflow-y: visible;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+@media (min-width: 768px) {
+  .skill-map-section {
+    padding: 96px 48px;
+  }
+  .skill-map-scroll {
+    margin-left: -48px;
+    margin-right: -48px;
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}
+
+.skill-map-container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.skill-map-desc {
+  color: var(--muted);
+  font-family: 'Smooch Sans', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  max-width: 42rem;
+}
+
+@media (min-width: 768px) {
+  .skill-map-desc {
+    font-size: 18px;
+  }
+}
+
+.skill-map-scroll {
+  overflow-x: auto;
+  padding-bottom: 48px;
+  -ms-overflow-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+  /* let tree be wider than section padding */
+  margin-left: -24px;
+  margin-right: -24px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+.skill-map-scroll::-webkit-scrollbar {
+  height: 4px;
+}
+.skill-map-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.skill-map-scroll::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 100px;
+}
+
+.skill-map-tree-wrap {
+  display: inline-flex;
+  min-width: 100%;
+  justify-content: center;
+  padding-top: 32px;
+}
+
+/* Tree Node */
+.tree-node-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tree-node {
+  padding: 12px 20px;
+  border-radius: 12px;
+  cursor: none;
+  transition: all 0.3s;
+  position: relative;
+  z-index: 10;
+  backdrop-filter: blur(4px);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--fg);
+}
+[data-theme="light"] .tree-node {
+  background: rgba(240, 237, 229, 0.8);
+}
+[data-theme="dark"] .tree-node {
+  background: rgba(12, 12, 11, 0.8);
+}
+
+.tree-node:hover {
+  border-color: var(--fg);
+}
+
+.tree-node.is-root {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: transparent;
+  font-weight: 700;
+  box-shadow: 0 4px 20px rgba(255, 61, 0, 0.3);
+}
+.tree-node.is-root:hover {
+  border-color: transparent;
+}
+
+.tree-node-text {
+  font-family: 'Smooch Sans', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  white-space: nowrap;
+  letter-spacing: 0.025em;
+}
+
+@media (min-width: 768px) {
+  .tree-node-text {
+    font-size: 16px;
+  }
+}
+
+.tree-node-indicator {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 16px;
+  height: 16px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .5; }
+}
+
+.tree-node-indicator-text {
+  font-size: 8px;
+  color: #fff;
+  font-weight: 700;
+}
+
+/* Children connections */
+.tree-children {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+  gap: 16px;
+  padding-top: 24px;
+}
+
+@media (min-width: 768px) {
+  .tree-children {
+    margin-top: 48px;
+    gap: 32px;
+  }
+}
+
+.tree-line-v-top {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  width: 1px;
+  height: 24px;
+  background: var(--border);
+  transform: translateX(-50%);
+}
+
+@media (min-width: 768px) {
+  .tree-line-v-top {
+    top: -32px;
+    height: 32px;
+  }
+}
+
+.tree-child-wrapper {
+  position: relative;
+  padding-top: 24px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.tree-line-h-first {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  right: 0;
+  height: 1px;
+  background: var(--border);
+}
+
+.tree-line-h-last {
+  position: absolute;
+  top: 0;
+  right: 50%;
+  left: 0;
+  height: 1px;
+  background: var(--border);
+}
+
+.tree-line-h-mid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--border);
+}
+
+.tree-line-v-child {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 24px;
+  background: var(--border);
+  transform: translateX(-50%);
+}
+
+/* Modal */
+.sm-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 9998;
+}
+
+.sm-modal-wrap {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.sm-modal {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 448px;
+  width: 100%;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  position: relative;
+  pointer-events: auto;
+}
+
+@media (min-width: 768px) {
+  .sm-modal {
+    padding: 32px;
+  }
+}
+
+.sm-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  color: var(--muted);
+  background: none;
+  border: none;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: none;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sm-modal-close:hover {
+  color: var(--fg);
+  background: var(--border);
+}
+
+.sm-modal-title {
+  font-size: 24px;
+  font-weight: 700;
+  font-family: 'Syne', sans-serif;
+  margin-bottom: 8px;
+  color: var(--fg);
+  padding-right: 32px;
+}
+
+.sm-modal-divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(to right, var(--accent), transparent);
+  margin: 16px 0;
+}
+
+.sm-modal-desc {
+  font-family: 'Smooch Sans', sans-serif;
+  font-weight: 400;
+  color: var(--muted);
+  line-height: 1.625;
+  font-size: 16px;
+}
+
+@media (min-width: 768px) {
+  .sm-modal-desc {
+    font-size: 18px;
+  }
+}
+
+/* ============================================
+    SKILL MAP (DESKTOP & MOBILE VISIBILITY)
+============================================ */
+.skill-map-desktop {
+  display: none;
+}
+.skill-map-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .skill-map-desktop {
+    display: block;
+  }
+  .skill-map-mobile {
+    display: none;
+  }
+}
+
+/* ============================================
+    SKILL MAP (MOBILE LIST STYLES)
+============================================ */
+.mobile-skill-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-skill-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--fg);
+  font-family: 'Smooch Sans', sans-serif;
+  font-size: 18px;
+  text-align: left;
+  cursor: none;
+  transition: all 0.3s;
+}
+
+[data-theme="light"] .mobile-skill-btn {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.mobile-skill-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--border-hover);
+}
+
+[data-theme="light"] .mobile-skill-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.mobile-skill-btn.is-branch {
+  font-weight: 600;
+}
+
+.mobile-skill-btn.is-expanded {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-color: var(--border-hover);
+}
+
+.mobile-skill-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mobile-skill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.mobile-skill-chevron {
+  display: flex;
+  align-items: center;
+  color: var(--muted);
+}
+
+.mobile-skill-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+}
+
+.mobile-skill-children {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 0 12px 20px;
+  border-left: 1px dashed var(--border);
+  margin-left: 19px;
+  margin-bottom: 8px;
+}
+
+/* Depth variations */
+.depth-0 > .mobile-skill-btn {
+  background: var(--bg2);
+}
+.depth-1 > .mobile-skill-btn {
+  font-size: 16px;
+}
+.depth-2 > .mobile-skill-btn {
+  font-size: 15px;
+  background: transparent;
+}
+
+/* ============================================
+    SKILL MAP (DESKTOP INTERACTIVE TREE STYLES)
+============================================ */
+.tree-node-chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+  color: var(--muted);
+}
+
+.tree-node.has-children {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tree-node.is-expanded {
+  border-color: var(--accent);
 }

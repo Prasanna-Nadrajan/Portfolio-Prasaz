@@ -1,4 +1,4 @@
-
+import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
@@ -7,6 +7,8 @@ interface HeroProps {
 }
 
 export default function Hero({ heroInTrigger }: HeroProps) {
+  const imgRef = useRef<HTMLImageElement>(null);
+
   useGSAP(() => {
     if (!heroInTrigger) return;
 
@@ -35,10 +37,56 @@ export default function Hero({ heroInTrigger }: HeroProps) {
     });
 
     gsap.to('.scroll-hint', { opacity: 1, duration: 0.6, delay: 1.2 });
+
+    // Floating parallax effect for image
+    const onMouseMove = (e: MouseEvent) => {
+      if (!imgRef.current) return;
+      const { clientX, clientY } = e;
+      
+      const x = (clientX / window.innerWidth - 0.5) * 30;
+      const y = (clientY / window.innerHeight - 0.5) * 30;
+      
+      gsap.to(imgRef.current, {
+        x: x,
+        y: y,
+        duration: 1.2,
+        ease: 'power2.out'
+      });
+    };
+
+    // Add subtle continuous floating animation
+    gsap.to(imgRef.current, {
+      y: '-=15',
+      duration: 3,
+      yoyo: true,
+      repeat: -1,
+      ease: 'sine.inOut'
+    });
+
+    gsap.fromTo('.hero-image-wrapper', 
+      { opacity: 0, scale: 0.9 }, 
+      { opacity: 1, scale: 1, duration: 1, ease: 'power3.out', delay: 1.0 }
+    );
+
+    window.addEventListener('mousemove', onMouseMove);
+    
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove);
+    };
   }, [heroInTrigger]);
 
   return (
     <section id="hero">
+      <div className="hero-image-wrapper">
+        <img 
+          ref={imgRef}
+          src="/assets/images/portfolio_image_1.jpeg" 
+          alt="Prasanna Nadrajan" 
+          className="hero-image"
+          data-cursor="prasanna"
+        />
+      </div>
+
       <p className="hero-eyebrow">
         <span>Data Scientist | Pre-Final Year | AI&DS Undergrad</span>
       </p>

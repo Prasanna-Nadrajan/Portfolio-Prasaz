@@ -88,40 +88,6 @@ export default function About({ scrollTriggerReady }: AboutProps) {
 
         <div className="about-side">
           <div>
-            <h3 className="detail-h">Experience</h3>
-            <ul className="exp-list">
-              <li className="exp-item">
-                <div className="ei-l">
-                  <span className="ei-co">ARQ REC</span>
-                  <span className="ei-role">Data Analyst Associate</span>
-                </div>
-                <span className="ei-yr">2025 - Present</span>
-              </li>
-              <li className="exp-item">
-                <div className="ei-l">
-                  <span className="ei-co">Evo Astra Ventures</span>
-                  <span className="ei-role">Data Science Intern</span>
-                </div>
-                <span className="ei-yr">2025 - 2026</span>
-              </li>
-              <li className="exp-item">
-                <div className="ei-l">
-                  <span className="ei-co">Indian Space Academy</span>
-                  <span className="ei-role">Intern Trainee</span>
-                </div>
-                <span className="ei-yr">2025 - 2026</span>
-              </li>
-              <li className="exp-item">
-                <div className="ei-l">
-                  <span className="ei-co">Medium</span>
-                  <span className="ei-role">Tech Blogger</span>
-                </div>
-                <span className="ei-yr">2025 - Present</span>
-              </li>
-            </ul>
-          </div>
-
-          <div>
             <h3 className="detail-h">Education</h3>
             <ul className="awards-list">
               <li className="award-item">
