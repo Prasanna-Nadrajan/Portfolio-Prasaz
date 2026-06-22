@@ -54,7 +54,7 @@ export default function Work({ scrollTriggerReady }: WorkProps) {
       </div>
 
       <div className="projects">
-        
+
         {/* Project 1 */}
         <a href="https://github.com/Prasanna-Nadrajan/Sentinal-AI" target="_blank" rel="noreferrer" className="pcard p-caixabank">
           <div className="pcard-inner">
@@ -66,6 +66,9 @@ export default function Work({ scrollTriggerReady }: WorkProps) {
                     <span className="tag">Machine Learning</span>
                     <span className="tag">Healthcare</span>
                   </div>
+                </div>
+                <div className="p-img-wrapper" style={{ width: '140px', height: '90px', borderRadius: '12px', overflow: 'hidden', flexShrink: 0 }}>
+                  <img src="/assets/images/portfolio/sepsis.png" alt="48-Hour Sepsis Forecasting" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
                 <div className="p-arrow" aria-hidden="true">
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -107,6 +110,9 @@ export default function Work({ scrollTriggerReady }: WorkProps) {
                     <span className="tag">Computer Vision</span>
                   </div>
                 </div>
+                <div className="p-img-wrapper" style={{ width: '140px', height: '90px', borderRadius: '12px', overflow: 'hidden', flexShrink: 0 }}>
+                  <img src="/assets/images/portfolio/LULC_classification.png" alt="LULC Classification" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                </div>
                 <div className="p-arrow" aria-hidden="true">
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                     <path d="M2 12L12 2M12 2H4M12 2V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
@@ -146,6 +152,9 @@ export default function Work({ scrollTriggerReady }: WorkProps) {
                     <span className="tag">Computer Vision</span>
                     <span className="tag">Real-time</span>
                   </div>
+                </div>
+                <div className="p-img-wrapper" style={{ width: '140px', height: '90px', borderRadius: '12px', overflow: 'hidden', flexShrink: 0 }}>
+                  <img src="/assets/images/portfolio/Ambulance_detection.png" alt="Signal Sync" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
                 <div className="p-arrow" aria-hidden="true">
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -187,6 +196,9 @@ export default function Work({ scrollTriggerReady }: WorkProps) {
                     <span className="tag">CI/CD</span>
                   </div>
                 </div>
+                <div className="p-img-wrapper" style={{ width: '140px', height: '90px', borderRadius: '12px', overflow: 'hidden', flexShrink: 0 }}>
+                  <img src="/assets/images/portfolio/ai-powered-code-reviewer-for-ml-pipelines.png" alt="Code Sage" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                </div>
                 <div className="p-arrow" aria-hidden="true">
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                     <path d="M2 12L12 2M12 2H4M12 2V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
@@ -227,6 +239,9 @@ export default function Work({ scrollTriggerReady }: WorkProps) {
                     <span className="tag">Finance</span>
                   </div>
                 </div>
+                <div className="p-img-wrapper" style={{ width: '140px', height: '90px', borderRadius: '12px', overflow: 'hidden', flexShrink: 0 }}>
+                  <img src="/assets/images/portfolio/loan_eligibilty.png" alt="Credit Sense" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                </div>
                 <div className="p-arrow" aria-hidden="true">
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                     <path d="M2 12L12 2M12 2H4M12 2V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
@@ -266,6 +281,9 @@ export default function Work({ scrollTriggerReady }: WorkProps) {
                     <span className="tag">Deep Learning</span>
                     <span className="tag">Bioinformatics</span>
                   </div>
+                </div>
+                <div className="p-img-wrapper" style={{ width: '140px', height: '90px', borderRadius: '12px', overflow: 'hidden', flexShrink: 0 }}>
+                  <img src="/assets/images/portfolio/eDNA_Pipeline.png" alt="eDNA Lab" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
                 <div className="p-arrow" aria-hidden="true">
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">

@@ -26,7 +26,7 @@ export default function Blog({ scrollTriggerReady }: BlogProps) {
       .then(res => res.json())
       .then(data => {
         if (data.items) {
-          const formatted = data.items.slice(0, 3).map((item: any) => {
+          const formatted = data.items.slice(0, 10).map((item: any) => {
             let img = item.thumbnail;
             if (!img || img.indexOf('stat?event') > -1) {
               const match = item.content.match(/<img[^>]+src="([^">]+)"/);
@@ -90,9 +90,9 @@ export default function Blog({ scrollTriggerReady }: BlogProps) {
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '32px' }}>
-        
+
         {articles.map((article, index) => (
-          <a key={index} href={article.link} target="_blank" rel="noreferrer" className="blog-card" style={{ border: '1px solid var(--border)', borderRadius: 'var(--radius)', padding: '0', display: 'flex', flexDirection: 'column', transition: 'border-color 0.4s ease, transform 0.4s ease', cursor: 'none', overflow: 'hidden' }} 
+          <a key={index} href={article.link} target="_blank" rel="noreferrer" className="blog-card" style={{ border: '1px solid var(--border)', borderRadius: 'var(--radius)', padding: '0', display: 'flex', flexDirection: 'column', transition: 'border-color 0.4s ease, transform 0.4s ease', cursor: 'none', overflow: 'hidden' }}
             onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--border-hover)'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
             onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.transform = 'none'; }}
           >
@@ -122,7 +122,7 @@ export default function Blog({ scrollTriggerReady }: BlogProps) {
         <a href="https://medium.com/@prasaznat" target="_blank" rel="noreferrer" className="cv-btn">
           View all on Medium
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
-             <path d="M1 11L11 1M11 1H3.5M11 1V8.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M1 11L11 1M11 1H3.5M11 1V8.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </a>
       </div>
