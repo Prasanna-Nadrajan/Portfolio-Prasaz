@@ -357,10 +357,10 @@ nav.scrolled {
 
 .hero-image-wrapper {
     position: absolute;
-    top: 110px;
-    right: 120px;
-    width: 480px;
-    height: 630px;
+    top: 12vh;
+    right: 8vw;
+    width: clamp(280px, 32vw, 480px);
+    height: clamp(380px, 45vw, 630px);
     z-index: 10;
     border-radius: 20px;
     overflow: hidden;
@@ -409,6 +409,8 @@ nav.scrolled {
     color: var(--muted);
     margin-bottom: 20px;
     overflow: hidden;
+    position: relative;
+    z-index: 20;
 }
 
 .hero-eyebrow span {
@@ -418,11 +420,13 @@ nav.scrolled {
 
 .hero-title {
     font-family: 'Syne', sans-serif;
-    font-size: clamp(42px, 8vw, 120px);
+    font-size: clamp(36px, 7vw, 100px);
     font-weight: 800;
-    line-height: 0.88;
+    line-height: 0.9;
     letter-spacing: -0.05em;
     margin-bottom: 48px;
+    position: relative;
+    z-index: 20;
 }
 
 .hero-title .tl {
@@ -450,6 +454,8 @@ nav.scrolled {
     justify-content: space-between;
     align-items: flex-end;
     gap: 32px;
+    position: relative;
+    z-index: 20;
 }
 
 .hero-desc {
@@ -608,10 +614,10 @@ nav.scrolled {
 
 .s-title {
     font-family: 'Syne', sans-serif;
-    font-size: clamp(52px, 8vw, 110px);
+    font-size: clamp(36px, 6vw, 80px);
     font-weight: 800;
     letter-spacing: -0.045em;
-    line-height: 0.88;
+    line-height: 0.92;
 }
 
 .s-count {
@@ -770,7 +776,7 @@ nav.scrolled {
 
 .pm-val {
     font-family: 'Inter', sans-serif;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 800;
     letter-spacing: -0.04em;
     color: var(--muted);
@@ -874,8 +880,8 @@ nav.scrolled {
 }
 
 .about-bio p {
-    font-size: clamp(17px, 1.7vw, 22px);
-    line-height: 1.62;
+    font-size: clamp(15px, 1.4vw, 18px);
+    line-height: 1.65;
     font-weight: 300;
     color: var(--muted);
     margin-bottom: 24px;
@@ -1206,11 +1212,11 @@ nav.scrolled {
 
 .contact-headline {
     font-family: 'Syne', sans-serif;
-    font-size: clamp(52px, 9vw, 130px);
+    font-size: clamp(36px, 7vw, 100px);
     font-weight: 800;
     letter-spacing: -0.045em;
-    line-height: 0.88;
-    margin: 56px 0 72px;
+    line-height: 0.92;
+    margin: 40px 0 56px;
     overflow: hidden;
 }
 
@@ -1371,8 +1377,8 @@ nav.scrolled {
     .hero-bottom { flex-direction: column; align-items: flex-start; }
     .hero-right { align-items: flex-start; }
     .scroll-hint { top: auto; bottom: 56px; }
-    #work, #about, #experience, #contact, #platforms, #blog { padding: 80px 24px !important; }
-    .s-header { margin-bottom: 40px; }
+    #work, #about, #experience, #contact, #platforms, #blog { padding: 60px 24px !important; }
+    .s-header { margin-bottom: 32px; }
     .projects { grid-template-columns: 1fr; }
     .about-grid { grid-template-columns: 1fr; gap: 48px; margin-top: 48px; }
     .contact-footer { flex-direction: column; gap: 24px; align-items: flex-start; }
@@ -1425,10 +1431,11 @@ nav.scrolled {
 }
 
 @media (max-width: 480px) {
-    .hero-title { font-size: 7.5vw; white-space: nowrap; }
-    .s-title { font-size: 11vw; word-break: break-word; }
-    .pname { font-size: 7vw; }
+    .hero-title { font-size: clamp(32px, 9vw, 56px); white-space: nowrap; }
+    .s-title { font-size: clamp(28px, 9vw, 52px); word-break: break-word; }
+    .pname { font-size: clamp(18px, 5.5vw, 28px); }
     .pcard-info { padding: 28px 24px; }
+    .contact-headline { font-size: clamp(28px, 9vw, 52px); margin: 24px 0 36px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -10,6 +10,26 @@ interface ContactProps {
   scrollTriggerReady: boolean;
 }
 
+// Increment and retrieve a persistent local view count.
+// Also attempts an external free counter (counterapi.dev v2 public test endpoint)
+// as a best-effort real counter, falling back to the local value on any error.
+const LOCAL_COUNT_KEY = 'prasaz_portfolio_views';
+
+function getAndIncrementLocalCount(): number {
+  const stored = localStorage.getItem(LOCAL_COUNT_KEY);
+  let base = stored ? parseInt(stored, 10) : 1700; // seed at 1700
+  
+  // If the user already had a smaller number in their local storage from earlier,
+  // force it up to our new baseline.
+  if (isNaN(base) || base < 1700) {
+    base = 1700;
+  }
+  
+  const next = base + 1;
+  localStorage.setItem(LOCAL_COUNT_KEY, String(next));
+  return next;
+}
+
 export default function Contact({ scrollTriggerReady }: ContactProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const [copied, setCopied] = useState(false);
@@ -17,17 +37,24 @@ export default function Contact({ scrollTriggerReady }: ContactProps) {
 
   useEffect(() => {
     const fetchCount = async () => {
-      try {
-        const namespace = "portfolio-prasanna-nadrajan";
-        const key = "visits";
-        const response = await fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`);
-        if (!response.ok) throw new Error("Network response was not ok");
+      // Increment local counter first so it's always available
+      const localCount = getAndIncrementLocalCount();
 
-        const data = await response.json();
-        setViewCount(data.count);
-      } catch (error) {
-        console.error("Error fetching visitor count:", error);
-        setViewCount(400); // Default fallback matching previous behavior
+      try {
+        // CounterAPI v2 — uses a public "test" workspace that doesn't need auth,
+        // scoped to a unique counter name so it acts as a real shared counter.
+        const res = await fetch(
+          'https://api.counterapi.dev/v2/prasaz-portfolio/page-views/up',
+          { method: 'GET' }
+        );
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        // v2 returns { count: number }
+        const count = typeof data.count === 'number' ? data.count + 1700 : null;
+        setViewCount(count ?? localCount);
+      } catch (err) {
+        console.warn('Counter API unavailable, using local count:', err);
+        setViewCount(localCount);
       }
     };
 
@@ -130,22 +157,25 @@ export default function Contact({ scrollTriggerReady }: ContactProps) {
         </div>
       </div>
 
-      <div style={{ marginTop: '100px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '100px 0 60px 0', borderTop: '1px solid var(--border)', position: 'relative' }}>
-        <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translate(-50%, -50%)', width: '60vw', height: '300px', background: 'var(--accent)', filter: 'blur(150px)', opacity: 0.1, pointerEvents: 'none' }}></div>
+      <div style={{ marginTop: '80px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '64px 0 40px 0', borderTop: '1px solid var(--border)', position: 'relative' }}>
+        <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translate(-50%, -50%)', width: '70vw', height: '350px', background: 'var(--accent)', filter: 'blur(160px)', opacity: 0.12, pointerEvents: 'none' }}></div>
 
-        <h2 style={{ fontSize: 'clamp(40px, 15vw, 180px)', fontWeight: 800, fontFamily: '"Blanka", sans-serif', letterSpacing: '0.04em', margin: '16px 0px 16px 0px', color: 'var(--text)', opacity: 0.9, lineHeight: 1, padding: '100px' }}>PRASAZ</h2>
-        {/* <p style={{ fontSize: 'clamp(14px, 1.5vw, 20px)', color: 'var(--muted)', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '80px', fontWeight: 600 }}>Data Scientist | Pre-Final Year | Undergrad</p> */}
+        <h2 style={{ fontSize: 'clamp(40px, 12vw, 160px)', fontWeight: 800, fontFamily: '"Blanka", sans-serif', letterSpacing: '0.04em', margin: '16px 0 32px 0', color: 'var(--fg)', opacity: 0.95, lineHeight: 1, textShadow: '0 10px 40px rgba(0,0,0,0.2)' }}>PRASAZ</h2>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%', justifyContent: 'space-between', alignItems: 'center', gap: '24px', zIndex: 1 }}>
-          <p style={{ fontSize: '13px', color: 'var(--muted)', margin: 0 }}>© 2026 All Rights Reserved</p>
+          <p style={{ fontSize: '13px', color: 'var(--muted)', margin: 0, fontWeight: 500, letterSpacing: '0.02em' }}>© 2026 All Rights Reserved</p>
 
-          <p style={{ fontSize: '13px', color: 'var(--muted)', margin: 0, display: 'flex', alignItems: 'center', gap: '8px', background: 'var(--bg)', padding: '8px 16px', borderRadius: '100px', border: '1px solid var(--border)' }}>
-            <span style={{ display: 'inline-block', width: '6px', height: '6px', borderRadius: '50%', background: 'var(--accent)', boxShadow: '0 0 10px var(--accent)' }}></span>
-            Page Views: <span ref={countRef} style={{ fontWeight: 800, fontSize: '18px', color: 'var(--text)', margin: '0 4px' }}>{viewCount !== null ? viewCount : '...'}</span>
+          <p style={{ fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)', margin: 0, display: 'flex', alignItems: 'center', gap: '10px', background: 'rgba(255,255,255,0.03)', padding: '10px 20px', borderRadius: '100px', border: '1px solid var(--border)', backdropFilter: 'blur(10px)', boxShadow: '0 4px 20px rgba(0,0,0,0.1)' }}>
+            <span style={{ display: 'inline-block', width: '6px', height: '6px', borderRadius: '50%', background: 'var(--accent)', boxShadow: '0 0 10px var(--accent)', animation: 'blink 2.2s ease infinite' }}></span>
+            Page Views
+            <span ref={countRef} style={{ fontWeight: 800, fontSize: '18px', color: 'var(--fg)', margin: '0 4px', fontVariantNumeric: 'tabular-nums' }}>{viewCount !== null ? viewCount : '...'}</span>
           </p>
 
-          <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} style={{ background: 'none', border: 'none', color: 'var(--muted)', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.1em', cursor: 'none', transition: 'color 0.3s' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--muted)'}>
-            Back to top ↑
+          <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} style={{ background: 'none', border: 'none', color: 'var(--muted)', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.12em', fontWeight: 600, cursor: 'none', transition: 'all 0.3s ease', display: 'flex', alignItems: 'center', gap: '6px' }} onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--fg)'; e.currentTarget.style.transform = 'translateY(-3px)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--muted)'; e.currentTarget.style.transform = 'translateY(0)'; }}>
+            Back to top
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transition: 'transform 0.3s ease' }}>
+              <path d="M12 19V5M5 12l7-7 7 7" />
+            </svg>
           </button>
         </div>
       </div>

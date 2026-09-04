@@ -190,8 +190,8 @@ const NetworkGlobe: React.FC = () => {
           top: '50%',
           left: '0%',
           transform: 'translate(-50%, -50%)',
-          width: '1200px',
-          height: '1200px',
+          width: '800px',
+          height: '800px',
           backgroundColor: 'transparent'
         }}
       />

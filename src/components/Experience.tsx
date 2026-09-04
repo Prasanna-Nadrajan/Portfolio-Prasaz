@@ -11,11 +11,20 @@ interface ExperienceProps {
 
 const experiences = [
   {
+    company: 'Hyundai Motor India Limited',
+    role: 'Data Analyst Intern',
+    period: 'Aug 2026 – Present',
+    description:
+      'Applying data analysis techniques and collaborating with teams to extract actionable insights from automotive industry data.',
+    logo: '/assets/images/experience/hyundai.jpg'
+  },
+  {
     company: 'ARQ REC',
     role: 'Data Analyst Associate',
     period: '2025 – Present',
     description:
       'Driving data-informed strategies through advanced analytics, reporting dashboards, and cross-functional collaboration.',
+    logo: '/assets/images/experience/arq_rec_logo.jpg'
   },
   {
     company: 'Evo Astra Ventures',
@@ -23,6 +32,7 @@ const experiences = [
     period: '2025 – 2026',
     description:
       'Built predictive models and automated data pipelines to support product decision-making at scale.',
+    logo: '/assets/images/experience/evo_astra.png'
   },
   {
     company: 'Indian Space Academy',
@@ -30,6 +40,7 @@ const experiences = [
     period: '2025 – 2026',
     description:
       'Processed and analysed satellite imagery using computer vision and geospatial analysis techniques.',
+    logo: '/assets/images/experience/isa_logo.png'
   },
   {
     company: 'Medium',
@@ -37,6 +48,7 @@ const experiences = [
     period: '2025 – Present',
     description:
       'Publishing in-depth articles on machine learning, data science, and modern web technologies.',
+    logo: '/assets/images/experience/medium.png'
   },
 ];
 
@@ -148,8 +160,13 @@ export default function Experience({ scrollTriggerReady }: ExperienceProps) {
 
             {/* Card */}
             <div className="exp-tl-card">
-              <span className="exp-tl-period">{exp.period}</span>
-              <h3 className="exp-tl-company">{exp.company}</h3>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '12px' }}>
+                <img src={exp.logo} alt={exp.company} style={{ width: '48px', height: '48px', borderRadius: '12px', objectFit: 'contain', backgroundColor: 'var(--bg)', border: '1px solid var(--border)' }} />
+                <div>
+                  <span className="exp-tl-period" style={{ marginBottom: '4px' }}>{exp.period}</span>
+                  <h3 className="exp-tl-company" style={{ marginBottom: 0 }}>{exp.company}</h3>
+                </div>
+              </div>
               <span className="exp-tl-role">{exp.role}</span>
               <p className="exp-tl-desc">{exp.description}</p>
             </div>

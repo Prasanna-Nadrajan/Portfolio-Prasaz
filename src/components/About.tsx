@@ -93,17 +93,23 @@ export default function About({ scrollTriggerReady }: AboutProps) {
           <div>
             <h3 className="detail-h">Education</h3>
             <ul className="awards-list">
-              <li className="award-item">
-                <div className="aw-l">
-                  <span className="aw-title">Rajalakshmi Engineering College</span>
-                  <span className="aw-issuer">Undergraduate Student</span>
+              <li className="award-item" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <img src="/assets/images/experience/rec.png" alt="REC" style={{ width: '40px', height: '40px', borderRadius: '8px', objectFit: 'contain', backgroundColor: 'var(--bg)', border: '1px solid var(--border)' }} />
+                  <div className="aw-l">
+                    <span className="aw-title">Rajalakshmi Engineering College</span>
+                    <span className="aw-issuer">Undergraduate Student</span>
+                  </div>
                 </div>
                 <span className="aw-yr">2024 - Present</span>
               </li>
-              <li className="award-item">
-                <div className="aw-l">
-                  <span className="aw-title">THSSS, Triplicane</span>
-                  <span className="aw-issuer">High School</span>
+              <li className="award-item" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <img src="/assets/images/experience/hsss.png" alt="THSSS" style={{ width: '40px', height: '40px', borderRadius: '8px', objectFit: 'contain', backgroundColor: 'var(--bg)', border: '1px solid var(--border)' }} />
+                  <div className="aw-l">
+                    <span className="aw-title">THSSS, Triplicane</span>
+                    <span className="aw-issuer">High School</span>
+                  </div>
                 </div>
                 <span className="aw-yr">2022 - 2024</span>
               </li>
@@ -113,19 +119,38 @@ export default function About({ scrollTriggerReady }: AboutProps) {
           <div>
             <h3 className="detail-h">Volunteering</h3>
             <ul className="awards-list">
-              <li className="award-item">
-                <div className="aw-l">
-                  <span className="aw-title">Chennai Data Circle</span>
-                  <span className="aw-issuer">Active Member</span>
+              <li className="award-item" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <img src="/assets/images/experience/cdc.png" alt="CDC" style={{ width: '40px', height: '40px', borderRadius: '8px', objectFit: 'contain', backgroundColor: 'var(--bg)', border: '1px solid var(--border)' }} />
+                  <div className="aw-l">
+                    <span className="aw-title">Chennai Data Circle</span>
+                    <span className="aw-issuer">Active Member</span>
+                  </div>
                 </div>
                 <span className="aw-yr">2026 - Present</span>
               </li>
-              <li className="award-item">
-                <div className="aw-l">
-                  <span className="aw-title">CII Connect 2024</span>
-                  <span className="aw-issuer">Volunteer</span>
+              <li className="award-item" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <img src="/assets/images/experience/cii.png" alt="CII" style={{ width: '40px', height: '40px', borderRadius: '8px', objectFit: 'contain', backgroundColor: 'var(--bg)', border: '1px solid var(--border)' }} />
+                  <div className="aw-l">
+                    <span className="aw-title">CII Connect 2024</span>
+                    <span className="aw-issuer">Volunteer</span>
+                  </div>
                 </div>
                 <span className="aw-yr">2024</span>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="detail-h">Certifications</h3>
+            <ul className="awards-list">
+              <li className="award-item">
+                <div className="aw-l">
+                  <span className="aw-title">JLPT N5</span>
+                  <span className="aw-issuer">Japanese Language Proficiency Test</span>
+                </div>
+                <span className="aw-yr">Certified</span>
               </li>
             </ul>
           </div>
