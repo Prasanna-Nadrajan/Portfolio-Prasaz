@@ -12,10 +12,10 @@ interface ExperienceProps {
 const experiences = [
   {
     company: 'Hyundai Motor India Limited',
-    role: 'Data Analyst Intern',
+    role: 'AI Engineer Intern',
     period: 'Aug 2026 – Present',
     description:
-      'Applying data analysis techniques and collaborating with teams to extract actionable insights from automotive industry data.',
+      'Developing AI-driven solutions for automotive applications, focusing on machine learning and predictive analytics.',
     logo: '/assets/images/experience/hyundai.jpg'
   },
   {
