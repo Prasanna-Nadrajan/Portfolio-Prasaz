@@ -1,0 +1,29 @@
+.group {
+  display: flex;
+  background: #000;
+  border: 3px solid #000;
+}
+
+.option {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  background: var(--slot-bg);
+  border: 0;
+  cursor: pointer;
+}
+
+.option:hover {
+  background: var(--slot-bg-hover);
+}
+
+.option[aria-checked="true"] {
+  background: #e8e8e8;
+  box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 5px #000;
+}
+
+.option svg {
+  image-rendering: pixelated;
+}

@@ -1,0 +1,249 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--header-h);
+  background: linear-gradient(rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.5)), var(--tex-header) 0 0 / 48px 48px;
+  image-rendering: pixelated;
+  border-bottom: 3px solid #000;
+  box-shadow: inset 0 -3px 0 rgba(255, 255, 255, 0.12), 0 4px 0 rgba(0, 0, 0, 0.35);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: 100%;
+}
+
+.logo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+  text-decoration: none;
+  flex: none;
+}
+
+.logoBlock {
+  filter: drop-shadow(3px 3px 0 rgba(0, 0, 0, 0.6));
+  transition: transform 120ms steps(2);
+}
+
+.logo:hover .logoBlock {
+  transform: rotate(-8deg) translateY(-2px);
+}
+
+.logoText {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #e8e8e8;
+  text-shadow: 3px 3px 0 #3a3a3a, 0 0 0 #000;
+  -webkit-text-stroke: 1px #000;
+  paint-order: stroke fill;
+}
+
+.splash {
+  position: absolute;
+  left: 100%;
+  top: 8px;
+  margin-left: 6px;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.7rem;
+  white-space: nowrap;
+  color: #ffff55;
+  text-shadow: 2px 2px 0 #3f3f15;
+  transform: rotate(-12deg);
+  transform-origin: left center;
+  animation: splash 0.6s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes splash {
+  to {
+    transform: rotate(-12deg) scale(1.1);
+  }
+}
+
+.desktopNav {
+  display: none;
+  margin-left: auto;
+}
+
+.desktopNav ul {
+  display: flex;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 4px 12px;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #e0e0e0;
+  text-decoration: none;
+  text-shadow: 2px 2px 0 #222;
+  border: 3px solid transparent;
+  transition: transform 80ms steps(2);
+}
+
+.link:hover {
+  color: #ffffa0;
+  background: rgba(0, 0, 0, 0.35);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-1px);
+}
+
+.link[aria-current="page"] {
+  color: #fff;
+  background: rgba(110, 110, 110, 0.55);
+  border-color: #000;
+  box-shadow: var(--bevel);
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.menuButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 4px 14px;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 2px 2px 0 #3f3f3f;
+  background: #7a7a7a;
+  border: 3px solid #000;
+  box-shadow: var(--bevel);
+  cursor: pointer;
+}
+
+.menuButton:hover {
+  border-color: #fff;
+}
+
+.menuButton:active {
+  box-shadow: var(--bevel-in);
+}
+
+.burger {
+  display: grid;
+  gap: 3px;
+}
+
+.burger span {
+  display: block;
+  width: 18px;
+  height: 3px;
+  background: #fff;
+  box-shadow: 2px 2px 0 #3f3f3f;
+}
+
+.mobileList {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 20px;
+  padding: 0;
+  list-style: none;
+}
+
+.mobileLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 2px 2px 0 #3f3f3f;
+  background: #7a7a7a;
+  border: 3px solid #000;
+  box-shadow: var(--bevel);
+}
+
+.mobileLink:hover,
+.mobileLink[aria-current="page"] {
+  border-color: #fff;
+  background: var(--button-hover);
+}
+
+.mobileWorld {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: var(--font-tag);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+@media (max-width: 959px) {
+  .tools > :first-child {
+    display: none;
+  }
+}
+
+.sound {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: var(--slot-bg);
+  border: 3px solid #000;
+  cursor: pointer;
+}
+
+.sound:hover {
+  background: var(--slot-bg-hover);
+}
+
+.sound[aria-pressed="true"] {
+  box-shadow: inset 0 0 0 2px #55ff55;
+}
+
+@media (max-width: 480px) {
+  .splash {
+    display: none;
+  }
+
+  .logoText {
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 960px) {
+  .desktopNav {
+    display: block;
+  }
+
+  .tools {
+    margin-left: 8px;
+  }
+
+  .menuButton {
+    display: none;
+  }
+}

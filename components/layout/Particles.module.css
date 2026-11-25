@@ -1,0 +1,41 @@
+.layer {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.layer span {
+  position: absolute;
+  bottom: -12px;
+  width: 6px;
+  height: 6px;
+  background: var(--particle);
+  box-shadow: 0 0 8px var(--particle);
+  animation: drift linear infinite;
+  will-change: transform;
+}
+
+.layer span:nth-child(3n) {
+  width: 4px;
+  height: 4px;
+}
+
+@keyframes drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(24px, -55vh, 0);
+  }
+  100% {
+    transform: translate3d(-12px, -110vh, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layer {
+    display: none;
+  }
+}
