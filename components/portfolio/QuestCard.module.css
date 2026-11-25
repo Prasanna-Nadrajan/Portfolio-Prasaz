@@ -1,0 +1,108 @@
+.quest {
+  display: grid;
+  background: #1c1520;
+  border: 3px solid #000;
+  box-shadow: inset 0 0 0 3px #7a5a10, inset 0 0 0 6px #000, inset 0 0 0 8px rgba(252, 219, 74, 0.25), var(--drop);
+  padding: 10px;
+}
+
+@media (min-width: 880px) {
+  .quest {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.art {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: #000;
+  box-shadow: inset 3px 3px 0 var(--slot-lo), inset -3px -3px 0 var(--slot-hi);
+  padding: 3px;
+}
+
+.scene {
+  width: 100%;
+  height: 100%;
+}
+
+.content {
+  padding: 24px 20px 20px;
+}
+
+@media (min-width: 880px) {
+  .content {
+    padding: 28px 28px 24px 32px;
+  }
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 10px;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: var(--r-epic);
+  text-shadow: 2px 2px 0 #3f153f;
+}
+
+.title {
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+  color: var(--gold);
+  text-shadow: 3px 3px 0 #3f3205;
+}
+
+.summary {
+  font-family: var(--font-body);
+  font-size: 1.35rem;
+  line-height: 1.35;
+  color: var(--ink-dim);
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 0 0 24px;
+}
+
+.stats div {
+  padding: 8px 14px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid #000;
+  box-shadow: inset 0 0 0 2px #3a2e44;
+  margin: 0 -2px -2px 0;
+}
+
+.stats dt {
+  font-family: var(--font-tag);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+.stats dd {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 2px 0 0;
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Let the text column set the row height; the screenshot just covers it */
+@media (min-width: 880px) {
+  .art {
+    aspect-ratio: auto;
+    min-height: 340px;
+  }
+}

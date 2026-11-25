@@ -1,0 +1,110 @@
+.tip {
+  --tone: var(--diamond);
+  --tone-bg: rgba(74, 237, 217, 0.08);
+  display: flex;
+  gap: 16px;
+  padding: 16px 18px 16px 14px;
+  background: var(--tone-bg);
+  border: 3px solid #000;
+  box-shadow: inset 4px 0 0 var(--tone), var(--drop);
+}
+
+.emerald {
+  --tone: var(--emerald);
+  --tone-bg: rgba(23, 221, 98, 0.08);
+}
+
+.warning {
+  --tone: #ff5a4a;
+  --tone-bg: rgba(255, 74, 66, 0.1);
+}
+
+.redstone {
+  --tone: #ff3b30;
+  --tone-bg: rgba(216, 35, 30, 0.12);
+}
+
+.info {
+  --tone: var(--gold);
+  --tone-bg: rgba(252, 219, 74, 0.08);
+}
+
+.tipSlot {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  flex: none;
+  background: var(--slot-bg);
+  box-shadow: none;
+}
+
+.tipLabel {
+  margin: 0 0 4px !important;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  color: var(--tone);
+  text-shadow: 2px 2px 0 #000;
+}
+
+.tipBody > * {
+  margin: 0;
+}
+
+.tipBody > * + * {
+  margin-top: 0.5em;
+}
+
+.figure {
+  margin: 0;
+}
+
+.frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  padding: 4px;
+  background: #000;
+  border: 3px solid #000;
+  box-shadow: inset 3px 3px 0 var(--slot-lo), inset -3px -3px 0 var(--slot-hi), var(--drop);
+}
+
+.scene {
+  width: 100%;
+  height: 100%;
+}
+
+.caption {
+  margin-top: 8px;
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: var(--ink-mute);
+  text-align: center;
+}
+
+.caption::before {
+  content: "▲ ";
+  color: var(--accent-ink);
+}
+
+.gallery {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+}
+
+.gallery .caption {
+  font-size: 1rem;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 6px;
+  vertical-align: baseline;
+  background: rgba(0, 0, 0, 0.45);
+  border: 2px solid #3a3a3a;
+  white-space: nowrap;
+}

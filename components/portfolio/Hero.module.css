@@ -1,0 +1,127 @@
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: min(78vh, 760px);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.sky {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: #000;
+}
+
+.scene {
+  image-rendering: auto;
+}
+
+/* Darken the lower half slightly so the panel always has contrast */
+.sky::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 55%, rgba(0, 0, 0, 0.35), transparent 70%);
+}
+
+.content {
+  display: grid;
+  place-items: center;
+  flex: 1;
+  padding-block: 56px 72px;
+}
+
+.panel {
+  max-width: 760px;
+  padding: 28px 24px;
+  text-align: center;
+  background: rgba(10, 10, 14, 0.72);
+  border: 3px solid #000;
+  box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.12), var(--drop);
+  backdrop-filter: blur(1px);
+}
+
+@media (min-width: 768px) {
+  .panel {
+    padding: 40px 48px;
+  }
+}
+
+.kicker {
+  margin: 0 0 12px;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: clamp(1rem, 2.4vw, 1.3rem);
+  text-transform: uppercase;
+  color: #ffff55;
+  text-shadow: 2px 2px 0 #3f3f15;
+  animation: bob 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes bob {
+  to {
+    transform: scale(1.04);
+  }
+}
+
+.title {
+  font-size: clamp(1.75rem, 5vw, 3.25rem);
+  line-height: 1.1;
+  color: #fff;
+  text-shadow: 4px 4px 0 #2a2a2a;
+}
+
+.lead {
+  max-width: 52ch;
+  margin: 0 auto 28px;
+  font-family: var(--font-body);
+  font-size: clamp(1.25rem, 2.2vw, 1.5rem);
+  line-height: 1.35;
+  color: var(--ink-dim);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
+@media (max-width: 480px) {
+  .actions > * {
+    flex: 1 1 100%;
+  }
+}
+
+.timeToggle {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 4px 12px;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 2px 2px 0 #3f3f3f;
+  background: rgba(0, 0, 0, 0.6);
+  border: 3px solid #000;
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+
+.timeToggle:hover {
+  border-color: #fff;
+}
+
+.ground {
+  position: relative;
+  min-width: 0;
+  width: 100%;
+}
+

@@ -1,0 +1,145 @@
+.browser {
+  display: grid;
+  gap: 20px;
+}
+
+.controls {
+  margin: 0;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 14px;
+  background: #000;
+  border: 3px solid #a0a0a0;
+  box-shadow: var(--drop);
+}
+
+.search:focus-within {
+  border-color: #fff;
+}
+
+.search input {
+  flex: 1;
+  min-width: 0;
+  min-height: 52px;
+  font-family: var(--font-ui);
+  font-size: 1.1rem;
+  color: #fff;
+  background: transparent;
+  border: 0;
+  outline: none;
+}
+
+.search input::placeholder {
+  color: #8a8a8a;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 4px 12px 4px 8px;
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  color: var(--gui-ink);
+  background: var(--gui);
+  border: 3px solid #000;
+  box-shadow: inset 2px 2px 0 var(--gui-hi), inset -2px -2px 0 var(--gui-lo);
+  cursor: pointer;
+}
+
+.filter span {
+  font-family: var(--font-tag);
+  font-size: 0.7rem;
+  color: #555;
+}
+
+.filter:hover {
+  border-color: #fff;
+}
+
+.filter[aria-pressed="true"] {
+  color: #000;
+  background: var(--accent-ink);
+  box-shadow: inset 2px 2px 0 rgba(255, 255, 255, 0.6), inset -2px -2px 0 rgba(0, 0, 0, 0.35);
+}
+
+.filter[aria-pressed="true"] span {
+  color: #1a1a1a;
+}
+
+.count {
+  margin: 0;
+  font-family: var(--font-tag);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+.grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+}
+
+.empty {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  padding: 48px 16px;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 1.3rem;
+  color: var(--ink-dim);
+  background: rgba(0, 0, 0, 0.35);
+  border: 3px dashed rgba(255, 255, 255, 0.2);
+}
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.pagination ol {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.page {
+  width: 44px;
+  height: 44px;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+  text-shadow: 2px 2px 0 #3f3f3f;
+  background: var(--slot-bg);
+  border: 0;
+  cursor: pointer;
+}
+
+.page:hover {
+  background: var(--slot-bg-hover);
+}
+
+.page[aria-current="page"] {
+  outline: 3px solid #fff;
+  outline-offset: -3px;
+  background: #6a6a6a;
+}
