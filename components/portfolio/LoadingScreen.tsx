@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useWorld } from "@/components/layout/World";
 import { ThemeSwitcher } from "@/components/layout/ThemeSwitcher";
@@ -133,12 +134,12 @@ export function LoadingScreen() {
               </div>
             )}
             <div className={styles.row}>
-              <a className={styles.button} href="/projects" onClick={enter}>
+              <Link className={styles.button} href="/projects" onClick={enter}>
                 Projects
-              </a>
-              <a className={styles.button} href="/contact" onClick={enter}>
+              </Link>
+              <Link className={styles.button} href="/contact" onClick={enter}>
                 Contact
-              </a>
+              </Link>
             </div>
           </div>
 
