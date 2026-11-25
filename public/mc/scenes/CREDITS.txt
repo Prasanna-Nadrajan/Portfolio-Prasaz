@@ -1,0 +1,18 @@
+Screenshots from the Minecraft Wiki (minecraft.fandom.com).
+
+plains: https://minecraft.fandom.com/wiki/File:Plains.png
+castle: https://minecraft.fandom.com/wiki/File:Woodland_Mansion.png
+village: https://minecraft.fandom.com/wiki/File:Plains_village.png
+cave: https://minecraft.fandom.com/wiki/File:Lush_Caves.png
+dripstone: https://minecraft.fandom.com/wiki/File:Dripstone_Caves.png
+deepdark: https://minecraft.fandom.com/wiki/File:Deep_Dark.png
+nether: https://minecraft.fandom.com/wiki/File:Nether_Wastes.png
+crimson: https://minecraft.fandom.com/wiki/File:Crimson_Forest.png
+basalt: https://minecraft.fandom.com/wiki/File:Basalt_Deltas.png
+end: https://minecraft.fandom.com/wiki/File:The_End.png
+endcity: https://minecraft.fandom.com/wiki/File:End_City.png
+redstone: https://minecraft.fandom.com/wiki/File:Redstone-lamp-and-repeaters.png
+cherry: https://minecraft.fandom.com/wiki/File:Cherry_Grove.png
+ocean: https://minecraft.fandom.com/wiki/File:Warm_Ocean.png
+mountain: https://minecraft.fandom.com/wiki/File:Jagged_Peaks.png
+snowy: https://minecraft.fandom.com/wiki/File:Snowy_Slopes.png
