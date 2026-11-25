@@ -1,0 +1,55 @@
+.grid {
+  display: grid;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (min-width: 960px) {
+  .grid {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  }
+}
+
+.side {
+  padding: 20px;
+  background: var(--gui);
+  color: var(--gui-ink);
+  border: 3px solid #000;
+  box-shadow: inset 3px 3px 0 var(--gui-hi), inset -3px -3px 0 var(--gui-lo), var(--drop);
+}
+
+.sideTitle {
+  margin: 0 0 12px;
+  font-family: var(--font-tag);
+  font-size: 0.95rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #3f3f3f;
+  text-shadow: none;
+}
+
+.email {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 16px;
+  font-family: var(--font-ui);
+  word-break: break-all;
+}
+
+.email a {
+  color: #1f3f8a;
+}
+
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.small {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: var(--gui-ink-dim);
+}

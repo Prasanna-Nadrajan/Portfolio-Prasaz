@@ -1,0 +1,113 @@
+.grid {
+  display: grid;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (min-width: 960px) {
+  .grid {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  }
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 1.4em;
+}
+
+.timeline {
+  margin-top: 56px;
+}
+
+/* Advancement tree: framed icons joined by a line */
+.tree {
+  position: relative;
+  display: grid;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tree::before {
+  content: "";
+  position: absolute;
+  left: 31px;
+  top: 32px;
+  bottom: 32px;
+  width: 4px;
+  background: #fff;
+  box-shadow: 0 0 0 2px #000;
+}
+
+@media (min-width: 900px) {
+  .tree {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .tree::before {
+    left: 32px;
+    right: 32px;
+    top: 31px;
+    bottom: auto;
+    width: auto;
+    height: 4px;
+  }
+}
+
+.node {
+  position: relative;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+@media (min-width: 900px) {
+  .node {
+    flex-direction: column;
+  }
+}
+
+.frame {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 66px;
+  height: 66px;
+  flex: none;
+  background: #c6a64a;
+  border: 3px solid #000;
+  box-shadow: inset 3px 3px 0 #f2d77a, inset -3px -3px 0 #7a5a10;
+}
+
+.card {
+  padding: 12px 14px;
+  background: #212121;
+  border: 3px solid #000;
+  box-shadow: inset 0 0 0 2px #555;
+}
+
+.year {
+  margin: 0;
+  font-family: var(--font-tag);
+  font-size: 0.75rem;
+  color: var(--ink-mute);
+}
+
+.title {
+  margin: 2px 0 6px;
+  font-size: 1rem;
+  color: #ffff55;
+  text-shadow: 2px 2px 0 #3f3f15;
+}
+
+.text {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  line-height: 1.4;
+  color: var(--ink-dim);
+}

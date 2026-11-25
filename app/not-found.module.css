@@ -1,0 +1,38 @@
+.screen {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 8px;
+  min-height: 70vh;
+  padding: 48px 16px;
+  text-align: center;
+  background: linear-gradient(rgba(120, 0, 0, 0.45), rgba(60, 0, 0, 0.6));
+}
+
+.title {
+  font-size: clamp(2.5rem, 9vw, 4.5rem);
+  color: #fff;
+  text-shadow: 5px 5px 0 #3f0000;
+}
+
+.reason {
+  font-family: var(--font-body);
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.score {
+  font-family: var(--font-ui);
+  font-size: 1.1rem;
+}
+
+.score span {
+  color: #ffff55;
+}
+
+.actions {
+  display: grid;
+  gap: 12px;
+  width: min(400px, 100%);
+  margin-top: 16px;
+}
