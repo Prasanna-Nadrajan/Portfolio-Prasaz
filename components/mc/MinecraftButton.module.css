@@ -1,0 +1,108 @@
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 6px 22px 8px;
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  color: #fff;
+  text-shadow: 2px 2px 0 #3f3f3f;
+  background: none;
+  border: 6px solid transparent;
+  border-image: var(--btn-img);
+  image-rendering: pixelated;
+  filter: drop-shadow(3px 3px 0 rgba(0, 0, 0, 0.45));
+  cursor: pointer;
+  user-select: none;
+  transition: transform 80ms steps(2);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Colour variants tint the vanilla stone button rather than replacing it */
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  background: var(--tint, transparent);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.btn:hover {
+  color: #ffffa0;
+  border-image-source: var(--btn-img-hover);
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(1px);
+  filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.45)) brightness(0.92);
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  color: #a0a0a0;
+  border-image-source: var(--btn-img-disabled);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn:disabled::after {
+  display: none;
+}
+
+.grass {
+  --tint: #5fb83a;
+}
+
+.wood {
+  --tint: #c79a5a;
+}
+
+.danger {
+  --tint: #e0463c;
+}
+
+.gold {
+  --tint: #f2c53a;
+}
+
+.stone {
+  --tint: transparent;
+}
+
+.sm {
+  min-height: 40px;
+  padding: 3px 14px 5px;
+  font-size: 0.85rem;
+}
+
+.lg {
+  min-height: 60px;
+  padding: 10px 32px 12px;
+  font-size: 1.2rem;
+}
+
+.block {
+  display: flex;
+  width: 100%;
+}
+
+.icon {
+  display: inline-flex;
+}

@@ -1,0 +1,52 @@
+.card {
+  position: relative;
+  border: 3px solid #000;
+  box-shadow: var(--bevel), var(--drop);
+  image-rendering: pixelated;
+}
+
+.padded {
+  padding: 20px;
+}
+
+@media (min-width: 768px) {
+  .padded {
+    padding: 24px;
+  }
+}
+
+/* Dark textured panel: the default reading surface */
+.panel {
+  background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), var(--tex-panel) 0 0 / 64px 64px;
+  background-color: var(--panel);
+}
+
+/* Light grey game GUI, like the inventory screen */
+.gui {
+  background: var(--gui);
+  color: var(--gui-ink);
+  box-shadow: inset 3px 3px 0 var(--gui-hi), inset -3px -3px 0 var(--gui-lo), var(--drop);
+}
+
+.gui :is(h1, h2, h3, h4) {
+  color: var(--gui-ink);
+  text-shadow: none;
+}
+
+.plank {
+  background: linear-gradient(rgba(30, 18, 8, 0.25), rgba(30, 18, 8, 0.25)), url("/mc/blocks/oak_planks.png") 0 0 / 64px 64px;
+}
+
+.stone {
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("/mc/blocks/stone.png") 0 0 / 64px 64px;
+}
+
+.obsidian {
+  background: url("/mc/blocks/obsidian.png") 0 0 / 64px 64px;
+}
+
+.glass {
+  background: rgba(190, 225, 255, 0.08);
+  backdrop-filter: blur(2px);
+  box-shadow: inset 0 0 0 3px rgba(220, 240, 255, 0.35), inset 6px 6px 0 rgba(255, 255, 255, 0.08), var(--drop);
+}

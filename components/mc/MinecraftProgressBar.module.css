@@ -1,0 +1,50 @@
+.wrap {
+  width: 100%;
+}
+
+.meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.label {
+  font-family: var(--font-tag);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: inherit;
+}
+
+.level {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #80ff20;
+  text-shadow: 2px 2px 0 #000, -1px -1px 0 #000;
+}
+
+/* Vanilla HUD experience bar sprites (182×5), stretched to fit */
+.track {
+  position: relative;
+  height: 10px;
+  background: url("/mc/gui/xp-bg.png") 0 0 / 100% 100% no-repeat;
+  image-rendering: pixelated;
+}
+
+.fill {
+  position: absolute;
+  inset: 0;
+  background: url("/mc/gui/xp-fill.png") 0 0 / 100% 100% no-repeat;
+  image-rendering: pixelated;
+  transition: clip-path 120ms linear;
+}
+
+.health .fill {
+  filter: hue-rotate(250deg) saturate(1.6);
+}
+
+.mana .fill {
+  filter: hue-rotate(95deg) saturate(1.3);
+}

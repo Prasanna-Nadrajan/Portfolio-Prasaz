@@ -1,0 +1,56 @@
+.wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.tip {
+  position: absolute;
+  left: 50%;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: max-content;
+  max-width: 220px;
+  padding: 6px 10px 8px;
+  background: rgba(16, 0, 16, 0.94);
+  border: 3px solid #100010;
+  box-shadow: inset 0 0 0 2px #2d0a6b, inset 0 0 0 3px #1a0540;
+  font-family: var(--font-ui);
+  text-align: left;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, 4px);
+  transition: opacity 90ms steps(2), transform 90ms steps(2), visibility 0s 90ms;
+}
+
+.top {
+  bottom: calc(100% + 10px);
+}
+
+.bottom {
+  top: calc(100% + 10px);
+}
+
+.wrap:hover .tip,
+.wrap:focus-within .tip {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+  transition-delay: 0s;
+}
+
+.name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-shadow: 2px 2px 0 #3f3f3f;
+}
+
+.lore {
+  font-size: 0.8rem;
+  line-height: 1.3;
+  color: #aaaaaa;
+  text-shadow: 1px 1px 0 #2a2a2a;
+}
