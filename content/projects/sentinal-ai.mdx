@@ -1,0 +1,34 @@
+---
+title: "Sentinal-AI"
+summary: "48-hour clinical sepsis forecasting from ICU vitals, served as a sub-50ms microservice."
+date: "2026-06-01"
+tags: [python, tensorflow, fastapi, docker, time-series, healthcare]
+role: "Solo, end to end"
+status: "Completed"
+rarity: legendary
+scene: redstone
+coverAlt: "Minecraft screenshot of a redstone contraption"
+featured: true
+sample: false
+---
+
+Sepsis is hardest to treat when it is caught late. Sentinal-AI reads multi-parameter ICU vitals and forecasts onset **48 hours** before clinical presentation, giving care teams a window to intervene.
+
+<Tip variant="diamond" title="Built to be trusted">
+  The pipeline is checked with automated Python AST inspection, so no future information leaks into training.
+</Tip>
+
+## Results
+
+- **48 h** early warning window ahead of acute symptoms
+- **Under 50 ms** inference latency from a containerised service
+- **Zero data leakage**, verified by AST checks
+- Decision thresholds tuned for high sensitivity while limiting alarm fatigue
+
+## Pipeline
+
+1. **Ingestion and ETL:** clean ICU vitals, handle irregular sampling and impute missing parameters
+2. **Feature store:** physiological biomarkers, rolling vital trends, shock index and lab deltas
+3. **Predictive core:** a sequential temporal deep network trained on clinical records
+4. **Evaluation:** AUROC optimisation and risk threshold calibration
+5. **Deployment:** a FastAPI microservice in Docker that delivers fast alerts to bedside monitors
